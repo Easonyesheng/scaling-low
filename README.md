@@ -2,33 +2,45 @@
 
 **Scale is all you owe.**
 
-A small joke about a very big industry. A satirical research homepage about scaling laws, diminishing returns, and GPU invoices. All chart values and prices are fictional.
+[Visit Scaling Low ↗](https://scalinglow.com/)
 
-## Local preview
+Scaling Low is a small joke about a very big industry.
 
-No dependencies or build step required. Open `index.html` in a browser, or run:
+In AI, scaling laws describe how model performance changes with more parameters, more data, and more compute. Somewhere along the way, a useful empirical observation became a much broader belief: whatever the question, the answer must be bigger.
 
-```sh
-python3 -m http.server 8000
-```
+We find that belief funny. Especially when the invoice arrives.
 
-Then visit http://localhost:8000.
+## From scaling law to scaling low
 
-## Publish with GitHub Pages
+One letter changes the research direction.
 
-1. Commit and push these files to the `main` branch of `Easonyesheng/scaling-low`.
-2. Open https://github.com/Easonyesheng/scaling-low/settings/pages.
-3. Under **Build and deployment → Source**, select **GitHub Actions**.
-4. Open https://github.com/Easonyesheng/scaling-low/actions and select **Deploy GitHub Pages → Run workflow → main → Run workflow**. Later pushes to `main` deploy automatically.
-5. After the workflow succeeds, visit https://easonyesheng.github.io/scaling-low/.
+Scaling Low follows the other curves: the shrinking budget, the diminishing returns, the distance between a benchmark improvement and something you actually needed. When every announcement promises more, we are interested in how little might be enough.
 
-The repository must have GitHub Pages available for its visibility and account plan. If an initial workflow fails before Pages is enabled, enable it in step 3, then rerun the workflow.
+A smaller model. A simpler tool. A regular expression with suspiciously good performance. The radical possibility that the task was already solved.
 
-## Files
+## Our working hypotheses
 
-- `index.html`: page structure and copy.
-- `style.css`: responsive design. Google Fonts are optional; system fonts serve as fallbacks.
-- `script.js`: illustrative chart and compute slider.
-- `.github/workflows/pages.yml`: deploys only the three site files to GitHub Pages.
+- **Bigger is a measurement, not a mission.** A model's size tells us very little about whether it is the right tool for a particular job.
+- **The invoice is a benchmark, too.** Compute, energy, latency, and money belong in the conversation about progress.
+- **Enough deserves a research agenda.** Meeting a real need with fewer resources is an achievement worth naming.
+- **Expectations can scale down.** Every autocomplete does not need to be the first spark of a new civilization.
 
-This project uses no analytics, backend, or paid services.
+## Deeply unserious research
+
+The site borrows the visual language of a research lab: a confident headline, a smooth curve, a few numbers, and conclusions that may require further funding.
+
+Drag the compute slider. Watch the bill grow. Watch the score flatten. All chart values and prices are made up; the enthusiasm for spending more is widely available.
+
+The joke is aimed at the habit of treating scale as its own justification. There is plenty to admire in AI research, and plenty to laugh at in the stories we tell about it.
+
+## The lower ambition
+
+Build things that earn their complexity. Celebrate useful work done on modest hardware. Leave room for experiments whose main contribution is a good joke.
+
+And occasionally ask:
+
+> What if we scaled the expectations down?
+
+---
+
+100% satire. 0 GPUs harmed.
