@@ -43,4 +43,8 @@ And occasionally ask:
 
 ---
 
-100% satire. 0 GPUs harmed.
+## Local preview and news updates
+
+From the repository root, run `python3 -m http.server` and open `http://localhost:8000/`. Opening the HTML as a file will not load the news feed.
+
+Add an object to `entries` in `news.json` using a unique `id`, ISO publication date (`YYYY-MM-DD`), `topic` (misuse, reliability, governance, infrastructure), and `kind` (report, proposal, research, company). Supply `en` and `zh` strings for `title`, `summary`, `takeaway`, and `source.label`, plus the original HTTPS `source.url`. Keep the source’s observation in the summary and the editorial reading in the takeaway. Display order is newest first.

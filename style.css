@@ -23,3 +23,14 @@ html.sl[lang=zh-Hans] :is(h1,h2,h3,h4){letter-spacing:-.035em;line-height:1.2}ht
 @media(prefers-reduced-motion:reduce){.sl .plot-anim{animation:none}}
 @media print{html.sl{background:white}.sl .bar nav,html.sl.js .enhanced,.sl footer a:last-child{display:none!important}.sl .cover,.sl footer{background:white;color:var(--ink)}.sl .cover :is(.meta,p,em){color:var(--dim)}.sl .note,.sl .labgrid{break-inside:avoid}}
 :where(html.sl) :target{scroll-margin-top:.5rem}
+
+.sl .checkpoint{padding-block:clamp(20px,3vw,40px);border-bottom:1px solid #686279}
+.sl .checkpoint .meta,.sl #passed{color:var(--light)}
+.sl .checkpoint h2{font-size:clamp(2rem,4vw,3.7rem)}
+.sl .checkpoint p{max-width:86ch;margin-top:.6rem;color:#ddd7e9;font-size:.92rem}
+.sl #clock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:56rem;margin:1rem 0;border-block:1px solid #686279}
+.sl #clock>div{padding:.65rem clamp(3px,1vw,1rem);font:600 clamp(.62rem,1.6vw,.8rem)/1.5 var(--mono);text-transform:uppercase}
+.sl #clock>div+div{border-left:1px solid #686279}.sl #clock strong{display:block;font:400 clamp(1.65rem,6vw,5rem)/1.1 var(--mono);font-variant-numeric:tabular-nums;color:#e3d7fa}
+.sl .riskgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1.4rem;margin-top:1.6rem}.sl .riskgrid article{padding:1rem;border-top:2px solid var(--ink);background:var(--lav)}
+.sl .riskgrid h3,.sl .note h3{font:400 clamp(1.45rem,2.4vw,2rem)/1.2 var(--serif);margin:.35em 0}.sl #news-status{margin:1rem 0;color:var(--dim);font-size:.85rem}.sl .bar nav,.sl .folio{flex-wrap:wrap}.sl .labgrid>*{min-width:0}.sl .coverfoot{font-size:.79rem}.sl .coverbody .tagline{color:white;font:italic 1.4rem/1.3 var(--serif)}
+@media(max-width:360px){.sl #clock{grid-template-columns:repeat(2,minmax(0,1fr))}.sl #clock>div:nth-child(3){border-left:0}.sl #clock>div:nth-child(n+3){border-top:1px solid #686279}}

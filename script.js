@@ -95,35 +95,84 @@
     const buttons = document.querySelectorAll('button[data-lang]');
     const labels = document.querySelectorAll('[data-en-label][data-zh-label]');
     const filters = document.querySelectorAll('button[data-filter]');
-    const stories = document.querySelectorAll('article[data-topic]');
-    const status = document.getElementById('filter-status');
+    const status = document.getElementById('news-status');
+    const list = document.getElementById('news-list');
     const readout = bindLab();
-    let lastCount = null;
-
-    function updateStatus() {
-      if (!status || lastCount === null) return;
-      status.textContent = language === 'zh' ? `显示 ${lastCount} 篇报道。`
-        : `Showing ${lastCount} ${lastCount === 1 ? 'story' : 'stories'}.`;
+    let entries = [], state = 'loading', topic = 'all';
+    const tr = (en, zh) => language === 'zh' ? zh : en;
+    const kinds = {report:'报告', proposal:'提案', research:'研究', company:'企业披露'};
+    function render() {
+      list.replaceChildren();
+      const visible = entries.filter(e => topic === 'all' || e.topic === topic);
+      filters.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === topic)));
+      status.textContent = state === 'loading' ? tr('Loading news…','正在加载简讯…') : state === 'error' ? tr('No readable news data available.','无法读取有效新闻数据。') : !visible.length ? tr('No entries for this topic.','本主题暂无简讯。') : tr(`${visible.length} entries`, `共 ${visible.length} 篇`);
+      function node(parent, tag, text, cls) {
+        const el = document.createElement(tag);
+        if (cls) el.className = cls;
+        el.textContent = text; parent.append(el); return el;
+      }
+      for (const e of visible) {
+        const article = node(list,'article','','note');
+        const meta = node(article,'div','','dateline');
+        node(meta,'time',e.date).dateTime = e.date;
+        node(meta,'span',tr(e.kind,kinds[e.kind]));
+        const body = node(article,'div','');
+        node(body,'h3',e.title[language]);
+        node(body,'p',e.summary[language]);
+        node(body,'p',tr('Our reading: ','编辑解读：') + e.takeaway[language],'watch');
+        node(node(body,'div','','sources'),'a',e.source.label[language]).href = e.source.url;
+      }
+    }
+    async function load() {
+      try {
+        const response = await fetch('./news.json', {mode:'same-origin', cache:'no-cache'});
+        if (!response.ok) throw Error();
+        const data = await response.json(), seen = new Set();
+        if (data.schemaVersion !== 1 || !Array.isArray(data.entries)) throw Error();
+        const text = v => typeof v === 'string' && v.trim();
+        const pair = v => v && text(v.en) && text(v.zh);
+        entries = data.entries.filter(e => {
+          if (!e || !text(e.id) || seen.has(e.id.trim()) || !/^\d{4}-\d{2}-\d{2}$/.test(e.date) || !['misuse','reliability','governance','infrastructure'].includes(e.topic) || !Object.hasOwn(kinds,e.kind) || ![e.title,e.summary,e.takeaway,e.source?.label].every(pair)) return false;
+          try {
+            const url = new URL(e.source.url);
+            if (url.protocol !== 'https:' || url.username || url.password || new Date(e.date).toISOString().slice(0,10) !== e.date) return false;
+          } catch { return false; }
+          seen.add(e.id.trim()); return true;
+        }).sort((a,b) => b.date.localeCompare(a.date));
+        state = entries.length ? 'ready' : 'error';
+      } catch { state = 'error'; }
+      render();
     }
 
-    function filter(topic, announce) {
-      let count = 0;
-      filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === topic)));
-      stories.forEach(story => {
-        story.hidden = topic !== 'all' && !story.dataset.topic.split(/[\s,]+/).includes(topic);
-        if (!story.hidden) count++;
+    const deadline = Date.parse(document.getElementById('checkpoint').dateTime);
+    const clock = document.getElementById('clock');
+    const digits = clock.querySelectorAll('strong');
+    let timer;
+    function tick() {
+      const n = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+      [Math.floor(n/86400), Math.floor(n/3600)%24, Math.floor(n/60)%60, n%60].forEach((v,i) => {
+        const value = String(v).padStart(2,'0');
+        if (digits[i].textContent !== value) digits[i].textContent = value;
       });
-      if (announce) { lastCount = count; updateStatus(); }
+      clock.hidden = false;
+      if (!n) {
+        clearInterval(timer);
+        document.removeEventListener('visibilitychange', resumeClock);
+        document.getElementById('passed').hidden = false;
+      }
     }
-
+    function resumeClock() { if (!document.hidden) tick(); }
+    timer = setInterval(tick,1000);
+    document.addEventListener('visibilitychange',resumeClock);
+    tick();
     function applyLanguage() {
       root.lang = language === 'zh' ? 'zh-Hans' : 'en';
       document.title = language === 'zh'
-        ? 'Scaling Low — AI 风险观察台 | 2026年11月20日'
-        : 'Scaling Low — AI Risk Desk | 20 November 2026';
+        ? 'Scaling Low — 损失降了，账单可没降。'
+        : 'Scaling Low — The loss goes down. The bill doesn’t.';
       buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === language)));
       labels.forEach(element => element.setAttribute('aria-label', element.getAttribute(`data-${language}-label`)));
-      updateStatus();
+      render();
       readout();
     }
 
@@ -134,8 +183,8 @@
       applyLanguage();
       try { localStorage.setItem(storageKey, language); } catch { /* Optional preference. */ }
     }));
-    filters.forEach(button => button.addEventListener('click', () => filter(button.dataset.filter, true)));
-    filter('all', false);
+    filters.forEach(button => button.addEventListener('click', () => { topic = button.dataset.filter; render(); }));
     applyLanguage();
+    load();
   }, { once: true });
 })();

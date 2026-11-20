@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "winter-peak",
+      "date": "2026-11-19",
+      "topic": "infrastructure",
+      "kind": "report",
+      "source": {
+        "label": {
+          "en": "FERC winter assessment",
+          "zh": "美国联邦能源监管委员会冬季评估"
+        },
+        "url": "https://ferc.gov/news-events/news/2026-2027-winter-energy-market-electric-reliability-assessment"
+      },
+      "title": {
+        "en": "A winter peak is not an annual bill",
+        "zh": "冬季峰值不是全年电费"
+      },
+      "summary": {
+        "en": "FERC staff expect sufficient resources this winter under normal conditions. They cite a NERC projection of about 245 GW of additional North American winter peak demand over the next decade, driven mostly by large loads, chiefly data centres.",
+        "zh": "委员会工作人员预计，今冬在正常条件下电力资源充足。评估援引北美电力可靠性公司的预测：未来十年北美冬季峰值需求将增加约 245 吉瓦，增长主要来自大型用电负荷，尤其是数据中心。"
+      },
+      "takeaway": {
+        "en": "The projection concerns power at peak times, not annual energy consumed or a confirmed shortage.",
+        "zh": "预测衡量的是高峰时段的功率，不是全年用电量，也不代表已经出现缺电。"
+      }
+    },
+    {
+      "id": "safeguards",
+      "date": "2026-11-12",
+      "topic": "reliability",
+      "kind": "company",
+      "source": {
+        "label": {
+          "en": "Anthropic safeguards disclosure",
+          "zh": "Anthropic 安全防护披露"
+        },
+        "url": "https://safeguards.anthropic.com/2026/automated-red-teaming/"
+      },
+      "title": {
+        "en": "Safeguard tests turn up weaknesses",
+        "zh": "防护测试发现薄弱之处"
+      },
+      "summary": {
+        "en": "Anthropic says its automated evaluations uncovered weaknesses in its safeguards.",
+        "zh": "Anthropic 表示，其自动化评估发现了自身防护措施中的弱点。"
+      },
+      "takeaway": {
+        "en": "A developer describing what its tests caught is not an independent assessment of what they missed.",
+        "zh": "开发者披露了测试发现的问题；这不等于有人独立评估过漏检的问题。"
+      }
+    },
+    {
+      "id": "complaints",
+      "date": "2026-06-24",
+      "topic": "misuse",
+      "kind": "report",
+      "source": {
+        "label": {
+          "en": "CFPB release",
+          "zh": "美国消费者金融保护局公告"
+        },
+        "url": "https://www.consumerfinance.gov/about-us/newsroom/the-cfpb-is-correcting-flaws-to-restore-integrity-and-utility-to-the-consumer-complaint-system/"
+      },
+      "title": {
+        "en": "Who is filing the complaint?",
+        "zh": "谁在提交投诉？"
+      },
+      "summary": {
+        "en": "The CFPB identifies overlapping drivers of complaint growth, including AI tools acting as agents and business intermediaries.",
+        "zh": "美国消费者金融保护局指出，投诉增长有多种相互重叠的原因，包括代为办事的 AI 工具以及商业中介。"
+      },
+      "takeaway": {
+        "en": "Complaint volume alone tells us neither how many submissions involved AI nor which complaints have merit.",
+        "zh": "仅凭投诉总量，既不能判断多少投诉涉及 AI，也不能判断哪些投诉有理有据。"
+      }
+    },
+    {
+      "id": "evaluations",
+      "date": "2026-02-03",
+      "topic": "reliability",
+      "kind": "research",
+      "source": {
+        "label": {
+          "en": "International AI Safety Report 2026",
+          "zh": "《2026 国际人工智能安全报告》"
+        },
+        "url": "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026"
+      },
+      "title": {
+        "en": "What a pre-release test cannot settle",
+        "zh": "上线前的测试不能说明什么"
+      },
+      "summary": {
+        "en": "The report distinguishes malicious use, malfunctions and systemic risks. It notes that pre-deployment evaluations do not reliably predict real-world utility or risk.",
+        "zh": "报告区分了恶意使用、系统失灵和系统性风险，并指出部署前的评估不能可靠预测实际应用中的效用或风险。"
+      },
+      "takeaway": {
+        "en": "Ask where the system will be used before treating a test score as evidence that it belongs there.",
+        "zh": "先问系统将在哪里使用，再判断测试分数能否支持在那里部署。"
+      }
+    },
+    {
+      "id": "training-rights",
+      "date": "2026-11-18",
+      "topic": "governance",
+      "kind": "company",
+      "source": {
+        "label": {
+          "en": "Final prospectus filed with the SEC",
+          "zh": "提交美国证交会的最终招股说明书"
+        },
+        "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm"
+      },
+      "title": {
+        "en": "Training-data rights on the books",
+        "zh": "账目中的训练数据版权"
+      },
+      "summary": {
+        "en": "According to the filing, Anthropic accrued $1.5 billion in 2025 for the Bartz training-data copyright settlement. The court approved the settlement in July 2026.",
+        "zh": "据文件披露，Anthropic 于 2025 年为 Bartz 训练数据版权案和解计提了 15 亿美元。法院于 2026 年 7 月批准和解。"
+      },
+      "takeaway": {
+        "en": "This is one example of the cost of a rights dispute. The filing describes an earlier settlement, not a new fine.",
+        "zh": "这是版权争议成本的一个实例。文件披露的是此前的和解，并非新增罚款。"
+      }
+    }
+  ]
+}
