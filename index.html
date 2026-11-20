@@ -5,14 +5,116 @@
 <meta name="theme-color" content="#f5f3eb"><meta name="description" content="Scaling Low — a deeply unserious study of compute, diminishing returns, and very real invoices.">
 <title>Scaling Low — Less is a research direction.</title>
 <link rel="stylesheet" href="style.css">
+<style>
+html[data-lang="zh"] .lang-en{display:none}
+html:not([data-lang="zh"]) .lang-zh{display:none}
+.lang-toggle{display:flex;gap:10px;align-items:center;margin-left:16px}
+.lang-toggle button{background:none;border:1px solid var(--line);color:var(--muted);padding:8px 12px;font:inherit;font-size:12px;cursor:pointer}
+.lang-toggle button[aria-pressed="true"]{border-color:var(--orange);color:var(--ink);background:rgba(223,84,46,.08)}
+.jump-link{color:var(--orange)}
+.editorial{padding:14px 0 18px}
+.editorial-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+.editorial-panel,.news-card{border-top:1px solid var(--line);padding-top:18px}
+.editorial-panel h2,.news-card h3,.manifesto h2{font-family:'Space Grotesk',sans-serif;letter-spacing:-.04em;margin:.35rem 0 .7rem}
+.editorial-panel p,.news-card p,.news-card li,.news-card small,.manifesto p{font-size:15px;line-height:1.75;color:#5f6257}
+.editorial-panel ul{margin:0;padding-left:18px}.news-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.news-card time,.news-card .kicker{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:1px;color:var(--muted)}
+.news-card a{word-break:break-word}
+.manifesto{margin-top:18px}
+@media (max-width: 980px){.editorial-grid,.news-grid{grid-template-columns:1fr 1fr}.intro{flex-direction:column;align-items:flex-start}.hero-note{position:static;transform:none;display:inline-block;margin-top:18px}}
+@media (max-width: 720px){.wrap{padding:0 20px}header{height:auto;min-height:92px;padding:14px 0;flex-wrap:wrap;gap:12px}nav{gap:18px;flex-wrap:wrap}.lang-toggle{margin-left:0}.hero{padding:38px 0 28px}h1{letter-spacing:-5px}.editorial-grid,.news-grid{grid-template-columns:1fr}.button{width:100%;justify-content:space-between}}
+</style>
 </head>
 <body>
-<header class="wrap"><a class="brand" href="./" aria-label="Scaling Low home"><span class="mark">↘</span> scaling low<span class="dot">.</span></a><nav aria-label="Main navigation"><a href="#experiment">The experiment</a><a href="https://github.com/Easonyesheng/scaling-low">GitHub ↗</a></nav></header>
+<header class="wrap">
+  <a class="brand" href="./" aria-label="Scaling Low home"><span class="mark">↘</span> scaling low<span class="dot">.</span></a>
+  <nav aria-label="Main navigation">
+    <a href="#briefing"><span class="lang-en">Briefing</span><span class="lang-zh">简报</span></a>
+    <a href="#experiment"><span class="lang-en">The experiment</span><span class="lang-zh">实验</span></a>
+    <a class="jump-link" href="#manifesto"><span class="lang-en">Jump to manifesto</span><span class="lang-zh">跳到宣言</span></a>
+    <a href="https://github.com/Easonyesheng/scaling-low">GitHub ↗</a>
+    <span class="lang-toggle" role="group" aria-label="Language switch"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="zh" aria-pressed="false">中文</button></span>
+  </nav>
+</header>
 <main class="wrap">
-<section class="hero"><div class="eyebrow"><span></span> INDEPENDENT RESEARCH · QUESTIONABLE CONCLUSIONS</div><h1>Scale is all<br>you <em>owe.</em></h1><div class="intro"><p>More parameters. More GPUs. More invoices.<br>Welcome to <strong>Scaling Low</strong> — exploring the lower limits of artificial ambition.</p><a class="button" href="#experiment">Run the experiment <span>↘</span></a></div><div class="hero-note">LESS IS MORE*<br><span>*mostly less</span></div></section>
-<section id="experiment" class="experiment" aria-labelledby="experiment-title"><div class="section-top"><div><span class="eyebrow">FIG. 01 / THE LAW OF DIMINISHING VIBES</span><h2 id="experiment-title">The curve looks expensive.</h2></div><span class="live"><span></span> SIMULATED SCIENCE</span></div>
-<div class="lab"><div class="plot"><div class="legend"><span class="orange">●</span> Benchmark score <span class="gray">--- Your expectations</span></div><svg viewBox="0 0 700 300" role="img" aria-labelledby="chart-title chart-desc"><title id="chart-title">Diminishing returns from compute</title><desc id="chart-desc">A fictional benchmark curve rises quickly then flattens as compute increases, while expectations keep rising.</desc><g class="grid"><path d="M48 35H674 M48 95H674 M48 155H674 M48 215H674 M48 275H674"/></g><g class="axis"><text x="12" y="40">100</text><text x="22" y="160">50</text><text x="29" y="280">0</text><text x="48" y="298">1×</text><text x="628" y="298">1,000×</text></g><path class="expectation" d="M48 260L674 35"/><path id="curve" class="curve" d="M48 260 C110 105 230 80 674 70"/><circle id="point" cx="361" cy="86" r="7"/></svg><div class="plot-label">COMPUTE → <span>FINANCIAL FREEDOM ←</span></div></div><aside class="controls"><label for="compute">Throw compute at it <output id="multiplier" for="compute">100×</output></label><input id="compute" type="range" min="0" max="100" value="67" aria-describedby="slider-help"><div class="range-labels"><span>Laptop energy</span><span>National grid</span></div><p id="slider-help">Move the slider. The invoice is the only thing that scales reliably.</p><dl><div><dt>Hypothetical monthly bill</dt><dd id="bill">$100,000</dd></div><div><dt>Benchmark score <span>/ 100</span></dt><dd id="score">86.2</dd></div><div><dt>Reviewer confidence</dt><dd class="confidence">Still needs ablations</dd></div></dl></aside></div><div class="caption"><span>Source: we made it up.</span><span>Illustrative satire. No actual benchmark or pricing data.</span></div></section>
-<section class="findings" aria-label="Research findings"><article><span class="index">01 / THE HYPOTHESIS</span><h3>Bigger ≠ better.</h3><p>Sometimes a smaller model is all you need. Sometimes you just need a regular expression.</p></article><article><span class="index">02 / THE METHOD</span><h3>Trust the invoice.</h3><p>If the loss doesn't go down, try plotting your bank balance. That curve never disappoints.</p></article><article><span class="index">03 / THE CONTRIBUTION</span><h3>State of the art*</h3><p>A novel framework for turning electricity into a slightly more confident wrong answer.</p><small>*in budget consumption</small></article></section>
-<section class="manifesto"><span class="eyebrow">OUR RESEARCH DIRECTION</span><p>What if we scaled<br><em>the expectations down?</em></p><a href="https://github.com/Easonyesheng/scaling-low">Contribute to the decline ↗</a></section>
-</main><footer class="wrap"><a class="brand" href="./">↘ scaling low.</a><span>A small joke about a very big industry.</span><span>100% satire. 0 GPUs harmed.</span></footer><script src="script.js"></script>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="eyebrow"><span></span><span class="lang-en">INDEPENDENT RESEARCH · QUESTIONABLE CONCLUSIONS</span><span class="lang-zh">独立研究 · 结论需存疑</span></div>
+    <h1 id="hero-title"><span class="lang-en">Scale is all<br>you <em>owe.</em></span><span class="lang-zh">规模只是<br>你该<em>付出的。</em></span></h1>
+    <div class="intro">
+      <p><span class="lang-en">More parameters. More GPUs. More invoices.<br>Welcome to <strong>Scaling Low</strong> — exploring the lower limits of artificial ambition.</span><span class="lang-zh">更多参数。更多 GPU。更多账单。<br>欢迎来到 <strong>Scaling Low</strong>——研究人工雄心的下限。</span></p>
+      <a class="button" href="#briefing"><span class="lang-en">Read the briefing</span><span class="lang-zh">查看简报</span> <span>↘</span></a>
+    </div>
+    <div class="hero-note"><span class="lang-en">LESS IS MORE*<br><span>*mostly less</span></span><span class="lang-zh">少即是多*<br><span>*大多只是更少</span></span></div>
+  </section>
+
+  <section id="briefing" class="editorial" aria-labelledby="briefing-title">
+    <div class="editorial-grid">
+      <article class="editorial-panel">
+        <span class="eyebrow"><span></span><span class="lang-en">EDITORIAL / VERIFIED MARKET NOTES</span><span class="lang-zh">社论 / 已核实市场笔记</span></span>
+        <h2 id="briefing-title"><span class="lang-en">What the tape says, without pretending it says more.</span><span class="lang-zh">盘口只说明这些，不要把它说成更多。</span></h2>
+        <p><span class="lang-en">This site stays satirical, but the stories below are separately sourced, dated, and not live. They are not investment advice. We do not monitor OTC flows, borrow availability, or short interest here, and a broad selloff alone does not prove cause and effect.</span><span class="lang-zh">本站保留讽刺语气，但下面的新闻均已单独核实、带日期、且不是实时信息。它们不是投资建议。这里不跟踪 OTC 交易、借券可得性或空头持仓量，而大盘普跌本身也不能证明因果关系。</span></p>
+        <ul>
+          <li><span class="lang-en">The IPO, the first day, and the wider AI-compute backdrop are three different facts.</span><span class="lang-zh">IPO、本周首日表现和更大的 AI 算力背景是三件不同的事。</span></li>
+          <li><span class="lang-en">Editorial questions about valuation, execution, and funding are not accusations.</span><span class="lang-zh">关于估值、执行和融资的社论问题，不等于指控。</span></li>
+          <li><span class="lang-en">A stronger AI spend cycle can coexist with sharply different company-level outcomes.</span><span class="lang-zh">更强的 AI 支出周期，也可能伴随不同公司的明显分化。</span></li>
+        </ul>
+      </article>
+      <article class="editorial-panel">
+        <span class="eyebrow"><span></span><span class="lang-en">ANT bear case</span><span class="lang-zh">ANT 做空观察</span></span>
+        <h2><span class="lang-en">Catalysts, counterpoints, and squeeze risk — in one tidy frame.</span><span class="lang-zh">催化、反驳与挤空风险——放在同一框里看。</span></h2>
+        <p><span class="lang-en">Catalysts: a very large public deal, an aggressive opening tape, and a valuation that invites scrutiny. Counterpoints: the company framed compute and infrastructure as stated uses of proceeds, and the broader AI capex backdrop is not weak by default. Squeeze risk exists in any crowded name, but this page does not claim live positioning, short interest, or options data.</span><span class="lang-zh">催化：超大规模公开发行、强势开盘，以及容易引发审视的估值。反方：公司已将算力和基础设施列为募资用途，而更大的 AI 资本开支背景并不天然疲弱。任何拥挤标的都存在挤空风险，但本页不声称掌握实时持仓、做空利率或期权数据。</span></p>
+        <p><span class="lang-en">If the stock moves, that is market action, not proof of a thesis.</span><span class="lang-zh">如果股价波动，那是市场行为，不是论点被证明。</span></p>
+      </article>
+    </div>
+  </section>
+
+  <section id="experiment" class="experiment" aria-labelledby="experiment-title"><div class="section-top"><div><span class="eyebrow">FIG. 01 / <span class="lang-en">THE LAW OF DIMINISHING VIBES</span><span class="lang-zh">边际情绪递减定律</span></span><h2 id="experiment-title"><span class="lang-en">The curve looks expensive.</span><span class="lang-zh">这条曲线看起来很贵。</span></h2></div><span class="live"><span></span><span class="lang-en">SIMULATED SCIENCE</span><span class="lang-zh">模拟科学</span></span></div>
+  <div class="lab"><div class="plot"><div class="legend"><span class="orange">●</span> <span class="lang-en">Benchmark score</span><span class="lang-zh">基准分数</span> <span class="gray">--- <span class="lang-en">Your expectations</span><span class="lang-zh">你的预期</span></span></div><svg viewBox="0 0 700 300" role="img" aria-labelledby="chart-title chart-desc"><title id="chart-title"><span class="lang-en">Diminishing returns from compute</span><span class="lang-zh">算力的边际收益递减</span></title><desc id="chart-desc"><span class="lang-en">A fictional benchmark curve rises quickly then flattens as compute increases, while expectations keep rising.</span><span class="lang-zh">一个虚构的基准曲线先快速上升，再随着算力增加而趋于平缓；预期则持续上升。</span></desc><g class="grid"><path d="M48 35H674 M48 95H674 M48 155H674 M48 215H674 M48 275H674"/></g><g class="axis"><text x="12" y="40">100</text><text x="22" y="160">50</text><text x="29" y="280">0</text><text x="48" y="298">1×</text><text x="628" y="298">1,000×</text></g><path class="expectation" d="M48 260L674 35"/><path id="curve" class="curve" d="M48 260 C110 105 230 80 674 70"/><circle id="point" cx="361" cy="86" r="7"/></svg><div class="plot-label"><span class="lang-en">COMPUTE →</span><span class="lang-zh">算力 →</span> <span><span class="lang-en">FINANCIAL FREEDOM ←</span><span class="lang-zh">财务自由 ←</span></span></div></div><aside class="controls"><label for="compute"><span class="lang-en">Throw compute at it</span><span class="lang-zh">把算力扔进去</span> <output id="multiplier" for="compute">100×</output></label><input id="compute" type="range" min="0" max="100" value="67" aria-describedby="slider-help"><div class="range-labels"><span><span class="lang-en">Laptop energy</span><span class="lang-zh">笔记本级能耗</span></span><span><span class="lang-en">National grid</span><span class="lang-zh">电网级负载</span></span></div><p id="slider-help"><span class="lang-en">Move the slider. The invoice is the only thing that scales reliably.</span><span class="lang-zh">拖动滑块。唯一稳定扩张的是账单。</span></p><dl><div><dt><span class="lang-en">Hypothetical monthly bill</span><span class="lang-zh">假设月账单</span></dt><dd id="bill">$100,000</dd></div><div><dt><span class="lang-en">Benchmark score</span><span class="lang-zh">基准分数</span> <span>/ 100</span></dt><dd id="score">86.2</dd></div><div><dt><span class="lang-en">Reviewer confidence</span><span class="lang-zh">审稿人信心</span></dt><dd class="confidence"><span class="lang-en">Still needs ablations</span><span class="lang-zh">仍需更多消融实验</span></dd></div></dl></aside></div><div class="caption"><span><span class="lang-en">Source: we made it up.</span><span class="lang-zh">来源：我们编的。</span></span><span><span class="lang-en">Illustrative satire. No actual benchmark or pricing data.</span><span class="lang-zh">仅为讽刺示意。无真实基准或定价数据。</span></span></div></section>
+
+  <section class="findings" aria-label="Research findings">
+    <article><span class="index">01 / <span class="lang-en">THE HYPOTHESIS</span><span class="lang-zh">假设</span></span><h3><span class="lang-en">Bigger ≠ better.</span><span class="lang-zh">更大不等于更好。</span></h3><p><span class="lang-en">Sometimes a smaller model is all you need. Sometimes you just need a regular expression.</span><span class="lang-zh">有时更小的模型就够了。有时你只需要一个正则表达式。</span></p></article>
+    <article><span class="index">02 / <span class="lang-en">THE METHOD</span><span class="lang-zh">方法</span></span><h3><span class="lang-en">Trust the invoice.</span><span class="lang-zh">相信账单。</span></h3><p><span class="lang-en">If the loss doesn't go down, try plotting your bank balance. That curve never disappoints.</span><span class="lang-zh">如果损失不下降，试着画一下账户余额。那条曲线从不让人失望。</span></p></article>
+    <article><span class="index">03 / <span class="lang-en">THE CONTRIBUTION</span><span class="lang-zh">贡献</span></span><h3><span class="lang-en">State of the art*</span><span class="lang-zh">前沿水平*</span></h3><p><span class="lang-en">A novel framework for turning electricity into a slightly more confident wrong answer.</span><span class="lang-zh">一种把电力转化为“更自信一点的错误答案”的新框架。</span></p><small><span class="lang-en">*in budget consumption</span><span class="lang-zh">*在预算消耗方面</span></small></article>
+  </section>
+
+  <section class="findings" aria-label="Verified stories">
+    <article class="news-card"><div class="kicker"><span class="lang-en">DATE 2026 · 11/18 ET</span><span class="lang-zh">日期 2026 · 11 月 18 日 ET</span></div><h3><span class="lang-en">Anthropic priced its IPO at $83 a share.</span><span class="lang-zh">Anthropic 将 IPO 定价为每股 83 美元。</span></h3><p><span class="lang-en">The company said 980 million shares were offered in total, including shares sold by existing shareholders, and the gross public offer size was $81.34 billion before overallotment.</span><span class="lang-zh">公司称公开发行共 9.8 亿股，其中包括现有股东出售的股份，超额配售前的公开发行总额为 813.4 亿美元。</span></p><p><a href="https://www.anthropic.com/news/anthropic-prices-initial-public-offering"><span class="lang-en">Original source ↗</span><span class="lang-zh">原始来源 ↗</span></a></p></article>
+    <article class="news-card"><div class="kicker"><span class="lang-en">DATE 2026 · 11/18</span><span class="lang-zh">日期 2026 · 11 月 18 日</span></div><h3><span class="lang-en">SEC filing adds a separate conditional private placement.</span><span class="lang-zh">SEC 文件新增一笔独立的有条件私募。</span></h3><p><span class="lang-en">The prospectus describes a $26 billion concurrent private placement; total gross deal size is not the same thing as IPO net proceeds.</span><span class="lang-zh">招股书写明另有 260 亿美元的并行私募；交易总规模不等于 IPO 净募资。</span></p><p><a href="https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm">Original source ↗</a></p></article>
+    <article class="news-card"><div class="kicker"><span class="lang-en">DATE 2026 · 11/19</span><span class="lang-zh">日期 2026 · 11 月 19 日</span></div><h3><span class="lang-en">First-day trading opened strong, then cooled.</span><span class="lang-zh">首日交易高开，随后回落。</span></h3><p><span class="lang-en">AP reported ANT opened at $111.50 and closed at $97.17, up 17.1% from the IPO price while pulling back from the open.</span><span class="lang-zh">美联社报道 ANT 以 111.50 美元开盘、97.17 美元收盘，较发行价上涨 17.1%，但较开盘有所回落。</span></p><p><a href="https://apnews.com/article/c4c3f4878b12989347f8a930ed813dad">Original source ↗</a></p></article>
+    <article class="news-card"><div class="kicker"><span class="lang-en">DATE 2026 · 11/17</span><span class="lang-zh">日期 2026 · 11 月 17 日</span></div><h3><span class="lang-en">NVIDIA still reported very large data-center growth.</span><span class="lang-zh">NVIDIA 仍报告了非常大的数据中心增长。</span></h3><p><span class="lang-en">FY2027 Q3 data-center revenue was $107.6 billion, up 110% year on year, which is relevant context for AI compute demand but not a guarantee for every company.</span><span class="lang-zh">2027 财年第三季度数据中心收入为 1,076 亿美元，同比增 110%，这对 AI 算力需求讨论有参考意义，但不保证每家公司都受益。</span></p><p><a href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Third-Quarter-Fiscal-2027/default.aspx">Original source ↗</a></p></article>
+    <article class="news-card"><div class="kicker"><span class="lang-en">DATE 2026 · 11/16</span><span class="lang-zh">日期 2026 · 11 月 16 日</span></div><h3><span class="lang-en">SEC staff gave narrow settlement relief.</span><span class="lang-zh">SEC 工作人员给出狭义结算便利。</span></h3><p><span class="lang-en">The letter concerns qualifying broker-dealer customer cash for IPO-day purchases delivered the next business day; it does not show market-wide funding stress.</span><span class="lang-zh">这封信只涉及合格经纪商客户现金在 IPO 当天买入、次一交易日交割的安排；并不显示全市场融资压力。</span></p><p><a href="https://www.sec.gov/files/tm/no-action/sifma-noaction-111626.pdf">Original source ↗</a></p></article>
+  </section>
+
+  <section id="manifesto" class="manifesto"><span class="eyebrow"><span class="lang-en">OUR RESEARCH DIRECTION</span><span class="lang-zh">我们的研究方向</span></span><p><span class="lang-en">What if we scaled<br><em>the expectations down?</em></span><span class="lang-zh">如果我们把<br><em>预期降下来呢？</em></span></p><a href="https://github.com/Easonyesheng/scaling-low"><span class="lang-en">Contribute to the decline ↗</span><span class="lang-zh">一起参与降温 ↗</span></a></section>
+</main><footer class="wrap"><a class="brand" href="./">↘ scaling low.</a><span><span class="lang-en">A small joke about a very big industry.</span><span class="lang-zh">一个关于庞大行业的小玩笑。</span></span><span><span class="lang-en">100% satire. 0 GPUs harmed. Real news is separately sourced.</span><span class="lang-zh">100% 讽刺。0 张 GPU 受伤。真实新闻另行核实。</span></span></footer><script src="script.js"></script>
+<script>
+(() => {
+  const root = document.documentElement;
+  const buttons = document.querySelectorAll('.lang-toggle button');
+  const title = document.title;
+  const desc = document.querySelector('meta[name="description"]');
+  const copy = {
+    en: {
+      title: 'Scaling Low — Less is a research direction.',
+      description: 'Scaling Low — a deeply unserious study of compute, diminishing returns, and very real invoices.'
+    },
+    zh: {
+      title: 'Scaling Low — 少即是研究方向。',
+      description: 'Scaling Low —— 关于算力、边际递减和真实账单的严肃不起来的研究。'
+    }
+  };
+  const apply = (lang) => {
+    root.setAttribute('lang', lang);
+    root.setAttribute('data-lang', lang);
+    document.title = copy[lang].title;
+    desc.setAttribute('content', copy[lang].description);
+    buttons.forEach((btn) => btn.setAttribute('aria-pressed', String(btn.dataset.lang === lang)));
+    try { localStorage.setItem('scaling-low-lang', lang); } catch (err) {}
+  };
+  buttons.forEach((btn) => btn.addEventListener('click', () => apply(btn.dataset.lang)));
+  let saved = 'en';
+  try { saved = localStorage.getItem('scaling-low-lang') || 'en'; } catch (err) {}
+  apply(saved === 'zh' ? 'zh' : 'en');
+})();
+</script>
 </body></html>
