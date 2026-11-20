@@ -24,13 +24,21 @@ html.sl[lang=zh-Hans] :is(h1,h2,h3,h4){letter-spacing:-.035em;line-height:1.2}ht
 @media print{html.sl{background:white}.sl .bar nav,html.sl.js .enhanced,.sl footer a:last-child{display:none!important}.sl .cover,.sl footer{background:white;color:var(--ink)}.sl .cover :is(.meta,p,em){color:var(--dim)}.sl .note,.sl .labgrid{break-inside:avoid}}
 :where(html.sl) :target{scroll-margin-top:.5rem}
 
-.sl .checkpoint{padding-block:clamp(20px,3vw,40px);border-bottom:1px solid #686279}
+/* One editorial stage: the mesh fades toward the timer. */
+.sl .cover{background:radial-gradient(ellipse at 88% 35%,#393357,#1b1935 72%)}
+.sl .folio{border:0}
+.sl .stage{position:relative;isolation:isolate;overflow:hidden;padding-block:clamp(2rem,5vw,5rem)}
+.sl .stage .plate{position:absolute;z-index:-1;inset:0 0 0 auto;width:64%;height:100%;max-width:none;margin:0;pointer-events:none;mask-image:linear-gradient(90deg,transparent,#0003 28%,#000 72%)}
+.sl .stage .plate svg{height:100%}
+.sl .stage .tagline{color:#e0d7ed;font:italic clamp(1.18rem,2vw,1.65rem)/1.35 var(--serif)}
+.sl .checkpoint{margin-top:clamp(2.7rem,6vw,5.5rem)}
 .sl .checkpoint .meta,.sl #passed{color:var(--light)}
-.sl .checkpoint h2{font-size:clamp(2rem,4vw,3.7rem)}
-.sl .checkpoint p{max-width:86ch;margin-top:.6rem;color:#ddd7e9;font-size:.92rem}
-.sl #clock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:56rem;margin:1rem 0;border-block:1px solid #686279}
-.sl #clock>div{padding:.65rem clamp(3px,1vw,1rem);font:600 clamp(.62rem,1.6vw,.8rem)/1.5 var(--mono);text-transform:uppercase}
-.sl #clock>div+div{border-left:1px solid #686279}.sl #clock strong{display:block;font:400 clamp(1.65rem,6vw,5rem)/1.1 var(--mono);font-variant-numeric:tabular-nums;color:#e3d7fa}
+.sl .checkpoint h2{font-size:clamp(1.4rem,2.6vw,2.45rem)}
+.sl .checkpoint p{color:#ded8ec;font-size:.88rem}
+.sl #clock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:45rem;margin:1rem 0}
+.sl #clock>div{font:600 .72rem/1.6 var(--mono);letter-spacing:.09em;text-transform:uppercase}
+.sl #clock strong{display:block;font:500 clamp(2rem,6.1vw,5rem)/1.05 var(--mono);letter-spacing:-.07em;font-variant-numeric:tabular-nums}
+@media(max-width:740px){.sl .stage .plate{width:80%;opacity:.35}}
+@media(max-width:480px){.sl #clock{grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}.sl #clock strong{font-size:2.9rem}.sl .stage .plate{width:100%;height:66%}}
 .sl .riskgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1.4rem;margin-top:1.6rem}.sl .riskgrid article{padding:1rem;border-top:2px solid var(--ink);background:var(--lav)}
 .sl .riskgrid h3,.sl .note h3{font:400 clamp(1.45rem,2.4vw,2rem)/1.2 var(--serif);margin:.35em 0}.sl #news-status{margin:1rem 0;color:var(--dim);font-size:.85rem}.sl .bar nav,.sl .folio{flex-wrap:wrap}.sl .labgrid>*{min-width:0}.sl .coverfoot{font-size:.79rem}.sl .coverbody .tagline{color:white;font:italic 1.4rem/1.3 var(--serif)}
-@media(max-width:360px){.sl #clock{grid-template-columns:repeat(2,minmax(0,1fr))}.sl #clock>div:nth-child(3){border-left:0}.sl #clock>div:nth-child(n+3){border-top:1px solid #686279}}
