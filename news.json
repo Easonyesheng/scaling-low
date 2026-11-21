@@ -125,6 +125,56 @@
         "en": "This is one example of the cost of a rights dispute. The filing describes an earlier settlement, not a new fine.",
         "zh": "这是版权争议成本的一个实例。文件披露的是此前的和解，并非新增罚款。"
       }
+    },
+    {
+      "id": "align-stakeholder-control-method",
+      "date": "2026-11-18",
+      "topic": "governance",
+      "kind": "research",
+      "title": {
+        "en": "ALIGN studies control-accountability gaps in high-risk AI use",
+        "zh": "ALIGN 研究高风险 AI 使用中的控制—问责缺口"
+      },
+      "summary": {
+        "en": "The ALIGN team published a method for spotting cases where the people expected to be accountable for an AI risk may not actually have enough control to manage it. The authors say they developed and evaluated the method, but the result is a governance tool, not evidence that deployed systems became safer.",
+        "zh": "ALIGN 团队发布了一种方法，用于识别“应承担 AI 风险问责的人，未必拥有足够控制权”这类情形。作者称已完成方法开发与评估，但这只是治理工具，并不等于已证明部署系统更安全。"
+      },
+      "takeaway": {
+        "en": "Useful for assigning responsibility, but it still needs real-world validation before anyone treats it as a safety fix.",
+        "zh": "它对厘清责任有用，但在被当作安全修复方案之前，仍需要真实场景验证。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.24609?utm_source=openai",
+        "label": {
+          "en": "arXiv: ALIGN method paper",
+          "zh": "arXiv：ALIGN 方法论文"
+        }
+      }
+    },
+    {
+      "id": "openai-frontier-risk-training-to-deployment",
+      "date": "2026-11-18",
+      "topic": "governance",
+      "kind": "company",
+      "title": {
+        "en": "OpenAI describes a stricter evidence standard from training to deployment",
+        "zh": "OpenAI 说明了从训练到部署的更严格证据标准"
+      },
+      "summary": {
+        "en": "OpenAI says it now requires stronger evidence of aligned behavior during training and uses written, evidence-backed safety arguments when deciding whether to proceed to deployment. This is a first-party description of process changes, not an independent test of whether those changes reduce risk in practice.",
+        "zh": "OpenAI 表示，其现在在训练阶段要求更强的对齐行为证据，并在是否进入部署时使用书面、以证据支撑的安全论证。这是公司对流程变化的自述，不是对这些变化是否能在实践中降低风险的独立检验。"
+      },
+      "takeaway": {
+        "en": "The signal is a tighter governance process; the open question is whether the process consistently catches dangerous gaps before release.",
+        "zh": "可见信号是治理流程更严格；仍待验证的是，这套流程能否在发布前稳定识别出危险缺口。"
+      },
+      "source": {
+        "url": "https://openai.com/index/managing-frontier-ai-risk/?utm_source=openai",
+        "label": {
+          "en": "OpenAI blog: Managing frontier AI risk",
+          "zh": "OpenAI 博文：管理前沿 AI 风险"
+        }
+      }
     }
   ]
 }
