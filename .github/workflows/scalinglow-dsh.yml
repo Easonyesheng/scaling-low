@@ -1,8 +1,7 @@
 name: Scaling Low DSH dry run
 
 on:
-  schedule:
-    - cron: '12 12 23 11 *'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -13,25 +12,18 @@ concurrency:
 
 jobs:
   dry-run:
-    if: github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
-      - id: window
-        run: echo "allowed=$(if [ \"$(date -u +%F)\" = 2026-11-23 ]; then echo yes; else echo no; fi)" >> "$GITHUB_OUTPUT"
-      - if: steps.window.outputs.allowed == 'yes'
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - if: steps.window.outputs.allowed == 'yes'
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24'
-      - if: steps.window.outputs.allowed == 'yes'
-        name: Install pinned DeepSeek Harness with no credential in scope
+      - name: Install pinned DeepSeek Harness with no credential in scope
         run: npm install --prefix "$RUNNER_TEMP/dsh" --no-audit --no-fund --ignore-scripts --save-exact @deepseek-ai/dsh@0.2.2-rc.5
-      - if: steps.window.outputs.allowed == 'yes'
-        name: Verify DSH search and editorial output without publishing
+      - name: Verify DSH search and editorial output without publishing
         env:
           SCALINGLOW_OPENAI_API_KEY: ${{ secrets.SCALINGLOW_OPENAI_API_KEY }}
         run: python3 .github/scalinglow/daily.py "$RUNNER_TEMP/dsh/node_modules/.bin/dsh" news.json "$RUNNER_TEMP/scalinglow-candidates.json"
