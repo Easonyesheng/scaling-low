@@ -5,6 +5,9 @@ name: Scaling Low DSH news
     # UTC -> Asia/Shanghai 03:00, 09:00, 15:00, 21:00.
     - cron: '0 1,7,13,19 * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/scalinglow-dsh.yml']
 
 permissions: {}
 
@@ -14,7 +17,7 @@ concurrency:
 
 jobs:
   generate:
-    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && (github.event_name != 'push' || github.event.head_commit.message == 'Run one approved Scaling Low publication now')
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     permissions:
