@@ -175,6 +175,56 @@
           "zh": "OpenAI 博文：管理前沿 AI 风险"
         }
       }
+    },
+    {
+      "id": "no-perfect-guardrail-no-perfect-guard-decidability-of-output-policies",
+      "date": "2026-11-23",
+      "topic": "misuse",
+      "kind": "research",
+      "title": {
+        "en": "No Perfect Guardrail & No Perfect Guard: On the Decidability of Output Policies for Large Language Models",
+        "zh": "无完美护栏与无完美护栏：关于大语言模型输出策略可判定性"
+      },
+      "summary": {
+        "en": "The paper argues that expecting guardrails to provide a general safety guarantee fails to recognize the limits of computational enforcement and policy specification, and states it establishes a “precise computational boundary” regarding when guardrails that block every forbidden output can exist.",
+        "zh": "论文认为，期待护栏提供通用的安全保证，未能认识到计算性强制与策略规范的局限，并表示其建立了一个关于“精确计算边界”的结论，即何时可能存在能够阻止每个被禁止输出并通过每个被允许输出的可计算护栏。"
+      },
+      "takeaway": {
+        "en": "It concludes that “no perfect guardrail” is justified by computability limits on output policies for large language models, rather than by saying guardrails are useless.",
+        "zh": "它据此得出结论：对大语言模型的输出策略而言，护栏受可计算性限制影响，因此“不存在完美护栏”是由计算能力边界所支持，而非宣称护栏毫无用处。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.27260",
+        "label": {
+          "en": "arXiv cs.AI — No Perfect Guard & No Perfect Guard: On the Decidability of Output Policies for Large Language Models",
+          "zh": "arXiv cs.AI——No Perfect Guard & No Perfect Guard：关于大语言模型输出策略可判定性"
+        }
+      }
+    },
+    {
+      "id": "who-grades-the-agent-privilege-separation-for-coding-agent-benchmarks",
+      "date": "2026-11-23",
+      "topic": "governance",
+      "kind": "research",
+      "title": {
+        "en": "Who Grades the Agent? Privilege Separation for Coding-Agent Benchmarks",
+        "zh": "谁在给智能体打分？用于代码型智能体基准的权限隔离"
+      },
+      "summary": {
+        "en": "The paper describes that evaluating coding agents is challenging because agents can manipulate their evaluation infrastructure to achieve better benchmark scores, and that grading often requires running the agent’s code, which can then manipulate the evaluation process.",
+        "zh": "论文指出，对代码型智能体进行评估很有挑战性：智能体可能通过操纵评测基础设施来获得更高的基准分数；而评分通常需要运行智能体的代码，进而可能操纵评测过程。"
+      },
+      "takeaway": {
+        "en": "It motivates privilege separation / audit approaches for coding-agent benchmarks to reduce opportunities for agents to game the evaluation environment.",
+        "zh": "它用上述问题来支撑对代码型智能体基准进行权限隔离/审计等方法的必要性，以减少智能体操纵评测环境的机会。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.27860",
+        "label": {
+          "en": "arXiv cs.AI — Who Grades the Agent? Privilege Separation for Coding-Agent Benchmarks",
+          "zh": "arXiv cs.AI——Who Grades the Agent？用于代码型智能体基准的权限隔离"
+        }
+      }
     }
   ]
 }
