@@ -1,22 +1,26 @@
-name: Scaling Low DSH dry run
+name: Scaling Low DSH news
 
-on:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/scalinglow-dsh.yml']
+'on':
+  schedule:
+    # UTC -> Asia/Shanghai 03:00, 09:00, 15:00, 21:00.
+    - cron: '0 1,7,13,19 * * *'
+  workflow_dispatch:
 
-permissions:
-  contents: read
+permissions: {}
 
 concurrency:
   group: scalinglow-dsh
   cancel-in-progress: false
 
 jobs:
-  dry-run:
-    if: github.run_attempt == 1
+  generate:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 7
+    permissions:
+      contents: read
+    outputs:
+      ready: ${{ steps.inspect.outputs.ready }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -24,47 +28,80 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24'
-      - name: Install pinned DeepSeek Harness with no credential in scope
+      - name: Install pinned DSH without the API key in scope
         run: npm install --prefix "$RUNNER_TEMP/dsh" --no-audit --no-fund --ignore-scripts --save-exact @deepseek-ai/dsh@0.2.2-rc.5
-      - name: Verify DSH search and editorial output without publishing
+      - name: Generate and check DSH candidates against original sources
         env:
           SCALINGLOW_OPENAI_API_KEY: ${{ secrets.SCALINGLOW_OPENAI_API_KEY }}
         run: python3 .github/scalinglow/daily.py "$RUNNER_TEMP/dsh/node_modules/.bin/dsh" news.json "$RUNNER_TEMP/scalinglow-candidates.json"
-
-      - name: Encrypt the candidate transfer
+      - id: inspect
         run: |
-          cat > "$RUNNER_TEMP/scalinglow-public.pem" <<'PEM'
-          -----BEGIN CERTIFICATE-----
-          MIIERTCCAq2gAwIBAgIUQcG/OFdmWFPpAPNdI4oviTPJeIAwDQYJKoZIhvcNAQEL
-          BQAwMjEwMC4GA1UEAwwnU2NhbGluZyBMb3cgb25lLXRpbWUgY2FuZGlkYXRlIHRy
-          YW5zZmVyMB4XDTI2MTEyMzEyMDMyNVoXDTI2MTEyNTEyMDMyNVowMjEwMC4GA1UE
-          AwwnU2NhbGluZyBMb3cgb25lLXRpbWUgY2FuZGlkYXRlIHRyYW5zZmVyMIIBojAN
-          BgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA1oYHDMRdw0ha4MiS/1VuDKEfkqOv
-          lkgQg18g3OSqZcDUJE2W0u32i+7BzVTsQ91+d9KVGknamZQrdu/+5I0F68BEIhpe
-          XCd63DN0tkfwoqxyB5Nee2bI9Ku8X7UFgRDfAIeuqxLsKFeQ5CG1ZUgv8EYuuyNw
-          Wr9vOQYqvSgpF55QYXXJdIwCmvR7INuLCx1gpexMabNVYswDMDlRJgrkNdmOwQPu
-          PB5ksD4/6NR+n7bKGmP/QrfVT4ac/jeMvynE/MaEkDrD4EwszWSF437wmkcGoP5w
-          gA8HaytEtvoCbF+0LKNk8v2aFJnsDfZiOpxYUzvJzcs6AaAChLsJOLZcpJR+5zE6
-          RZFiHmUs+kWzLMBPP9RVa231bvp0zYz8PdgUJTKThVnmmM7PadWxK0Dq6AR9Qz/f
-          yLCMU7JhFuQevRwMjYNr3by9eAE0Q6LJxPCWYt2Lk5pspWrvehIDNqerYsmLP88n
-          bkmFzcsW+EAAdHcnslHAYyKbSQ93nDmPlB8hAgMBAAGjUzBRMB0GA1UdDgQWBBRU
-          yx/coHA7NonnjLO6yID6SOCr3jAfBgNVHSMEGDAWgBRUyx/coHA7NonnjLO6yID6
-          SOCr3jAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBgQCiIdEKaGGd
-          fJtD+kvy80BRVQiQn6g73BaflDUthnPW3GzRlWkJ643dCPru2CH/m/8T2s0W/QpR
-          ZJnZ/XoMBo8eaKR3qi5pO5dx6ZtpQmIkJiVplGN7bxKt50/NhYIC2EPa9MYmY/oh
-          pZQkNTjhXly3d8hyOYMwIYU7taPzi3ZSXHxDQXVhkZmKPizW+4K1ZTN8wU2phtzx
-          0u+KnHeIm0ekbOXhoMgXkqjmcNANjKN3b9hy4uBJfxQGUdSo3QLgu/y1kBV/DWbG
-          OA0YP+CCLqUjvbunv3yi53W/GAXk+pEWNDY4KLIvPpU0AKJZFI+d3J3g+BDy/QAc
-          bpbNV8JSMQxSJ4AKTWjcjnbOgpp8vEn+JyhuDrucLByXPEbCzSJT1D3beuKWPWgu
-          FAmC/glW0U7jT7cww2mpUeT1Qrz/HZZOKpYsLmuvlbLfqzqWkQeETgU42Cb6FYvf
-          Ns0U7Z1p+AOuFr2Iv10S+qR0TmQwxm/MSmgoKaL7cHl9CgPb6VrkC78=
-          -----END CERTIFICATE-----
-          PEM
-          openssl cms -encrypt -binary -aes-256-cbc -outform DER -in "$RUNNER_TEMP/scalinglow-candidates.json" -out "$RUNNER_TEMP/scalinglow-candidates.cms" "$RUNNER_TEMP/scalinglow-public.pem"
-      - name: Upload encrypted candidates for independent review
+          test -s "$RUNNER_TEMP/scalinglow-candidates.json"
+          ready="$(jq -r '(.entries | length) > 0' "$RUNNER_TEMP/scalinglow-candidates.json")"
+          printf 'ready=%s\n' "$ready" >> "$GITHUB_OUTPUT"
+      - name: Transfer only verified items to isolated publishing job
+        if: steps.inspect.outputs.ready == 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: scalinglow-candidates-once
-          path: ${{ runner.temp }}/scalinglow-candidates.cms
+          name: scalinglow-verified-${{ github.run_id }}
+          path: ${{ runner.temp }}/scalinglow-candidates.json
           if-no-files-found: error
           retention-days: 1
+
+  publish:
+    if: needs.generate.outputs.ready == 'true'
+    needs: generate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: main
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: scalinglow-verified-${{ github.run_id }}
+          path: ${{ runner.temp }}/scalinglow-verified
+      - id: append
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [[ "$(git rev-parse HEAD)" != "$SOURCE_SHA" ]]; then
+            echo "main advanced after generation; skipping instead of overwriting"
+            echo 'changed=no' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          python3 .github/scalinglow/publish.py news.json "$RUNNER_TEMP/scalinglow-verified/scalinglow-candidates.json" "$GITHUB_OUTPUT"
+          if ! git diff --quiet -- news.json; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add -- news.json
+            git diff --cached --check
+            test "$(git diff --cached --name-only)" = 'news.json'
+            git commit -m 'Publish source-verified DSH AI risk briefs'
+            git push origin HEAD:main
+            git rev-parse HEAD > "$RUNNER_TEMP/scalinglow-published-sha"
+          fi
+      - name: Explicitly dispatch the existing GitHub Pages deployment
+        if: steps.append.outputs.changed == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --repo "$GITHUB_REPOSITORY" --ref main
+      - name: Confirm the live website contains the new article IDs
+        if: steps.append.outputs.changed == 'yes'
+        run: |
+          set -euo pipefail
+          want="$(jq -c '[.entries[].id]' "$RUNNER_TEMP/scalinglow-verified/scalinglow-candidates.json")"
+          for i in {1..16}; do
+            if curl -fsS --max-time 8 "https://scalinglow.com/news.json?run=${GITHUB_RUN_ID}-${i}" |
+                jq -e --argjson want "$want" '[.entries[].id] as $live | ($want - $live | length) == 0' >/dev/null; then
+              echo "Live website verified for commit $(cat "$RUNNER_TEMP/scalinglow-published-sha")"
+              exit 0
+            fi
+            sleep 15
+          done
+          echo 'Published to main but the website did not confirm within the deployment window.' >&2
+          exit 1
