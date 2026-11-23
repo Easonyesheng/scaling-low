@@ -5,6 +5,9 @@ name: Scaling Low DSH news
     # UTC -> Asia/Shanghai 03:00, 09:00, 15:00, 21:00.
     - cron: '0 1,7,13,19 * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/scalinglow-dsh.yml']
 
 permissions: {}
 
@@ -14,7 +17,7 @@ concurrency:
 
 jobs:
   generate:
-    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && (github.event_name != 'push' || github.event.head_commit.message == 'Run approved official-feed publication')
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     permissions:
@@ -30,7 +33,7 @@ jobs:
           node-version: '24'
       - name: Install pinned DSH without the API key in scope
         run: npm install --prefix "$RUNNER_TEMP/dsh" --no-audit --no-fund --ignore-scripts --save-exact @deepseek-ai/dsh@0.2.2-rc.5
-      - name: Generate and check DSH candidates against original sources
+      - name: Generate DSH candidates with official-feed date and URL checks
         env:
           SCALINGLOW_OPENAI_API_KEY: ${{ secrets.SCALINGLOW_OPENAI_API_KEY }}
         run: python3 .github/scalinglow/daily.py "$RUNNER_TEMP/dsh/node_modules/.bin/dsh" news.json "$RUNNER_TEMP/scalinglow-candidates.json"
