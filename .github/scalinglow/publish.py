@@ -15,7 +15,7 @@ def append(news,payload,sha,today):
         raise ValueError('source version mismatch')
     entrants=payload.get('entries')
     if entrants==[]: return news,0
-    if payload.get('dsh_live_search') is not True or payload.get('original_sources_verified') is not True:
+    if payload.get('dsh_live_search') is not True or payload.get('official_feed_verified') is not True:
         raise ValueError('missing publication gates')
     if not isinstance(entrants,list) or not 1<=len(entrants)<=2:
         raise ValueError('candidate count invalid')
