@@ -14,7 +14,7 @@
   ];
   const ns='http://www.w3.org/2000/svg';
   const panelButtons=[...document.querySelectorAll('button[data-risk]')];
-  let width=680,height=420,yaw=.32,pitch=.19,selected='misuse',pointer=null,news=null;
+  let width=680,height=420,yaw=.32,pitch=.19,selected='misuse',pointer=null,news=null,archiveState="loading",archiveMode="count";
   const initial=65, clamp=(v, lo, hi)=>Math.max(lo,Math.min(hi,v));
   const L=(a)=>words(...a);
   const scene=document.createElementNS(ns,'g');svg.append(scene);
@@ -72,8 +72,7 @@
     panelButtons.forEach(p=>p.setAttribute('aria-pressed',String(p.dataset.risk===id)));
     const h=document.createElement('h3'),p=document.createElement('p'),a=document.createElement('a');
     h.textContent=L(b.name);p.textContent=L(b.about);
-    a.textContent=words('Read related reports','查看相关报道');a.href='#news';
-    a.addEventListener('click',()=>document.querySelector(`button[data-filter="${b.id}"]`)?.click());
+    a.textContent=words('Read related reports','查看相关报道');a.href='#topic-' + b.id;
     detail.replaceChildren(h,p,a);draw();
   }
   panelButtons.forEach(b=>b.addEventListener('click',()=>select(b.dataset.risk)));
@@ -113,27 +112,81 @@
   });
   slider.addEventListener('input',draw);
   document.getElementById('atlas-reset').addEventListener('click',()=>{yaw=.32;pitch=.19;slider.value=initial;draw();});
+  const archiveChoices = [...document.querySelectorAll('button[data-archive-mode]')];
   function plotArchive(){
-    if(!news)return;
-    const total=news.length, donut=document.getElementById('atlas-donut'),list=document.getElementById('atlas-counts');
-    document.getElementById('atlas-total').textContent=String(total);
+    const donut=document.getElementById('atlas-donut'),list=document.getElementById('atlas-counts');
+    const status=document.getElementById('archive-status');
+    const ready = archiveState === 'ready';
+    const total = ready ? news.length : 0;
+    document.getElementById('atlas-total').textContent = ready ? String(total) : '—';
+    archiveChoices.forEach(button => {
+      button.disabled = !ready;
+      button.setAttribute('aria-pressed', String(button.dataset.archiveMode === archiveMode));
+    });
+    status.textContent = archiveState === 'loading' ? words('Loading the archive…','正在读取报道归档…') :
+      !ready ? words('Archive data unavailable.','暂时无法读取报道归档。') :
+      words(`${total} articles. Select a topic to see its reports.`,`共 ${total} 篇。点主题可查看相关报道。`);
     const legend=[], slices=[];
     let x=0;
-    for(const b of branches){
-      const n=news.filter(e=>e.topic===b.id).length,end=x+(total?n/total*100:0);
+    const percent = new Intl.NumberFormat(english() ? 'en-US' : 'zh-CN',{style:'percent', maximumFractionDigits:1});
+    if (ready) for(const b of branches){
+      const n=news.filter(e=>e.topic===b.id).length,end=x+n/total*100;
       if(n)slices.push(`${b.color} ${x}% ${end}%`);x=end;
-      const row=document.createElement('li'),dot=document.createElement('i'),label=document.createElement('span'),number=document.createElement('b');
-      dot.style.background=b.color;label.textContent=L(b.name);number.textContent=String(n);
-      row.append(dot,label,number);legend.push(row);
+      const row=document.createElement('li'), link=document.createElement(n ? 'a' : 'span');
+      const dot=document.createElement('i'),label=document.createElement('span'),number=document.createElement('b');
+      if(n)link.href='#topic-' + b.id;
+      else link.className='archive-item';
+      dot.style.background=b.color;label.textContent=L(b.name);
+      number.textContent=archiveMode==='count'?String(n):percent.format(n/total);
+      if(n)link.setAttribute('aria-label', words(`${L(b.name)}: ${n} articles (${percent.format(n/total)}). View reports.`,`${L(b.name)}：${n} 篇，占 ${percent.format(n/total)}。查看报道。`));
+      link.append(dot,label,number);row.append(link);legend.push(row);
     }
-    if(slices.length)donut.style.backgroundImage=`conic-gradient(${slices.join(',')})`;
+    donut.style.backgroundImage=slices.length?`conic-gradient(${slices.join(',')})`:'';
     list.replaceChildren(...legend);
   }
+  archiveChoices.forEach(b=>b.addEventListener('click',()=>{archiveMode=b.dataset.archiveMode;plotArchive();}));
+
+  const years = [
+    {year:2023,value:360,x:38,y:122},
+    {year:2024,value:416,x:85,y:113},
+    {year:2025,value:485,x:133,y:101},
+    {year:2030,value:945,x:369,y:26,scenario:true}
+  ];
+  let selectedYear = 2025, benchmark = 'scores';
+  const yearButtons = [...document.querySelectorAll('button[data-energy]')];
+  const benchmarkButtons = [...document.querySelectorAll('button[data-rdqa]')];
+  function showEnergy() {
+    const index = years.findIndex(e => e.year === selectedYear);
+    const item = years[index], prev = years[index - 1];
+    yearButtons.forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.energy)===selectedYear)));
+    document.querySelectorAll('.energy-plot :is(.plot-dots circle,.plot-values text)').forEach((el,i)=>el.classList.toggle('is-current',i % years.length===index));
+    const guide = document.getElementById('energy-guide');
+    guide.setAttribute('x1',item.x);guide.setAttribute('x2',item.x);guide.setAttribute('y1',item.y);guide.removeAttribute('hidden');
+    let tail = '';
+    if (prev) {
+      const change = new Intl.NumberFormat(english()?'en-US':'zh-CN',{style:'percent',signDisplay:'always', maximumFractionDigits:1}).format(item.value/prev.value-1);
+      tail = words(` · ${change} vs ${prev.year}`,` · 较 ${prev.year} 年 ${change}`);
+    }
+    document.getElementById('energy-readout').textContent = item.scenario ?
+      words(`${item.value} TWh · 2030 base case`,`${item.value} 太瓦时 · 2030 年基准情景`) + tail :
+      words(`${item.value} TWh · ${selectedYear} historical estimate`,`${item.value} 太瓦时 · ${selectedYear} 年历史估算`) + tail;
+  }
+  yearButtons.forEach(b=>b.addEventListener('click',()=>{selectedYear=Number(b.dataset.energy);showEnergy();}));
+  function showBenchmark() {
+    const gap = benchmark === 'gap';
+    benchmarkButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.rdqa===benchmark)));
+    document.getElementById('rdqa-bars').hidden = gap;
+    document.getElementById('rdqa-gap').hidden = !gap;
+    document.getElementById('rdqa-readout').textContent = gap ?
+      words('RDQA-Skill scores 17.1 percentage points higher on this benchmark.','在这项基准上，RDQA-Skill 高出 17.1 个百分点。') :
+      words('Both scores use the same 0–100% scale.','两个分数使用同一条 0–100% 刻度。');
+  }
+  benchmarkButtons.forEach(b=>b.addEventListener('click',()=>{benchmark=b.dataset.rdqa;showBenchmark();}));
   function localize(){
     document.getElementById('atlas-description').textContent=words('AI risks: a three-dimensional map','AI 风险三维图谱');
-    select(selected);plotArchive();
+    select(selected);plotArchive();showEnergy();showBenchmark();
   }
   new MutationObserver(localize).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
-  document.addEventListener('scalinglow:archive',e=>{news=e.detail;plotArchive();});
+  document.addEventListener('scalinglow:archive',e=>{archiveState=e.detail.state;news=e.detail.entries;plotArchive();});
   localize();resize();
 })();

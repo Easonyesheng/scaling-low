@@ -41,13 +41,15 @@
         style: 'currency', currency: 'USD', maximumFractionDigits: 0
       })
     ]));
-    const target = () => Number(slider.value) / 100;
+    const target = () => Number(slider.value) / Number(slider.max);
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let displayed = target();
     let frame = 0;
 
+    const presets = [...document.querySelectorAll("button[data-compute]")];
     function readout() {
       const t = target();
+      presets.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.compute === slider.value)));
       const compute = 10 ** (3 * t);
       const times = Math.round(compute).toLocaleString(language);
       multiplier.textContent = `${times}×`;
@@ -88,7 +90,12 @@
     }
 
     draw(displayed);
-    slider.addEventListener('input', () => { readout(); move(); });
+    const update = () => { readout(); move(); };
+    slider.addEventListener('input', update);
+    presets.forEach(button => button.addEventListener('click', () => {
+      slider.value = button.dataset.compute;
+      update();
+    }));
     return readout;
   }
 
@@ -355,22 +362,44 @@
         node(links,'a',tr('Link to this item','本条链接')).href = '#' + article.id;
       }
     }
-    function revealHash() {
-      const id = location.hash.slice(1);
+    const topics = new Set([...filters].map(button => button.dataset.filter));
+    const feed = document.getElementById('news');
+    const destination = () => location.hash.slice(1);
+    function showTopic(next) {
+      if (topics.has(next) && next !== topic) {
+        topic = next;
+        render();
+      }
+    }
+    function revealHash(move = false) {
+      const id = destination();
+      if (id === 'news' || id === 'factchecks' || id.startsWith('topic-')) {
+        const next = id === 'factchecks' ? 'checks' : id === 'news' ? 'all' : id.slice(6);
+        if (!topics.has(next)) return;
+        showTopic(next);
+        if (move && id.startsWith('topic-')) {
+          feed.focus({preventScroll:true});
+          feed.scrollIntoView();
+        }
+        return;
+      }
       if (!/^(case|news)-[a-z0-9-]+$/.test(id)) return;
       let card = document.getElementById(id);
-      if (!card && topic !== 'all') {
-        topic = 'all';
-        render();
+      if (!card && topic !== 'all' && entries.some(e => (e.kind === 'analysis' ? 'case-' : 'news-') + e.id === id)) {
+        showTopic('all');
         card = document.getElementById(id);
       }
       if (card) {
         const details = card.querySelector('details');
         if (details) details.open = true;
-        card.scrollIntoView();
+        if (move) card.scrollIntoView();
       }
     }
-    window.addEventListener('hashchange', revealHash);
+    window.addEventListener('hashchange', () => revealHash(true));
+    document.addEventListener('click', event => {
+      const link = event.target.closest?.('a[href^="#topic-"]');
+      if (link && !event.defaultPrevented && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && link.hash === location.hash) revealHash(true);
+    });
     async function load() {
       try {
         const response = await fetch('./news.json', {mode:'same-origin', cache:'no-cache'});
@@ -390,10 +419,10 @@
           seen.add(e.id.trim()); return true;
         }).sort((a,b) => b.date.localeCompare(a.date));
         state = entries.length ? 'ready' : 'error';
-        document.dispatchEvent(new CustomEvent('scalinglow:archive',{detail: entries}));
       } catch { state = 'error'; }
+      document.dispatchEvent(new CustomEvent('scalinglow:archive',{detail: {state, entries}}));
       render();
-      revealHash();
+      revealHash(/^(case|news)-/.test(destination()));
     }
 
     const deadline = Date.parse(document.getElementById('checkpoint').dateTime);
@@ -440,8 +469,14 @@
       applyLanguage();
       try { localStorage.setItem(storageKey, language); } catch { /* Optional preference. */ }
     }));
-    filters.forEach(button => button.addEventListener('click', () => { topic = button.dataset.filter; render(); }));
+    filters.forEach(button => button.addEventListener('click', () => {
+      const next = button.dataset.filter;
+      showTopic(next);
+      const hash = next === 'all' ? '#news' : '#topic-' + next;
+      if (location.hash !== hash) history.pushState(null, '', hash);
+    }));
     applyLanguage();
+    revealHash(true);
     load();
   }, { once: true });
 })();
