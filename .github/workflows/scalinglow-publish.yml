@@ -6,9 +6,6 @@ name: Scaling Low scheduled DSH publishing
     - cron: '17 3,9,15,21 * * *'
       timezone: Asia/Shanghai
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/scalinglow-publish.yml']
 
 permissions: {}
 
@@ -20,9 +17,7 @@ jobs:
   generate:
     if: >-
       github.ref == 'refs/heads/main' && github.run_attempt == 1 &&
-      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
-       (github.event_name == 'push' && github.event.before == '2c72a2234e1d7a8666a760c2a1a63d693ceae720' &&
-        github.event.head_commit.message == 'Trigger one Scaling Low Astra run'))
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     permissions:

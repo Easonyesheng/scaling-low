@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import unittest
 
-from daily import canonical, editorial_guide, validate, KINDS, bind_source_labels, apply_model_settings, make_patch
+from daily import canonical, editorial_guide, validate, KINDS, bind_source_labels, apply_model_settings, make_patch, DSH_MODEL_PROFILE
 from publish import append
 from official_feeds import parse
 
@@ -43,8 +43,9 @@ class Pipeline(unittest.TestCase):
         patches = {p.get('id'): p for p in make_patch('http://127.0.0.1:12345')}
         default_model = patches['agent-default-model']['config']
         provider = patches['llm-pi-ai']['config']['providers']['openai']
-        self.assertEqual(default_model, {'provider':'openai','model':request['model']})
-        self.assertEqual(provider['models'][0]['id'], request['model'])
+        self.assertEqual(default_model, {'provider':'openai','model':DSH_MODEL_PROFILE})
+        self.assertEqual(provider['models'][0]['id'], DSH_MODEL_PROFILE)
+        self.assertNotEqual(DSH_MODEL_PROFILE, request['model'])
         self.assertEqual(provider['models'][0]['maxTokens'], request['max_output_tokens'])
         self.assertEqual(provider['retryPolicy']['maxRetries'], 0)
 
