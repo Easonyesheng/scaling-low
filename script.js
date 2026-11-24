@@ -155,8 +155,8 @@
       const halo=ctx.createRadialGradient(cx+h*.035,cy,3,cx,cy,h*.66);
       halo.addColorStop(0,'rgba(182,59,34,.28)');
       halo.addColorStop(.26,'rgba(117,32,38,.32)');
-      halo.addColorStop(.57,'rgba(44,44,88,.18)');
-      halo.addColorStop(1,'rgba(10,12,23,0)');
+      halo.addColorStop(.57,'rgba(95,60,46,.20)');
+      halo.addColorStop(1,'rgba(28,17,13,0)');
       ctx.fillStyle=halo;ctx.fillRect(0,0,w,h);
       const sun=proj(88,50,1150);
       if(sun){
@@ -184,14 +184,23 @@
           for(let i=0;i<(mobile?5:8);i++){
             const q=[terrain(a,i,side),terrain(b,i,side),terrain(b,i+1,side),terrain(a,i+1,side)];
             const haze=.35+Math.min(.52,j*.024);
-            const red=i===0?(j%3===0?'rgba(112,47,43,.68)':'rgba(66,33,45,.58)'):(i+j)%3===0?'rgba(22,23,45,.54)':'rgba(16,17,35,.44)';
-            path(q,red,i===0?'rgba(231,97,76,.33)':`rgba(106,119,184,${(.18-haze*.12).toFixed(3)})`,.65,true);
+            const red=i===0?(j%3===0?'rgba(112,47,43,.68)':'rgba(66,33,45,.58)'):(i+j)%3===0?'rgba(37,28,24,.64)':'rgba(24,20,18,.56)';
+            path(q,red,i===0?'rgba(231,97,76,.33)':`rgba(143,105,84,${(.18-haze*.12).toFixed(3)})`,.65,true);
           }
         }
         const hot0=proj(fault(a),floor(a,0)-11,a), hot1=proj(fault(b),floor(b,0)-11,b);
         const warm=.3+(.5+.5*Math.sin(j*.89-t*2))*.48;
         path([hot0,hot1],null,`rgba(245,68,36,${warm*.25})`,Math.max(2,13-j*.47));
         path([hot0,hot1],null,`rgba(255,139,82,${warm})`,Math.max(.65,2.4-j*.075));
+      }
+      // Heat haze rolls across the horizon instead of washing out the text.
+      for(let k=0;k<(mobile?2:4);k++){
+        const x=(.17+k*.24)*w + Math.sin(t*.13+k*1.7)*w*.07;
+        const y=cy+h*(.035+k*.037), r=h*(.13+k*.015);
+        const haze=ctx.createRadialGradient(x,y,r*.14,x,y,r);
+        haze.addColorStop(0,k%2?'rgba(88,42,26,.16)':'rgba(141,57,28,.15)');
+        haze.addColorStop(1,'rgba(36,19,13,0)');
+        ctx.fillStyle=haze;ctx.fillRect(x-r,y-r,r*2,r*2);
       }
       for(let i=0;i<blocks.length;i++){
         if(mobile && i%2)continue;

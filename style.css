@@ -466,3 +466,30 @@ html.sl.world-ready .cover .hero-wave :is(.epic-radiance,.epic-orbit,.epic-grid,
  .sl .bar,.sl .cover,.sl .opinion,.sl footer,.sl .labgrid,.sl .riskgrid article,.sl #news-list .note,.sl #news-list .note.is-check{background:white;color:#231620;box-shadow:none}
  .sl :is(#news>h2,.section h2,.opinion h2,.riskgrid h3),.sl #news-list .note :is(h3,h4,p,.dateline,.detail-copy,.preview-source){color:#231620;text-shadow:none}
 }
+
+/* Impact: fractured lettering, charred concrete and a single ember-red signal color. */
+html.sl{
+ --abyss-void:#110d0b;--abyss-ink:#fff0da;--abyss-ash:#241b16;--abyss-panel:#1c1511;
+ --ink:#f6e7d5;--paper:#1a120e;--dim:#d0baaa;--rule:#76523e;--accent:#f9a577;--light:#ffd0a2;
+}
+.sl body::before{background:radial-gradient(ellipse at 72% 43%,#77221480,transparent 52%),radial-gradient(ellipse at 9% 34%,#47332895,transparent 61%),linear-gradient(128deg,#201712,#100c0a 56%,#251510)}
+.sl .bar{border-bottom-color:#b68a674d}
+.sl .bar nav .desk-tab{color:#ffbb90}
+.sl .cover .stage .masthead{width:min(100%,710px);margin:0;line-height:1;letter-spacing:normal}
+.sl .masthead-name{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sl .impact-mark{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 12px 20px #100805bc)}
+.sl .cover .stage .tagline{margin-top:clamp(15px,2.2vw,32px);padding-left:.4em;border-inline-start:2px solid #dd7149;color:#ffe7c9}
+.sl .cover .checkpoint{background:linear-gradient(146deg,#261813ef,#130e0ddd 73%,#301914e9);border-color:#bd846482;box-shadow:0 25px 70px #0d0805b0,inset 0 1px #edb38b2e}
+.sl .cover #clock>div{background:#fbad7910;border-color:#c591684e;border-top-color:#eeaa7e82}
+.sl .cover #clock>div:last-child strong{color:#ff996c}
+.sl #news>h2,.sl .section h2,.sl .opinion h2{color:#fce8ce}
+.sl #news-list .note,.sl #news-list .note.is-check{background:linear-gradient(111deg,#2b1d16ec,#1a130fee 68%);border-color:#ae795949}
+.sl #news-list .note.is-check{border-inline-start-color:#ef9b6c}
+.sl #news-list .note h3,.sl .riskgrid h3{color:#ffeed8}
+.sl #news-list .note :is(.dateline,.preview-source,.fact-claim,.detail-copy,.watch,p),.sl .riskgrid p,.sl .opinion p{color:#e5cfbf}
+.sl .riskgrid article,.sl .labgrid{background:#291d16e3;border-color:#ad785b80}
+.sl .riskgrid article{border-top-color:#ef9769}
+.sl .opinion{background:linear-gradient(90deg,#2f1e16dc,#1a130de0)}
+.sl footer{background:#1d140fa6}
+@media(max-width:760px){.sl .cover .stage .masthead{width:min(100%,540px)}.sl .cover .stage .tagline{padding-left:.5em}.sl .cover .stage{gap:24px}}
+@media print{.sl .impact-mark{display:none}.sl .masthead-name{position:static;width:auto;height:auto;clip-path:none;margin:0;color:#231620}.sl .cover .stage .tagline{color:#231620}}
