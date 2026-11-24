@@ -6,10 +6,6 @@ name: Scaling Low scheduled DSH publishing
     - cron: '17 3,9,15,21 * * *'
       timezone: Asia/Shanghai
   workflow_dispatch:
-  # This repair commit may launch one run; later pushes do not run DSH.
-  push:
-    branches: [main]
-    paths: ['.github/workflows/scalinglow-publish.yml']
 
 permissions: {}
 
@@ -21,9 +17,7 @@ jobs:
   generate:
     if: >-
       github.ref == 'refs/heads/main' && github.run_attempt == 1 &&
-      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
-       (github.event_name == 'push' && github.event.before == '132fd8ea37278a84548a58cc18b46ce531aa4820' &&
-        github.event.head_commit.message == 'Align Scaling Low DSH with the editorial guide and run once'))
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     permissions:

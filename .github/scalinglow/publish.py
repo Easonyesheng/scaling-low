@@ -45,5 +45,5 @@ if __name__=='__main__':
     if ids:
         current.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     with output.open('a',encoding='utf-8') as out:
-        out.write(f'published_ids={json.dumps(ids,separators=(chr(44),chr(58)))}\n')
+        print('published_ids='+json.dumps(ids,separators=(',',':')),file=out)
     print(f'Verified append: {len(ids)} candidate(s).')

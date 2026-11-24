@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import unittest
 
-from daily import canonical, editorial_guide, validate, KINDS
+from daily import canonical, editorial_guide, validate, KINDS, bind_source_labels
 from publish import append
 from official_feeds import parse
 
@@ -45,6 +45,20 @@ class Pipeline(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'not_a_feed'):
             parse(b'<html><title>Access error</title></html>', 'NIST', TODAY, canonical)
         self.assertEqual(parse(b'<rss><channel></channel></rss>', 'NIST', TODAY, canonical), [])
+
+    def test_registry_labels_keep_names_like_arxiv_publishable(self):
+        url = 'https://arxiv.org/abs/2611.12345'
+        row = draft(url)
+        row.pop('source')
+        row['source_url'] = url
+        evidence = {url: {'publisher': 'arXiv cs.AI', 'date': TODAY.isoformat()}}
+        response = bind_source_labels({'entries': [row]}, evidence)
+        entries = validate(response, [], {url: TODAY.isoformat()}, TODAY)
+        self.assertEqual(entries[0]['source']['label'], {'en': 'arXiv cs.AI', 'zh': 'arXiv 人工智能'})
+        issues = Counter()
+        result = validate(response, [], {}, TODAY, issues)
+        self.assertEqual(result, [])
+        self.assertEqual(issues, {'uncited_source': 1})
 
     def test_rejection_is_diagnosable_and_partial_batch_survives(self):
         bad = draft(eid='bad-date')
