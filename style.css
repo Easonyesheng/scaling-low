@@ -196,3 +196,33 @@ html.sl{--signal-board:#0d1933;--signal-ice:#a9d7ff;--signal-mark:#ffc55c;--sign
 .sl #news-list .fact-claim{margin-top:.45rem;color:#4a607e}
 .sl #news-list .note:target{outline:2px solid #2574db;outline-offset:3px;scroll-margin-top:1rem}
 .sl #news-list .sources{display:flex;flex-wrap:wrap;gap:6px 14px}
+
+/* The decorative scope keeps moving after the opening sweep. */
+.sl .signal-scope{position:relative;display:grid;justify-items:end;gap:4px;margin-block:12px 7px}
+.sl .signal-scope svg{display:block;width:100%;height:clamp(43px,8vw,66px);overflow:hidden;border:1px solid #5684b480;border-radius:5px;background:#07192d;grid-row:1}
+.sl .signal-scope path.signal-base,.sl .signal-scope path.signal-wave{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2;vector-effect:non-scaling-stroke}
+.sl .signal-base{stroke:#4e87b7}
+.sl .signal-wave{stroke:#9ee5ff;stroke-dasharray:205 795;opacity:0}
+.sl .signal-scan{opacity:0}
+.sl .signal-scope .signal-control{display:none;font:700 .68rem/1.4 var(--sans);color:#b5d7f8;cursor:pointer;padding:3px 0 3px 9px;grid-row:2;grid-column:1}
+.sl .signal-scope .signal-toggle{position:absolute;inline-size:1px;block-size:1px;margin:0;clip-path:inset(50%);overflow:hidden;display:none}
+.sl .signal-scope .signal-toggle:focus-visible+.signal-control{outline:2px solid #ffcf76;outline-offset:3px}
+.sl .signal-scope .signal-toggle:checked+.signal-control{color:#ffcf76}
+@keyframes sl-scope-scan{0%{transform:translateX(0%)}100%{transform:translateX(119%)}}
+@keyframes sl-scope-wave{to{stroke-dashoffset:-1000}}
+@media(prefers-reduced-motion:no-preference){
+ .sl .signal-scope .signal-control,.sl .signal-scope .signal-toggle{display:block}
+ .sl .signal-scan{opacity:.88;transform-box:view-box;animation:sl-scope-scan 5s linear infinite}
+ .sl .signal-wave{opacity:1;animation:sl-scope-wave 5s linear infinite}
+ .sl .signal-toggle:checked~svg :is(.signal-scan,.signal-wave){animation-play-state:paused}
+}
+@media print{.sl .signal-scope{display:none}}
+
+.sl .signal-scope{grid-template-columns:minmax(0,1fr) auto;justify-items:stretch;column-gap:8px}
+.sl .signal-scope svg{grid-column:1/-1}
+.sl .signal-scope .signal-caption{grid-row:2;grid-column:1;align-self:center;color:#a6c4e7;font-size:.66rem}
+.sl .signal-scope .signal-control{grid-column:2;margin:0}
+.sl .signal-scope .signal-control::before{content:"Ⅱ";margin-inline-end:5px;color:#ffcf76}
+.sl .signal-scope .signal-toggle:checked~.signal-control::before{content:"▶"}
+.sl .signal-scope .signal-toggle:focus-visible~.signal-control{outline:2px solid #ffcf76;outline-offset:3px}
+.sl .signal-scope .signal-toggle:checked~.signal-control{color:#ffcf76}

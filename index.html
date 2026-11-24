@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0d1731"><title>Scaling Low | AI 风险与叙事核查</title><meta name="description" content="AI risk, claim checks, and the evidence behind the headlines.">
-<link rel="stylesheet" href="style.css?v=pulse-02"><script src="script.js?v=pulse-02"></script>
+<link rel="stylesheet" href="style.css?v=scope-03"><script src="script.js?v=pulse-02"></script>
 </head><body id="top">
 <a class="skip" href="#main"><span class="en">Skip to issue</span><span class="zh" lang="zh-Hans">跳到正文</span></a>
 <header class="bar wrap"><a class="brand" href="#top"><b aria-hidden="true">↘</b> Scaling Low<span class="dot">.</span></a>
@@ -20,6 +20,19 @@
 <div id="clock" role="timer" aria-live="off" hidden><div><strong></strong><span class="en">Days</span><span class="zh" lang="zh-Hans">天</span></div><div><strong></strong><span class="en">Hours</span><span class="zh" lang="zh-Hans">小时</span></div><div><strong></strong><span class="en">Minutes</span><span class="zh" lang="zh-Hans">分钟</span></div><div><strong></strong><span class="en">Seconds</span><span class="zh" lang="zh-Hans">秒</span></div></div>
 <p id="passed" role="status" hidden><span class="en">Checkpoint reached. Review the three signals below.</span><span class="zh" lang="zh-Hans">观察时点已到。用下面三个信号判断压力是否升高。</span></p>
 <p><time id="checkpoint" datetime="2027-03-20T09:00:00+08:00"><span class="en">20 Mar 2027, 09:00 Beijing</span><span class="zh" lang="zh-Hans">2027 年 3 月 20 日 09:00 · 北京时间</span></time></p>
+<div class="signal-scope">
+<input class="signal-toggle" id="signal-pause" type="checkbox" aria-label="Pause scan" data-en-label="Pause scan" data-zh-label="暂停扫描">
+<span class="signal-caption" aria-hidden="true"><span class="en">Signal illustration</span><span class="zh" lang="zh-Hans">示意波形</span></span>
+<label for="signal-pause" class="signal-control"><span lang="en" class="en">Pause scan</span><span lang="zh-Hans" class="zh">暂停扫描</span></label>
+<svg viewBox="0 0 600 66" preserveAspectRatio="none" role="presentation" aria-hidden="true">
+<defs><pattern id="signal-grid" width="30" height="16.5" patternUnits="userSpaceOnUse"><path d="M30 0H0V16.5" fill="none" stroke="#294666" stroke-width="1"/></pattern>
+<linearGradient id="signal-tail"><stop stop-color="#50acff" stop-opacity="0"/><stop offset="1" stop-color="#50acff" stop-opacity=".48"/></linearGradient></defs>
+<rect width="600" height="66" fill="url(#signal-grid)"/>
+<path class="signal-base" pathLength="1000" d="M0 42h42l9-4 21 4h26l10-16 12 27 13-13 12 2h47l12-8 13 13 16-5h37l12-9 10 9h31l12-33 16 46 15-17 19 4h41l12-8 18 12 20-4h28l11-16 13 22 20-9 20 3h56"/>
+<path class="signal-wave" pathLength="1000" d="M0 42h42l9-4 21 4h26l10-16 12 27 13-13 12 2h47l12-8 13 13 16-5h37l12-9 10 9h31l12-33 16 46 15-17 19 4h41l12-8 18 12 20-4h28l11-16 13 22 20-9 20 3h56"/>
+<g class="signal-scan"><rect x="-108" width="108" height="66" fill="url(#signal-tail)"/><path d="M0 0v66" stroke="#ffcf76" stroke-width="2" vector-effect="non-scaling-stroke"/></g>
+</svg>
+</div>
 <details class="clock-method"><summary><span class="en">Why this date?</span><span class="zh" lang="zh-Hans">为什么选这天？</span></summary>
 <p><span class="en">An editorial checkpoint, not a crash date. We can compare the big cloud companies’ annual guidance and NVIDIA’s supply outlook after GTC ends on March 18.</span><span class="zh" lang="zh-Hans">这是复盘时间，不是崩盘日。等大厂年报和 2027 年支出指引，再结合 3 月 18 日结束的 GTC 看算力供需。</span></p>
 <ol><li><span class="en">Do at least two of Alphabet, Amazon, Microsoft and Meta cut comparable infrastructure plans?</span><span class="zh" lang="zh-Hans">谷歌、亚马逊、微软、Meta 中，是否至少两家下调同口径的基础设施支出计划？</span></li>
