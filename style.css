@@ -561,3 +561,12 @@ html.sl{
  .sl :is(.atlas-guide,.atlas-tools,.atlas-key p,.evidence-plot figcaption,.evidence-plot h3,#atlas-readout h3,#atlas-counts){color:#231711}
  .sl .atlas-node-label{fill:#231711;stroke:#fff}
 }
+
+/* The illustrative cost curve is the fourth instrument, not a separate chapter. */
+.sl #figures .cost-instrument{margin-top:14px;padding:clamp(15px,2.3vw,27px);border:1px solid #956e4e70;border-top:2px solid #ed9c71;background:linear-gradient(144deg,#2b1c15ef,#14100fef);scroll-margin-top:1.25rem}
+.sl .cost-instrument h3{margin:8px 0;color:#fff0d9;line-height:1.15;font-size:clamp(1.35rem,2.2vw,2rem)}
+.sl .cost-instrument .dek{margin:0 0 13px;max-width:70ch;font-size:.82rem;line-height:1.55}
+.sl .cost-instrument .labgrid{border:1px solid #ac77575e;background:#20140e91}
+.sl .cost-instrument .chart svg{display:block;width:100%;height:auto}
+@media(max-width:760px){.sl .cost-instrument :is(.chart,.controls){padding:12px}.sl .cost-instrument .labgrid{grid-template-columns:minmax(0,1fr)}.sl .cost-instrument .plotfoot{font-size:.57rem}}
+@media print{.sl #figures .cost-instrument,.sl .cost-instrument .labgrid{background:white}.sl .cost-instrument h3{color:#231711}}
