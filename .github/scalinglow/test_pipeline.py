@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import unittest
 
-from daily import canonical, editorial_guide, validate, KINDS, bind_source_labels
+from daily import canonical, editorial_guide, validate, KINDS, bind_source_labels, apply_model_settings, make_patch
 from publish import append
 from official_feeds import parse
 
@@ -31,6 +31,23 @@ def payload(entries):
 
 
 class Pipeline(unittest.TestCase):
+    def test_astra_settings_are_consistent_and_cost_bounded(self):
+        request = {'model':'obsolete','reasoning':{'effort':'none','summary':'auto'},
+                   'max_output_tokens':5000,'temperature':0.2,'top_p':0.9,'top_logprobs':1,
+                   'prompt_cache_retention':'24h','store':True,'service_tier':'ultrafast',
+                   'include':['reasoning.encrypted_content','message.output_text.logprobs']}
+        apply_model_settings(request)
+        self.assertEqual(request, {'model':'gpt-6.2-astra','reasoning':{'effort':'low','summary':'auto'},
+                                  'max_output_tokens':2100,'store':False,'service_tier':'default',
+                                  'include':['reasoning.encrypted_content']})
+        patches = {p.get('id'): p for p in make_patch('http://127.0.0.1:12345')}
+        default_model = patches['agent-default-model']['config']
+        provider = patches['llm-pi-ai']['config']['providers']['openai']
+        self.assertEqual(default_model, {'provider':'openai','model':request['model']})
+        self.assertEqual(provider['models'][0]['id'], request['model'])
+        self.assertEqual(provider['models'][0]['maxTokens'], request['max_output_tokens'])
+        self.assertEqual(provider['retryPolicy']['maxRetries'], 0)
+
     def test_generator_kinds_are_renderable(self):
         script = (ROOT / 'script.js').read_text(encoding='utf-8')
         html_kinds = re.search(r'const kinds = \{([^\n]+)\};', script)[1]

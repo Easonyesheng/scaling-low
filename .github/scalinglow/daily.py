@@ -14,7 +14,9 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-MODEL = 'gpt-5.4-nano'
+MODEL = 'gpt-6.2-astra'
+REASONING_EFFORT = 'low'
+MAX_OUTPUT_TOKENS = 2100
 DOMAINS = ('openai.com', 'anthropic.com', 'nist.gov', 'aisi.gov.uk', 'gov.uk',
            'ec.europa.eu', 'arxiv.org', 'deepmind.google', 'iea.org', 'ferc.gov',
            'oecd.org', 'cisa.gov', 'microsoft.com', 'ai.meta.com')
@@ -220,8 +222,8 @@ def make_patch(endpoint):
         {'id':'agent-default-model','config':{'provider':'openai','model':MODEL}},
         {'id':'llm-pi-ai','config':{'providers':{'openai':{
             'api':'openai-responses','apiKeyEnv':'SCALINGLOW_DSH_LOOPBACK',
-            'baseURL':endpoint+'/v1','reasoning':'low',
-            'models':[{'id':MODEL,'maxTokens':2100,'contextWindow':128000,'reasoning':True}],
+            'baseURL':endpoint+'/v1','reasoning':REASONING_EFFORT,
+            'models':[{'id':MODEL,'maxTokens':MAX_OUTPUT_TOKENS,'contextWindow':128000,'reasoning':True}],
             'retryPolicy':{'mode':'normal','maxRetries':0}}}}},
         {'insert':[{'id':'mcp-news','name':'@deepseek-ai/dsh-mcp-client','config':{
             'serverName':'brief','transport':'stdio','command':sys.executable,
@@ -234,6 +236,18 @@ def make_patch(endpoint):
 class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self,*args,**kwargs):
         return None
+
+def apply_model_settings(request):
+    # Astra rejects legacy sampling/logprob parameters. Keep all other
+    # conversation items, including any encrypted reasoning, unchanged.
+    for option in ('temperature','top_p','top_logprobs','prompt_cache_retention'):
+        request.pop(option,None)
+    if isinstance(request.get('include'),list):
+        request['include']=[item for item in request['include'] if item!='message.output_text.logprobs']
+    reasoning=request.get('reasoning')
+    request['reasoning']={**(reasoning if isinstance(reasoning,dict) else {}),'effort':REASONING_EFFORT}
+    request.update(model=MODEL,max_output_tokens=MAX_OUTPUT_TOKENS,store=False,service_tier='default')
+
 
 def make_bridge(evidence,key,rows,opener=None):
     # Never forward Authorization to a redirect and never accept target URLs.
@@ -282,7 +296,7 @@ def make_bridge(evidence,key,rows,opener=None):
                 else:
                     obj['tools']=[]
                     obj['tool_choice']='none'
-                obj.update(model=MODEL,max_output_tokens=2100,store=False)
+                apply_model_settings(obj)
                 req=urllib.request.Request('https://api.openai.com/v1/responses',json.dumps(obj).encode(),
                             {'Authorization':'Bearer '+key,'Content-Type':'application/json'})
                 with opener(req,timeout=68) as response:
