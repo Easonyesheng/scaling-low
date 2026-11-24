@@ -1,9 +1,11 @@
-name: Scaling Low DSH news
+name: Scaling Low scheduled DSH publishing
 
-'on':
+on:
   schedule:
     # Avoid GitHub Actions' start-of-hour load. Asia/Shanghai: 03:17, 09:17, 15:17, 21:17.
     - cron: '17 1,7,13,19 * * *'
+    # One diagnostic slot; this can never run the DSH or publish jobs.
+    - cron: '23 3 24 11 *'
   workflow_dispatch:
 
 permissions: {}
@@ -13,8 +15,18 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  scheduler-check:
+    if: github.event_name == 'schedule' && github.event.schedule == '23 3 24 11 *' && github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Verify the native timer without credentials or model calls
+        run: |
+          test "$(date -u +%F)" = 2026-11-24
+          printf 'Native schedule reached the runner at %s\n' "$(date -u +%FT%TZ)"
+
   generate:
-    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && (github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '17 1,7,13,19 * * *'))
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     permissions:
