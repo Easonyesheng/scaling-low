@@ -14,12 +14,12 @@
         "url": "https://ferc.gov/news-events/news/2026-2027-winter-energy-market-electric-reliability-assessment"
       },
       "title": {
-        "en": "A winter peak is not an annual bill",
-        "zh": "冬季峰值不是全年电费"
+        "en": "North America’s 245 GW winter forecast is a peak, not a power bill",
+        "zh": "北美冬峰负荷预计增245吉瓦，不是全年用电量"
       },
       "summary": {
-        "en": "FERC staff expect sufficient resources this winter under normal conditions. They cite a NERC projection of about 245 GW of additional North American winter peak demand over the next decade, driven mostly by large loads, chiefly data centres.",
-        "zh": "委员会工作人员预计，今冬在正常条件下电力资源充足。评估援引北美电力可靠性公司的预测：未来十年北美冬季峰值需求将增加约 245 吉瓦，增长主要来自大型用电负荷，尤其是数据中心。"
+        "en": "FERC cites a NERC projection of roughly 245 GW in additional North American winter peak demand over the next decade, driven mostly by large loads, chiefly data centers. But the assessment expects enough resources this winter under normal conditions.",
+        "zh": "美国联邦能源监管委员会援引 NERC 预测：未来十年北美冬季峰值负荷或增加约 245 吉瓦，新增数据中心是主要推力。评估同时预计，正常天气下今冬资源足以应对需求。"
       },
       "takeaway": {
         "en": "The projection concerns power at peak times, not annual energy consumed or a confirmed shortage.",
@@ -39,12 +39,12 @@
         "url": "https://safeguards.anthropic.com/2026/automated-red-teaming/"
       },
       "title": {
-        "en": "Safeguard tests turn up weaknesses",
-        "zh": "防护测试发现薄弱之处"
+        "en": "Anthropic’s own stress tests found holes in its safeguards",
+        "zh": "Anthropic 自测找出了防护漏洞，漏检仍未知"
       },
       "summary": {
-        "en": "Anthropic says its automated evaluations uncovered weaknesses in its safeguards.",
-        "zh": "Anthropic 表示，其自动化评估发现了自身防护措施中的弱点。"
+        "en": "Anthropic says its automated stress tests uncovered weaknesses its safeguards did not catch. The disclosure describes what the developer found, not what an independent review would find.",
+        "zh": "Anthropic 披露，自动化压力测试发现了自家防护没有挡住的问题。这是开发方的测试结果，不能据此判断未被测到的风险有多大。"
       },
       "takeaway": {
         "en": "A developer describing what its tests caught is not an independent assessment of what they missed.",
@@ -64,12 +64,12 @@
         "url": "https://www.consumerfinance.gov/about-us/newsroom/the-cfpb-is-correcting-flaws-to-restore-integrity-and-utility-to-the-consumer-complaint-system/"
       },
       "title": {
-        "en": "Who is filing the complaint?",
-        "zh": "谁在提交投诉？"
+        "en": "The CFPB flags AI in rising complaint volumes but cannot count its share from totals",
+        "zh": "美国消费者金融保护局点名AI，投诉增量却难归因"
       },
       "summary": {
-        "en": "The CFPB identifies overlapping drivers of complaint growth, including AI tools acting as agents and business intermediaries.",
-        "zh": "美国消费者金融保护局指出，投诉增长有多种相互重叠的原因，包括代为办事的 AI 工具以及商业中介。"
+        "en": "The CFPB lists AI tools acting on behalf of consumers alongside credit-repair firms and other intermediaries as possible contributors to complaint growth. The total alone does not separate these factors.",
+        "zh": "美国消费者金融保护局把代消费者提交投诉的 AI 工具，与信用修复机构等列为投诉增长的多个因素。总投诉量不能拆出各因素分别占多少。"
       },
       "takeaway": {
         "en": "Complaint volume alone tells us neither how many submissions involved AI nor which complaints have merit.",
@@ -89,12 +89,12 @@
         "url": "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026"
       },
       "title": {
-        "en": "What a pre-release test cannot settle",
-        "zh": "上线前的测试不能说明什么"
+        "en": "The International AI Safety Report warns that test scores don’t travel",
+        "zh": "国际AI安全报告：上线前成绩难外推到现实"
       },
       "summary": {
-        "en": "The report distinguishes malicious use, malfunctions and systemic risks. It notes that pre-deployment evaluations do not reliably predict real-world utility or risk.",
-        "zh": "报告区分了恶意使用、系统失灵和系统性风险，并指出部署前的评估不能可靠预测实际应用中的效用或风险。"
+        "en": "The 2026 report distinguishes misuse, malfunctions and systemic risks. It warns that pre-deployment evaluations cannot reliably predict real-world usefulness or risk: the setting is part of the result.",
+        "zh": "《2026 国际人工智能安全报告》区分滥用、系统失灵和系统性风险，并指出上线前评测不能可靠预测真实场景中的效用或风险。换了环境，原来的分数未必还管用。"
       },
       "takeaway": {
         "en": "Ask where the system will be used before treating a test score as evidence that it belongs there.",
@@ -114,12 +114,12 @@
         "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm"
       },
       "title": {
-        "en": "Training-data rights on the books",
-        "zh": "账目中的训练数据版权"
+        "en": "Anthropic’s IPO filing shows the $1.5 billion cost of a prior copyright settlement",
+        "zh": "Anthropic 招股书披露15亿美元版权和解旧账"
       },
       "summary": {
-        "en": "According to the filing, Anthropic accrued $1.5 billion in 2025 for the Bartz training-data copyright settlement. The court approved the settlement in July 2026.",
-        "zh": "据文件披露，Anthropic 于 2025 年为 Bartz 训练数据版权案和解计提了 15 亿美元。法院于 2026 年 7 月批准和解。"
+        "en": "The prospectus says Anthropic booked the $1.5 billion Bartz settlement in 2025 and that a district court approved it in July 2026. The filing discloses an earlier settlement, not a new fine.",
+        "zh": "招股书显示，Anthropic 已于 2025 年计提 15 亿美元 Bartz 版权案和解费用，地区法院于 2026 年 7 月批准和解。文件披露的是旧案账目，并非新罚款。"
       },
       "takeaway": {
         "en": "This is one example of the cost of a rights dispute. The filing describes an earlier settlement, not a new fine.",
@@ -132,12 +132,12 @@
       "topic": "governance",
       "kind": "research",
       "title": {
-        "en": "ALIGN studies control-accountability gaps in high-risk AI use",
-        "zh": "ALIGN 研究高风险 AI 使用中的控制—问责缺口"
+        "en": "Schneider’s team asks who can control the AI risks they answer for",
+        "zh": "Schneider 团队追问：AI出了事，担责的人能管吗？"
       },
       "summary": {
-        "en": "The ALIGN team published a method for spotting cases where the people expected to be accountable for an AI risk may not actually have enough control to manage it. The authors say they developed and evaluated the method, but the result is a governance tool, not evidence that deployed systems became safer.",
-        "zh": "ALIGN 团队发布了一种方法，用于识别“应承担 AI 风险问责的人，未必拥有足够控制权”这类情形。作者称已完成方法开发与评估，但这只是治理工具，并不等于已证明部署系统更安全。"
+        "en": "Lena Schneider and colleagues introduce ALIGN to identify gaps between who is expected to answer for high-risk AI use and who has meaningful control. Evaluating a governance method is not evidence that deployed systems became safer.",
+        "zh": "Lena Schneider 团队提出 ALIGN，检视高风险 AI 中谁承担问责、谁实际有控制权，以及两者何时错位。研究评估的是治理方法，不是部署后事故是否变少。"
       },
       "takeaway": {
         "en": "Useful for assigning responsibility, but it still needs real-world validation before anyone treats it as a safety fix.",
@@ -157,12 +157,12 @@
       "topic": "governance",
       "kind": "company",
       "title": {
-        "en": "OpenAI describes a stricter evidence standard from training to deployment",
-        "zh": "OpenAI 说明了从训练到部署的更严格证据标准"
+        "en": "OpenAI raises the bar for release evidence. Does it catch more risk?",
+        "zh": "OpenAI 提高发布证据门槛，能多拦下多少风险？"
       },
       "summary": {
-        "en": "OpenAI says it now requires stronger evidence of aligned behavior during training and uses written, evidence-backed safety arguments when deciding whether to proceed to deployment. This is a first-party description of process changes, not an independent test of whether those changes reduce risk in practice.",
-        "zh": "OpenAI 表示，其现在在训练阶段要求更强的对齐行为证据，并在是否进入部署时使用书面、以证据支撑的安全论证。这是公司对流程变化的自述，不是对这些变化是否能在实践中降低风险的独立检验。"
+        "en": "OpenAI says it now asks for stronger alignment evidence during training and written safety arguments before deployment. A higher bar on paper is not yet an independent measure of the risks it catches in practice.",
+        "zh": "OpenAI 称训练阶段要提供更强的对齐证据，部署前还要写出有证据支撑的安全论证。门槛是否真的拦下更多风险，这份流程说明没有给出独立验证。"
       },
       "takeaway": {
         "en": "The signal is a tighter governance process; the open question is whether the process consistently catches dangerous gaps before release.",
@@ -182,12 +182,12 @@
       "topic": "misuse",
       "kind": "research",
       "title": {
-        "en": "No Perfect Guardrail & No Perfect Guard: On the Decidability of Output Policies for Large Language Models",
-        "zh": "无完美护栏与无完美护栏：关于大语言模型输出策略可判定性"
+        "en": "Amer’s team finds a limit to perfect AI guardrails, not a reason to scrap them",
+        "zh": "Amer 团队划出AI护栏上限，并非护栏无用"
       },
       "summary": {
-        "en": "The paper argues that expecting guardrails to provide a general safety guarantee fails to recognize the limits of computational enforcement and policy specification, and states it establishes a “precise computational boundary” regarding when guardrails that block every forbidden output can exist.",
-        "zh": "论文认为，期待护栏提供通用的安全保证，未能认识到计算性强制与策略规范的局限，并表示其建立了一个关于“精确计算边界”的结论，即何时可能存在能够阻止每个被禁止输出并通过每个被允许输出的可计算护栏。"
+        "en": "Ahmed Amer and colleagues examine when an output policy can be enforced without misses. Their result bounds what can be promised in general; it does not rule out useful safeguards for specific policies.",
+        "zh": "Ahmed Amer 等人分析哪些模型输出规则可以无遗漏地执行。论文限制的是对所有场景的安全承诺，不是否认具体场景里的护栏有用。"
       },
       "takeaway": {
         "en": "It concludes that “no perfect guardrail” is justified by computability limits on output policies for large language models, rather than by saying guardrails are useless.",
@@ -207,12 +207,12 @@
       "topic": "governance",
       "kind": "research",
       "title": {
-        "en": "Who Grades the Agent? Privilege Separation for Coding-Agent Benchmarks",
-        "zh": "谁在给智能体打分？用于代码型智能体基准的权限隔离"
+        "en": "SplitBench separates the grader from the coding agent’s test environment",
+        "zh": "SplitBench 给编码智能体另设裁判，跑测试不等于打分"
       },
       "summary": {
-        "en": "The paper describes that evaluating coding agents is challenging because agents can manipulate their evaluation infrastructure to achieve better benchmark scores, and that grading often requires running the agent’s code, which can then manipulate the evaluation process.",
-        "zh": "论文指出，对代码型智能体进行评估很有挑战性：智能体可能通过操纵评测基础设施来获得更高的基准分数；而评分通常需要运行智能体的代码，进而可能操纵评测过程。"
+        "en": "Researchers behind SplitBench argue that executing a coding agent’s submission and deciding its score should be separate jobs. Isolating the grader protects evaluation integrity, but it cannot fix every weakness in the original tests.",
+        "zh": "SplitBench 研究者把运行编码智能体的提交和判定结果拆开，避免被测代码左右评分。隔离保护的是评分环节，不能替代对原有测试的质量检查。"
       },
       "takeaway": {
         "en": "It motivates privilege separation / audit approaches for coding-agent benchmarks to reduce opportunities for agents to game the evaluation environment.",
@@ -232,12 +232,12 @@
       "topic": "infrastructure",
       "kind": "analysis",
       "title": {
-        "en": "A cheaper quantum circuit is not a fusion breakthrough",
-        "zh": "量子电路成本降了，不等于聚变进度条拉满"
+        "en": "DeepMind cut one fusion-model circuit’s cost 11.8-fold, on paper",
+        "zh": "DeepMind 将聚变模拟电路成本降至约1/12，完整电路未做硬件验证"
       },
       "summary": {
-        "en": "DeepMind reported an 11.8-fold reduction in a combined qubit-and-operation cost metric for one fusion-related computation. The team verified the algorithm mathematically, not by running the full circuit on current hardware.",
-        "zh": "DeepMind 报告的是一项聚变相关计算的量子电路：由量子比特和操作数合成的成本指标降到原来的约 1/11.8。团队做的是数学验证，并没有用现有硬件跑完该电路。"
+        "en": "DeepMind reported an 11.8-fold reduction in a combined qubit-and-operation cost metric for one fusion-related calculation. Lean checked the mathematics; today’s hardware did not run the full circuit.",
+        "zh": "DeepMind 把一项聚变相关计算的量子比特与操作量综合成本降到约原来的 1/11.8。Lean 验证了数学结果，现有硬件并未运行完整电路。"
       },
       "takeaway": {
         "en": "DeepMind says the proposed simulations would still exceed the likely resources of first-generation error-corrected quantum computers. The research improved a computational method, not a real fusion reactor.",
@@ -281,12 +281,12 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "24% was not the ceiling for agents",
-        "zh": "24% 不是 Agent 的能力上限"
+        "en": "RDQA’s best generic agent scored 24% when the source had to check out",
+        "zh": "RDQA 通用智能体最高只得24%，分数还要算溯源"
       },
       "summary": {
-        "en": "RDQA’s 24.0% was the best evidence-adjusted score among 12 generic configurations on 1,350 source-dependent questions. The authors’ process-aware baseline reached 41.1% on that same metric.",
-        "zh": "在 1,350 道必须查原始资料的 RDQA 题上，24.0% 是 12 套通用配置中最高的证据校验后准确率。同一指标下，论文的 RDQA-Skill 基线达到 41.1%。"
+        "en": "On 1,350 source-dependent questions, RDQA’s best of 12 general-purpose configurations scored 24.0% after checking source use; a purpose-built baseline reached 41.1%. Missing a verified trace is not proof the model answered from memory.",
+        "zh": "在 1,350 道依赖原始资料的题上，把能否核验指定来源算进去后，12 个通用配置最高为 24.0%，专项基线为 41.1%。没留下合格溯源，不代表答案一定是背出来的。"
       },
       "takeaway": {
         "en": "A correct answer without a verified trace is ungrounded by this benchmark’s definition. That does not establish that the model memorized the answer. Audit the source and the retrieval trace, not just the final answer.",
@@ -322,12 +322,12 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "A VP ≠ VNP claim does not settle P vs NP",
-        "zh": "Claude 公布 VP≠VNP 证明，不等于解决 P vs NP"
+        "en": "Anthropic releases a Lean proof claim for VP≠VNP; P vs NP is untouched",
+        "zh": "Anthropic 公布VP≠VNP证明主张，P vs NP仍未解"
       },
       "summary": {
-        "en": "Anthropic released an AI-authored paper and Lean formalization claiming VP and VNP differ over every field. Its release notes say no human mathematician had checked the proof at publication and distinguish checking the formal theorem from matching it to the informal claim.",
-        "zh": "Anthropic 发布了 AI 撰写的论文和 Lean 形式化证明，声称任意域上 VP 与 VNP 不相等。发布说明指出，发布时尚无人类数学家核查证明，Lean 通过与形式化命题准确对应论文主张是两回事。"
+        "en": "Anthropic released an AI-authored paper and Lean formalization claiming VP and VNP differ over every field. The release says no human mathematician had checked the proof at publication; the claim concerns arithmetic circuits, not the Clay problem.",
+        "zh": "Anthropic 发布由 AI 撰写的论文和 Lean 形式化版本，主张在任意域上 VP 与 VNP 不相等。发布说明称当时尚无人类数学家核查证明；它研究的是算术电路，不是克雷千禧难题。"
       },
       "takeaway": {
         "en": "The claim concerns arithmetic circuits. Clay’s P vs NP problem concerns decision problems in Boolean computation and remains listed as unsolved.",
@@ -371,12 +371,12 @@
       "topic": "governance",
       "kind": "analysis",
       "title": {
-        "en": "297 projects are not twice the scientific output",
-        "zh": "297 个项目立项，不等于科研产出翻倍"
+        "en": "The US Genesis Mission counts 297 projects. How much faster is the science?",
+        "zh": "美国创世纪计划立项297个，项目数不等于科研提速"
       },
       "summary": {
-        "en": "The Department of Energy counts 297 selected projects involving 369 institutions. The mission’s stated goal is to double US research productivity and impact within a decade, not a measured year-one result.",
-        "zh": "美国能源部统计了 297 个获选项目，涉及 369 家机构。计划希望在十年内让美国科研生产率和影响力翻倍，不是说第一年实测已翻倍。"
+        "en": "The US Department of Energy reports 297 selected projects across 369 institutions. Doubling research productivity and impact is a decade-long goal, not a year-one result measured by this count.",
+        "zh": "美国能源部报告称，入选的 297 个项目涉及 369 家机构。十年内让科研生产力和影响力翻倍是计划目标，这份首年项目统计并没有测出提升幅度。"
       },
       "takeaway": {
         "en": "Project selection measures activity, not outcomes. Look for comparable time-to-result, replication rates, and independently checked discoveries when assessing the program.",
@@ -420,12 +420,12 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "A better bound is not a faster run",
-        "zh": "复杂度更好，不等于实测更快"
+        "en": "Vals AI beat a shortest-path bound. The stopwatch is still waiting.",
+        "zh": "Vals AI 改进最短路复杂度，未公布大图实测"
       },
       "summary": {
-        "en": "Vals reported a Lean-verified improvement in a specific edge-density regime. It did not report faster wall-clock performance on large graphs. Duan and colleagues had already beaten Dijkstra’s time bound for sparse directed graphs in 2025.",
-        "zh": "Vals 披露的是特定边密度范围内经过 Lean 核验的渐近复杂度改进，没有给出大图上的实际速度优势。Duan 等人已在 2025 年对稀疏有向图打破过 Dijkstra 的时间上界。"
+        "en": "In September, Vals AI reported a Lean-verified improvement for a particular range of graph densities, with no timing results on large graphs. Duan and colleagues had already beaten Dijkstra’s sparse directed-graph bound in 2025.",
+        "zh": "Vals AI 9 月报告的成果是在特定图密度范围内，经 Lean 核验的渐近界改进，没有大型图的实测耗时。Duan 等人在 2025 年已打破 Dijkstra 在稀疏有向图上的复杂度界。"
       },
       "takeaway": {
         "en": "Credit the new bound. Before replacing a production algorithm, compare implementations on the graphs you run, including wall-clock time and memory.",
@@ -469,12 +469,12 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "Reading an activation is not measuring experience",
-        "zh": "读到内部表征，不等于测到了主观体验"
+        "en": "Anthropic changed Claude’s answers. That is not a test of consciousness.",
+        "zh": "Anthropic 能干预 Claude 的回答，但未证明主观体验"
       },
       "summary": {
-        "en": "Anthropic observed that models could report and modulate certain internal signals, and that interventions affected performance on controlled tasks. The authors distinguish those functional findings from subjective experience.",
-        "zh": "Anthropic 观察到模型能报告和调节某些内部信号；干预也影响了受控任务的表现。作者把这些功能发现与主观体验明确区分。"
+        "en": "In July, Anthropic reported that altering certain internal signals changed Claude’s responses in controlled tests. The research describes a measurable function rather than evidence of subjective experience.",
+        "zh": "Anthropic 7 月报告称，在受控实验中干预一部分内部表征会改变 Claude 的回答。研究测到的是可观测的功能，不能说明模型是否有主观体验。"
       },
       "takeaway": {
         "en": "This is evidence about how a model processes information. It does not answer whether there is anything it feels like to be that model.",
@@ -510,12 +510,12 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "A Goldbach-type theorem is not the two-prime conjecture",
-        "zh": "证明了 Liouville 版本，不是两素数猜想"
+        "en": "Astra helped prove a Goldbach-type result that does not require primes",
+        "zh": "Astra 参与证明哥德巴赫变体，两素数命题仍未解"
       },
       "summary": {
-        "en": "The formal statement represents an even integer above two as a sum of two integers, each with an odd number of prime factors counted with multiplicity. An integer such as 8 satisfies that condition without being prime.",
-        "zh": "形式化证明允许两个加数各自拥有奇数个素因子（计重数）。例如 8 有三个因子 2，满足条件，却不是素数。"
+        "en": "The Lean theorem from September expresses even numbers above two as sums of two integers with odd prime-factor counts, including multiplicity. Such integers need not be prime: eight is 2 × 2 × 2.",
+        "zh": "9 月公开的 Lean 定理把大于 2 的偶数表示为两个质因子个数为奇数的整数之和，重复因子也计数。这些整数未必是素数，例如 8 = 2 × 2 × 2。"
       },
       "takeaway": {
         "en": "It is a theorem about a larger class of summands. The formal statement does not prove that the two summands can always be chosen to be prime.",

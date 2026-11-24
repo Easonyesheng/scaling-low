@@ -132,32 +132,36 @@
         node(meta,'time',e.date).dateTime = e.date;
         node(meta,'span',tr(...kinds[e.kind]),check ? 'feed-type' : '');
         const body = node(article,'div','','note-body');
+        node(body,'h3',e.title[language]);
+        node(body,'p',e.summary[language],'preview-summary');
+        const preview = node(body,'div','','sources preview-source');
+        const featuredSource = check ? check.coverage : e.source;
+        node(preview,'a',featuredSource.label[language]).href = featuredSource.url;
+        const details = node(body,'details','','entry-detail');
+        details.open = openEntries.has(article.id) || location.hash === '#' + article.id;
+        details.addEventListener('toggle', () => {
+          if (!details.isConnected) return;
+          if (details.open) openEntries.add(article.id);
+          else openEntries.delete(article.id);
+        });
+        node(details,'summary',tr('Evidence & context','展开证据与解读'));
+        const copy = node(details,'div','','detail-copy');
         if (check) {
-          const strip = node(body,'div','','fact-meta check-meta');
+          const strip = node(copy,'div','','fact-meta check-meta');
           node(strip,'span',tr(...verdicts[check.verdict]),'fact-verdict');
           if (nonEmpty(check.metric)) node(strip,'span',check.metric,'fact-metric');
+          node(copy,'p',tr('The original claim: ','原报道主张：') + check.claim[language],'fact-claim');
         }
-        node(body,'h3',e.title[language]);
-        if (check) node(body,'p',tr('The headline: ','标题怎么说：') + check.claim[language],'fact-claim');
-        node(body,'p',e.summary[language],check ? 'fact-evidence' : '');
-        if (check) {
-          const details = node(body,'details');
-          details.open = openEntries.has(article.id) || location.hash === '#' + article.id;
-          details.addEventListener('toggle', () => details.open ? openEntries.add(article.id) : openEntries.delete(article.id));
-          node(details,'summary',tr('Read our take & sources','展开解读与信源'));
-          node(details,'p',e.takeaway[language],'watch');
-          const links = node(details,'div','','sources');
-          for (const source of [check.coverage,e.source,...check.otherSources]) node(links,'a',source.label[language]).href = source.url;
-          node(links,'a',tr('Link to this item','本条链接')).href = '#' + article.id;
-        } else {
-          node(body,'p',tr('Our reading: ','编辑解读：') + e.takeaway[language],'watch');
-          node(node(body,'div','','sources'),'a',e.source.label[language]).href = e.source.url;
-        }
+        node(copy,'p',tr('What the evidence supports: ','证据支持到哪一步：') + e.takeaway[language],'watch');
+        const links = node(copy,'div','','sources detail-sources');
+        const references = check ? [check.coverage,e.source,...check.otherSources] : [e.source];
+        for (const source of references) node(links,'a',source.label[language]).href = source.url;
+        node(links,'a',tr('Link to this item','本条链接')).href = '#' + article.id;
       }
     }
     function revealHash() {
       const id = location.hash.slice(1);
-      if (!id.startsWith('case-')) return;
+      if (!/^(case|news)-[a-z0-9-]+$/.test(id)) return;
       let card = document.getElementById(id);
       if (!card && topic !== 'all') {
         topic = 'all';
