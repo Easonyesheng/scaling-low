@@ -197,32 +197,44 @@ html.sl{--signal-board:#0d1933;--signal-ice:#a9d7ff;--signal-mark:#ffc55c;--sign
 .sl #news-list .note:target{outline:2px solid #2574db;outline-offset:3px;scroll-margin-top:1rem}
 .sl #news-list .sources{display:flex;flex-wrap:wrap;gap:6px 14px}
 
-/* The decorative scope keeps moving after the opening sweep. */
-.sl .signal-scope{position:relative;display:grid;justify-items:end;gap:4px;margin-block:12px 7px}
-.sl .signal-scope svg{display:block;width:100%;height:clamp(43px,8vw,66px);overflow:hidden;border:1px solid #5684b480;border-radius:5px;background:#07192d;grid-row:1}
-.sl .signal-scope path.signal-base,.sl .signal-scope path.signal-wave{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2;vector-effect:non-scaling-stroke}
-.sl .signal-base{stroke:#4e87b7}
-.sl .signal-wave{stroke:#9ee5ff;stroke-dasharray:205 795;opacity:0}
-.sl .signal-scan{opacity:0}
-.sl .signal-scope .signal-control{display:none;font:700 .68rem/1.4 var(--sans);color:#b5d7f8;cursor:pointer;padding:3px 0 3px 9px;grid-row:2;grid-column:1}
-.sl .signal-scope .signal-toggle{position:absolute;inline-size:1px;block-size:1px;margin:0;clip-path:inset(50%);overflow:hidden;display:none}
-.sl .signal-scope .signal-toggle:focus-visible+.signal-control{outline:2px solid #ffcf76;outline-offset:3px}
-.sl .signal-scope .signal-toggle:checked+.signal-control{color:#ffcf76}
-@keyframes sl-scope-scan{0%{transform:translateX(0%)}100%{transform:translateX(119%)}}
-@keyframes sl-scope-wave{to{stroke-dashoffset:-1000}}
-@media(prefers-reduced-motion:no-preference){
- .sl .signal-scope .signal-control,.sl .signal-scope .signal-toggle{display:block}
- .sl .signal-scan{opacity:.88;transform-box:view-box;animation:sl-scope-scan 5s linear infinite}
- .sl .signal-wave{opacity:1;animation:sl-scope-wave 5s linear infinite}
- .sl .signal-toggle:checked~svg :is(.signal-scan,.signal-wave){animation-play-state:paused}
-}
-@media print{.sl .signal-scope{display:none}}
 
-.sl .signal-scope{grid-template-columns:minmax(0,1fr) auto;justify-items:stretch;column-gap:8px}
-.sl .signal-scope svg{grid-column:1/-1}
-.sl .signal-scope .signal-caption{grid-row:2;grid-column:1;align-self:center;color:#a6c4e7;font-size:.66rem}
-.sl .signal-scope .signal-control{grid-column:2;margin:0}
-.sl .signal-scope .signal-control::before{content:"Ⅱ";margin-inline-end:5px;color:#ffcf76}
-.sl .signal-scope .signal-toggle:checked~.signal-control::before{content:"▶"}
-.sl .signal-scope .signal-toggle:focus-visible~.signal-control{outline:2px solid #ffcf76;outline-offset:3px}
-.sl .signal-scope .signal-toggle:checked~.signal-control{color:#ffcf76}
+/* Full-cover instrument trace and a two-line, data-print masthead. */
+.sl .cover{background:radial-gradient(ellipse at 70% 62%,#263663 0%,#14264c 48%,#0b142a 90%)}
+.sl .cover::after{display:none}
+.sl .cover>.wrap{position:relative;z-index:1}
+.sl .cover .hero-wave{position:absolute;z-index:0;inset:0;display:block;width:100%;height:100%;pointer-events:none;overflow:hidden}
+.sl .hero-wave :is(.wave-echo,.signal-base,.signal-wave){fill:none;stroke-linejoin:round;stroke-linecap:round}
+.sl .hero-wave .wave-echo path{stroke:#529bfd;stroke-width:1;opacity:.20;vector-effect:non-scaling-stroke}
+.sl .hero-wave .signal-base{stroke:url(#wave-ink);stroke-width:2.3;opacity:.72;vector-effect:non-scaling-stroke}
+.sl .hero-wave .signal-wave{stroke:#a7ebff;stroke-width:3.4;stroke-dasharray:154 846;opacity:0;vector-effect:non-scaling-stroke}
+.sl .hero-wave .signal-scan{opacity:0;transform-box:view-box}
+.sl .cover .cover-message{min-width:0}
+.sl .cover .stage .masthead{font-size:clamp(3.65rem,8.6vw,9.1rem);font-weight:950;line-height:.78;letter-spacing:-.096em;text-wrap:nowrap}
+.sl .masthead-first,.sl .masthead-last{display:block;width:max-content;max-width:100%}
+.sl .masthead-first{color:#f1f6ff;transform:skewX(-8deg);transform-origin:bottom left;text-shadow:0 .075em .32em #070f2a91}
+.sl .masthead-last{position:relative;margin:.12em 0 0 .52em;padding-bottom:.10em;color:#b8dcff}
+@supports (-webkit-text-stroke:1px #a3d9ff){.sl .masthead-last{color:#142c4f;-webkit-text-stroke:clamp(1px,.2vw,2.8px) #a3d9ff;text-shadow:0 0 .25em #63b4ff5e}}
+.sl .masthead-last svg{width:.37em;height:.37em;margin:0 0 .07em .25em;display:inline-block;vertical-align:bottom;fill:none;stroke:#ffc56e;stroke-width:2.2;stroke-linecap:square}
+.sl .cover .stage .tagline{margin-top:19px;text-shadow:0 2px 10px #071021}
+.sl .cover .checkpoint{background:linear-gradient(135deg,#0d1a32f5,#162e55ea)}
+.sl .cover :is(.signal-control,.signal-toggle){display:none}
+.sl .cover .signal-toggle{position:absolute;inline-size:1px;block-size:1px;margin:0;clip-path:inset(50%);overflow:hidden}
+.sl .cover .signal-control{font:700 .75rem/1.4 var(--sans);color:#cbe4ff;cursor:pointer;padding:7px 4px}
+.sl .cover .signal-control::before{content:"Ⅱ";margin-inline-end:5px;color:#ffc56e}
+.sl .cover .signal-toggle:focus-visible~.wrap .signal-control{outline:2px solid #ffc56e;outline-offset:3px}
+.sl .cover .signal-toggle:checked~.wrap .signal-control::before{content:"▶"}
+@keyframes sl-full-scan{from{transform:translateX(0%)}to{transform:translateX(115%)}}
+@keyframes sl-full-wave{to{stroke-dashoffset:-1000}}
+@media(prefers-reduced-motion:no-preference){
+ .sl .cover :is(.signal-control,.signal-toggle){display:block}
+ .sl .hero-wave .signal-scan{opacity:.76;animation:sl-full-scan 6s linear infinite}
+ .sl .hero-wave .signal-wave{opacity:1;animation:sl-full-wave 6s linear infinite}
+ .sl .cover .signal-toggle:checked~.hero-wave :is(.signal-scan,.signal-wave){animation-play-state:paused}
+}
+@media(max-width:760px){
+ .sl .cover .stage .masthead{font-size:clamp(3.4rem,15vw,7.2rem)}
+ .sl .cover .hero-wave{height:100%;width:145%;max-width:none;left:-16%}
+ .sl .cover .coverfoot{flex-wrap:wrap;justify-content:flex-start;gap:3px 16px}
+ .sl .cover .coverfoot>p{margin-inline-start:auto}
+}
+@media print{.sl .cover :is(.hero-wave,.signal-control,.signal-toggle){display:none}.sl .masthead :is(.masthead-first,.masthead-last){color:#162344;-webkit-text-stroke:0;text-shadow:none}}
