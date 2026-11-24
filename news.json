@@ -544,6 +544,206 @@
         },
         "otherSources": []
       }
+    },
+    {
+      "id": "grok-consent-two-state-lawsuits",
+      "date": "2026-11-23",
+      "topic": "misuse",
+      "kind": "report",
+      "title": {
+        "en": "Grok’s safety promises face lawsuits in two US states",
+        "zh": "Grok的安全承诺被告上法庭，美国两州各自起诉"
+      },
+      "summary": {
+        "en": "Virginia and Oregon announced separate lawsuits over Grok-generated nonconsensual intimate imagery. Virginia alleges the companies promoted safeguards that failed to protect users; that is a claim in litigation, not a court finding.",
+        "zh": "弗吉尼亚州和俄勒冈州就 Grok 生成未经同意的私密图像分别提起诉讼。弗吉尼亚州指控运营方宣传的防护没有保护用户；这是诉方主张，不是法院认定。"
+      },
+      "takeaway": {
+        "en": "A product safety promise is testable: whether prohibited content is blocked before creation and whether victims can get it removed from circulation are distinct questions.",
+        "zh": "安全承诺可以拆成两个问题来检验：违规内容能否在生成前被拦住，受害者能否在传播后有效要求下架。"
+      },
+      "source": {
+        "url": "https://oag.state.va.us/media-center/news-releases/jay-jones/3162-attorneys-general-jones-and-rayfield-file-suit-against-spacex-parent-company-of-x-xai-and-grok-over-creation-and-promotion-of-child-exploitation-and-non-consensual-images-on-platform",
+        "label": {
+          "en": "Virginia Attorney General, Nov. 23 filing announcement",
+          "zh": "弗吉尼亚州总检察长，11 月 23 日诉讼公告"
+        }
+      }
+    },
+    {
+      "id": "metr-duration-not-research-productivity",
+      "date": "2026-11-20",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "METR’s AI task horizon doubled every 3.6 months. What exactly doubled?",
+        "zh": "METR测出AI任务时长约3.6个月翻倍，翻倍的究竟是什么？"
+      },
+      "summary": {
+        "en": "Across METR’s combined benchmark suites, the estimated 50%-success time horizon doubled roughly every 3.6 months. The horizon is measured by how long the task takes a human, not how long an agent can reliably work unattended.",
+        "zh": "在 METR 的两套合并基准上，模型以 50% 成功率完成的任务，其对应人类用时估计约每 3.6 个月翻倍。这里量的是人类做题需要多久，不是智能体能无人看管多久。"
+      },
+      "takeaway": {
+        "en": "Task mix matters: the fitted doubling interval is 2.08 to 4.94 months at 95% confidence, and rates differ between subsets. That is not a measured doubling of lab output.",
+        "zh": "换题会改变趋势估计。总体翻倍时间的 95% 置信区间为 2.08 至 4.94 个月，不同任务子集也有差异。这不是实验室科研产出翻倍的实测结果。"
+      },
+      "source": {
+        "url": "https://metr.org/blog/2026-11-20-q4-2026-capability-update/",
+        "label": {
+          "en": "METR capability update, §3.C.1",
+          "zh": "METR 能力更新，第 3.C.1 节"
+        }
+      }
+    },
+    {
+      "id": "uk-ai-test-is-not-a-safety-seal",
+      "date": "2026-11-20",
+      "topic": "governance",
+      "kind": "report",
+      "title": {
+        "en": "Britain tests frontier AI, but its safety institute doesn’t certify it",
+        "zh": "英国测试前沿AI，安全研究所却不给模型盖合格章"
+      },
+      "summary": {
+        "en": "In a response published November 20, the UK government said its AI Security Institute evaluates advanced models but neither approves them nor gives them a certification mark. Ministers also acknowledged that regulation at the point of use may not always be enough.",
+        "zh": "英国政府在 11 月 20 日公布的答复中表示，AI 安全研究所会评估先进模型，但不审批模型，也不颁发认证标志。政府同时承认，仅在使用端施加监管可能并不够。"
+      },
+      "takeaway": {
+        "en": "A regulator’s access to test a model does not mean that the model has been cleared for release. The response keeps open the question of model-level obligations.",
+        "zh": "监管机构能接触和测试模型，不代表模型已获准发布。是否需要在模型层面施加义务，仍是答复留下的开放问题。"
+      },
+      "source": {
+        "url": "https://publications.parliament.uk/pa/jt5902/jtselect/jtrights/844/report.html",
+        "label": {
+          "en": "UK Parliament, government response to JCHR",
+          "zh": "英国议会，政府对人权联合委员会的答复"
+        }
+      }
+    },
+    {
+      "id": "iea-data-centre-water-stress",
+      "date": "2026-11-19",
+      "topic": "infrastructure",
+      "kind": "report",
+      "title": {
+        "en": "The IEA puts roughly 30% of data-centre capacity in water-stressed areas",
+        "zh": "IEA：全球约三成现有和规划机房容量，落在高水压力地区"
+      },
+      "summary": {
+        "en": "The IEA estimates that around 30% of existing and planned global data-centre capacity is in high-water-stress areas. It also estimates that power generation accounted for nearly 40% of data-centre-related water consumption in 2025, more than direct cooling.",
+        "zh": "国际能源署估计，全球现有及规划的数据中心容量约三成位于高水压力地区。在 2025 年数据中心相关耗水中，发电环节占近四成，高于机房直接冷却。"
+      },
+      "takeaway": {
+        "en": "Capacity is not water consumed. To assess a project’s local impact, separate on-site consumption from its power supply’s water footprint and consider the local water source.",
+        "zh": "容量占比不是耗水占比。要判断单个项目的影响，得把现场耗水和供电带来的间接耗水分开，再看各自用的是什么水源。"
+      },
+      "source": {
+        "url": "https://www.iea.org/files/9bd739f6-e4c8-4d09-902b-4e1eb7eb083f/WorldEnergyOutlook2026.pdf",
+        "label": {
+          "en": "IEA World Energy Outlook 2026, Box 1.10",
+          "zh": "国际能源署《世界能源展望 2026》，专栏 1.10"
+        }
+      }
+    },
+    {
+      "id": "clinical-ai-correct-diagnosis-unsafe-route",
+      "date": "2026-11-17",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "The AI got the diagnosis right. In one audit, 55% still took a risky turn.",
+        "zh": "诊断没答错，回放中约55%的路径仍经过潜在危险决策"
+      },
+      "summary": {
+        "en": "In a retrospective hospital cardiology replay, 55.2% of AI trajectories ending in an acceptable diagnosis included a decision rated as having moderate or severe potential harm. The preprint uses retrospective scoring with a physician reference, not observations of patient injury.",
+        "zh": "研究团队回放某医院的心内科病例。在最终诊断可接受的 AI 决策轨迹中，55.2% 至少经过一次被评为存在中度或严重潜在伤害的决策。这是带医师参考标准的回顾性预印本，不是实际伤害发生率。"
+      },
+      "takeaway": {
+        "en": "A final-answer score misses what happens along the way. Auditing intermediate decisions can detect risks that a diagnosis leaderboard cannot see.",
+        "zh": "终点答案的分数看不到过程里发生了什么。逐步核查中间决策，才可能发现诊断排行榜漏掉的风险。"
+      },
+      "source": {
+        "url": "https://arxiv.org/html/2611.22612v1",
+        "label": {
+          "en": "Chen et al., clinical trajectory audit preprint",
+          "zh": "Chen 等，临床决策轨迹审计预印本"
+        }
+      }
+    },
+    {
+      "id": "new-york-raise-enforcement-unit",
+      "date": "2026-11-17",
+      "topic": "governance",
+      "kind": "report",
+      "title": {
+        "en": "New York names its AI safety enforcers before incident reporting kicks in",
+        "zh": "纽约先组AI执法队，前沿模型事故上报随后生效"
+      },
+      "summary": {
+        "en": "Attorney General Letitia James announced a new enforcement unit on November 17. It will oversee rules including the RAISE Act, which takes effect January 1, 2027 and requires covered frontier-model developers to disclose safeguards and report safety incidents promptly.",
+        "zh": "纽约州总检察长莱蒂希娅·詹姆斯于 11 月 17 日宣布设立专门执法小组。其中一项任务是执行 2027 年 1 月 1 日生效的 RAISE 法案：适用范围内的前沿模型开发商须披露防护措施并及时报告安全事件。"
+      },
+      "takeaway": {
+        "en": "A disclosure duty creates an accountability mechanism, not a safety guarantee. Its value will depend on what incidents are reported and how enforcement uses the reports.",
+        "zh": "报告义务建立了问责渠道，并不能保证事故不再发生。真正值得看的是哪些事故会被报告、执法者如何处理。"
+      },
+      "source": {
+        "url": "https://ag.ny.gov/press-release/2026/attorney-general-james-announces-creation-ai-safety-standards-enforcement-and",
+        "label": {
+          "en": "New York Attorney General, ASSET announcement",
+          "zh": "纽约州总检察长，ASSET 小组公告"
+        }
+      }
+    },
+    {
+      "id": "fort-worth-data-centres-tax-versus-net-benefit",
+      "date": "2026-11-10",
+      "topic": "infrastructure",
+      "kind": "report",
+      "title": {
+        "en": "Fort Worth sees real data-centre tax revenue. Net gains are harder to show.",
+        "zh": "数据中心交了不少税，沃思堡为何还要算净收益？"
+      },
+      "summary": {
+        "en": "Fort Worth’s study commission found that existing data centres contribute substantial property tax, but gross revenue is not the city’s net fiscal benefit. It also distinguishes jobs during construction from the relatively smaller number during operation.",
+        "zh": "沃思堡市顾问委员会发现，现有数据中心贡献了可观房产税，但税收总额不是城市的净财政收益。报告也区分了建设期用工与相对较少的运营期岗位。"
+      },
+      "takeaway": {
+        "en": "Compare recurring taxes and operating jobs with local infrastructure and service costs. This is an advisory report about local proposals, not a finding that every project loses money.",
+        "zh": "要判断一座机房给当地留下什么，应把经常性税收和运营岗位与地方基础设施和服务成本一起看。委员会的报告是咨询意见，并没有说所有项目都亏。"
+      },
+      "source": {
+        "url": "https://www.fortworthtexas.gov/files/assets/public/v/1/city-manager/documents/data-centers/11-10-2026-data-center-infrastructure-commission-final-report.pdf",
+        "label": {
+          "en": "Fort Worth municipal commission final report",
+          "zh": "沃思堡市数据中心与基础设施委员会最终报告"
+        }
+      }
+    },
+    {
+      "id": "meta-capex-cash-flow-q3-2026",
+      "date": "2026-10-21",
+      "topic": "infrastructure",
+      "kind": "company",
+      "title": {
+        "en": "Meta generated $32.8B in operating cash and still reported negative free cash flow",
+        "zh": "Meta经营现金流近328亿美元，自由现金流为何是负数？"
+      },
+      "summary": {
+        "en": "Meta reported $32.79 billion in operating cash flow, $34.91 billion in company-wide capital spending including finance-lease principal, and negative $2.12 billion in free cash flow for the September quarter.",
+        "zh": "Meta 披露，三季度经营活动现金流为 327.9 亿美元，公司整体资本开支（含融资租赁本金）为 349.1 亿美元，自由现金流为负 21.2 亿美元。"
+      },
+      "takeaway": {
+        "en": "The capital-spending figure is not an AI-only bill. These numbers show quarterly cash pressure after investment; they do not establish the profitability of Meta’s AI products.",
+        "zh": "这里的资本开支是全公司口径，不是纯 AI 账单。这组数字反映投资后的季度现金压力，不能据此计算 Meta 的 AI 产品赚不赚钱。"
+      },
+      "source": {
+        "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Third-Quarter-2026-Results/default.aspx",
+        "label": {
+          "en": "Meta Q3 2026 results and cash-flow reconciliation",
+          "zh": "Meta 2026 年三季度财报及现金流调节表"
+        }
+      }
     }
   ]
 }

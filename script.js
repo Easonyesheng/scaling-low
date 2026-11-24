@@ -99,159 +99,192 @@
     const pause = document.getElementById('signal-pause');
     const ctx = canvas?.getContext('2d', { alpha: true });
     if (!ctx) return;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-    const fine = matchMedia('(pointer: fine)');
-    const depth = Array.from({length: 29}, (_, i) => i * 41 + 45);
-    const fract = n => n - Math.floor(n);
-    const random = n => fract(Math.sin(n * 127.1 + 311.7) * 43758.5453);
-    const smooth = (v, target) => v + (target - v) * .07;
-    const dust = Array.from({length: 104}, (_, i) => ({
-      x: (random(i*11)*2-1)*740, y: random(i*11+1)*310 - 38,
-      z: random(i*11+5)*1100 + 140, a: random(i*11+7), r: random(i*11+9)
+    const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+    const fine=matchMedia('(pointer: fine)');
+    const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+    const fract=n=>n-Math.floor(n);
+    const rand=n=>fract(Math.sin(n*127.1+311.7)*43758.5453);
+    const lerp=(a,b,t)=>a+(b-a)*t;
+    const ease=t=>t*t*(3-2*t);
+    const palettes=[
+      {core:[255,168,102], blast:[204,58,35], ion:[222,109,197], matrix:[157,74,62], rock:[48,26,35], deep:[17,11,23]},
+      {core:[174,231,255], blast:[42,85,237], ion:[154,119,255], matrix:[73,114,218], rock:[30,35,77], deep:[11,15,44]},
+      {core:[177,253,206], blast:[31,161,130], ion:[108,185,250], matrix:[55,151,134], rock:[17,53,51], deep:[8,26,34]},
+      {core:[255,212,242], blast:[178,64,209], ion:[219,95,149], matrix:[137,90,212], rock:[52,28,75], deep:[22,11,38]}
+    ];
+    const shards=Array.from({length:37},(_,i)=>{
+      const arm=i%2?1:-1;
+      return {
+        x:arm*(76+rand(i*19+2)*540),y:44+rand(i*19+3)*315,z:100+rand(i*19+4)*1100,
+        size:9+rand(i*19+5)*58,spin:rand(i*19+6)*6.28, arm
+      };
+    }).sort((a,b)=>b.z-a.z);
+    const edges=shards.flatMap((a,i)=>shards
+      .map((b,j)=>({j,d:((a.x-b.x)**2+(a.y-b.y)**2+(a.z-b.z)**2)}))
+      .filter(({j,d})=>j>i && shards[j].arm===a.arm && d<405**2).sort((u,v)=>u.d-v.d).slice(0,3).map(({j})=>[i,j]));
+    const motes=Array.from({length:112},(_,i)=>({
+      a:rand(i*9+1)*Math.PI*2,r:.18+rand(i*9+2),z:100+rand(i*9+3)*1100,b:rand(i*9+4), offset:rand(i*9+5)
     }));
-    const blocks = Array.from({length: 22}, (_,i) => ({
-      x: (i % 2 ? 1 : -1) * (165 + random(i+63)*495),
-      y: random(i+172)*195 - 30, z: 132 + random(i+404)*980,
-      r: 7 + random(i+721)*38, a: random(i+963)*6.28
-    })).sort((a,b) => b.z-a.z);
-    let w=1,h=1,dpr=1,focal=1,frame=0,last=0,elapsed=0;
+    let w=0,h=0,dpr=1,focal=1,frame=0,last=0,t=0;
     let sx=0,sy=0,px=0,py=0,journey=0,section=0;
-    const isStill = () => reduce.matches || pause?.checked || document.hidden;
-    function dimensions() {
-      w=canvas.clientWidth; h=canvas.clientHeight;
-      if (!w || !h) return;
-      dpr=Math.min(devicePixelRatio||1, w<680 ? 1.15 : 1.6);
-      canvas.width=Math.round(w*dpr); canvas.height=Math.round(h*dpr);
-      focal=Math.max(w*.69,h*.54);
+    const isStill=()=>reduce.matches||pause?.checked||document.hidden;
+    const rgba=(v,a)=>'rgba('+v+','+a+')';
+    function dimensions(){
+      w=canvas.clientWidth;h=canvas.clientHeight;
+      if(!w||!h)return;
+      dpr=Math.min(devicePixelRatio||1,w<680?1.15:1.6);
+      canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
+      focal=Math.max(w*.71,h*.56);
       draw();
     }
-    function scroll() {
-      const distance=Math.max(1,document.documentElement.scrollHeight-innerHeight);
-      section=Math.max(0,Math.min(1,scrollY/distance));
+    function scroll(){
+      section=clamp(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight),0,1);
     }
-    function draw() {
-      if (!w || !h) return;
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-      ctx.clearRect(0,0,w,h);
-      const t=elapsed, phase=journey;
-      const mobile=w<680, yaw=sx*.082+Math.sin(phase*6.3)*.13;
-      const cx=w*(mobile?.56:.61)+sx*34, cy=h*(.45+phase*.095)+sy*16;
-      const fog=Math.sin(phase*Math.PI);
-      const cos=Math.cos(yaw),sin=Math.sin(yaw);
-      function proj(x,y,z) {
-        const u=x*cos+(z-460)*sin, v=z*cos-x*sin;
-        if (v<44) return null;
+    function draw(){
+      if(!w||!h)return;
+      ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+      const mobile=w<680, phase=journey, cycle=t/14;
+      const theme=Math.floor(cycle)%palettes.length,next=(theme+1)%palettes.length;
+      const fade=ease(clamp((fract(cycle)-.67)/.33,0,1));
+      const hue=(key)=>palettes[theme][key].map((v,i)=>Math.round(lerp(v,palettes[next][key][i],fade))).join(',');
+      const ash=hue('deep'),rock=hue('rock'),core=hue('core'),blast=hue('blast'),ion=hue('ion'),matrix=hue('matrix');
+      const yaw=sx*(mobile?.085:.18)+Math.sin(phase*4)*.14;
+      const pitch=sy*.11,cos=Math.cos(yaw),sin=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+      const cx=w*(mobile?.575:.60)+sx*w*.047,cy=h*(.46+phase*.09)+sy*h*.05;
+      const surge=(1+Math.sin(t*.81-.8))*.5;
+      function proj(x,y,z){
+        const u=x*cos+(z-460)*sin,b=z*cos-x*sin,v=b*cp-y*sp,q=y*cp+(b-510)*sp;
+        if(v<53)return null;
         const s=focal/v;
-        return [cx+u*s,cy-y*s,s];
+        return [cx+u*s,cy-q*s,s];
       }
-      function path(points, fill, stroke, line=1, closed=false) {
-        if (points.some(p=>!p)) return;
+      function path(points,fill,stroke,line=1,closed=false){
+        if(points.some(p=>!p))return;
+        if(points.every(p=>p[0]<-24)||points.every(p=>p[0]>w+24)||points.every(p=>p[1]<-24)||points.every(p=>p[1]>h+24))return;
         ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);
-        for (let i=1;i<points.length;i++) ctx.lineTo(points[i][0],points[i][1]);
+        for(let i=1;i<points.length;i++)ctx.lineTo(points[i][0],points[i][1]);
         if(closed)ctx.closePath();
         if(fill){ctx.fillStyle=fill;ctx.fill();}
         if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=line;ctx.stroke();}
       }
-      const halo=ctx.createRadialGradient(cx+h*.035,cy,3,cx,cy,h*.66);
-      halo.addColorStop(0,'rgba(182,59,34,.28)');
-      halo.addColorStop(.26,'rgba(117,32,38,.32)');
-      halo.addColorStop(.57,'rgba(95,60,46,.20)');
-      halo.addColorStop(1,'rgba(28,17,13,0)');
-      ctx.fillStyle=halo;ctx.fillRect(0,0,w,h);
-      const sun=proj(88,50,1150);
-      if(sun){
-        const r=Math.min(w*.48,h*.45) * (1.1+fog*.17);
-        const sunG=ctx.createRadialGradient(sun[0],sun[1],r*.53,sun[0],sun[1],r);
-        sunG.addColorStop(0,'rgba(10,7,12,.8)');
-        sunG.addColorStop(.65,'rgba(17,9,15,.94)');
-        sunG.addColorStop(.84,'rgba(110,35,31,.52)');
-        sunG.addColorStop(.94,'rgba(244,104,64,.23)');
-        sunG.addColorStop(1,'rgba(239,90,43,0)');
-        ctx.fillStyle=sunG;ctx.beginPath();ctx.arc(sun[0],sun[1],r,0,Math.PI*2);ctx.fill();
-        ctx.beginPath();ctx.ellipse(sun[0],sun[1],r*.94,r*.93,phase*.2,-.46,3.8);ctx.strokeStyle='rgba(250,133,91,.34)';ctx.lineWidth=1;ctx.stroke();
+      const star=proj(30,100,960);
+      if(star){
+        const [x,y]=star,r=Math.max(h*.55,w*.28);
+        const glow=ctx.createRadialGradient(x,y,0,x,y,r);
+        glow.addColorStop(0,rgba(core,.24+surge*.12));glow.addColorStop(.14,rgba(blast,.43));
+        glow.addColorStop(.54,rgba(ion,.16));glow.addColorStop(1,rgba(ash,0));
+        ctx.fillStyle=glow;ctx.fillRect(0,0,w,h);
+        const arcR=Math.min(h*.40,w*.48);
+        ctx.beginPath();ctx.ellipse(x,y,arcR,arcR*.77,.24+sx*.1,-.76,3.58);
+        ctx.strokeStyle=rgba(ion,.24);ctx.lineWidth=1.2;ctx.stroke();
+        ctx.beginPath();ctx.ellipse(x,y,arcR*.81,arcR*.66,-.3+sy*.08,1.6,5.31);
+        ctx.strokeStyle=rgba(core,.26);ctx.lineWidth=1;ctx.stroke();
+        // One long focal cut through the glowing horizon, not a fullscreen strobe.
+        const flare=ctx.createLinearGradient(x-r,y,x+r,y);
+        flare.addColorStop(0,rgba(ion,0));flare.addColorStop(.46,rgba(blast,.19));
+        flare.addColorStop(.5,rgba(core,.6));flare.addColorStop(.55,rgba(blast,.16));flare.addColorStop(1,rgba(ion,0));
+        ctx.fillStyle=flare;ctx.fillRect(0,y+.35,w,1.4);
       }
-      const fault = z => Math.sin(z*.0085 + phase*3 + t*.09)*39 + Math.sin(z*.024 + phase)*17;
-      const floor = (z,i) => -95 + Math.sin(z*.014+i*.83)*18 + Math.sin(z*.029-i*.51)*10;
-      const width = z => 33+ Math.sin(z*.019 + phase*3)*13 + fog*17;
-      const drift=(t*104+phase*147)%41;
-      function terrain(z,i,side) {
-        const open=width(z), f=fault(z);
-        return proj(f + side*(open+i**1.42*31),floor(z,i)+(i===0?7:Math.min(42,i*i*2)),z);
-      }
-      for(let j=depth.length-2;j>=0;j--){
-        const a=depth[j]+drift,b=depth[j+1]+drift;
-        for(const side of [-1,1]){
-          for(let i=0;i<(mobile?5:8);i++){
-            const q=[terrain(a,i,side),terrain(b,i,side),terrain(b,i+1,side),terrain(a,i+1,side)];
-            const haze=.35+Math.min(.52,j*.024);
-            const red=i===0?(j%3===0?'rgba(112,47,43,.68)':'rgba(66,33,45,.58)'):(i+j)%3===0?'rgba(37,28,24,.64)':'rgba(24,20,18,.56)';
-            path(q,red,i===0?'rgba(231,97,76,.33)':`rgba(143,105,84,${(.18-haze*.12).toFixed(3)})`,.65,true);
+      const fault=z=>Math.sin(z*.008+phase*2+t*.12)*32+Math.sin(z*.023+phase)*19;
+      const elevation=(z,i)=>-110+Math.sin(z*.014+i*.83)*14+Math.sin(z*.027-i*.63)*13;
+      const crack=z=>30+Math.sin(z*.019+phase*3)*16+surge*12;
+      const drift=(t*77+phase*125)%52;
+      const segments=mobile?18:24,sides=mobile?4:6;
+      const tileA=rgba(ash,.50),tileB=rgba(rock,.46),tileRim=rgba(blast,.28),line=rgba(matrix,.14),rim=rgba(core,.26);
+      const rails=[[],[]];
+      for(let j=0;j<=segments;j++){
+        const z=70+j*52+drift;
+        const sign=j%2===0?1:-1;
+        for(let side=0;side<2;side++){
+          const row=[];
+          for(let i=0;i<=sides;i++){
+            const x=fault(z)+(side?1:-1)*(crack(z)+i**1.43*45+sign*i*1.5);
+            row.push(proj(x,elevation(z,i)+Math.min(53,i*i*2.6),z));
           }
+          rails[side].push(row);
         }
-        const hot0=proj(fault(a),floor(a,0)-11,a), hot1=proj(fault(b),floor(b,0)-11,b);
-        const warm=.3+(.5+.5*Math.sin(j*.89-t*2))*.48;
-        path([hot0,hot1],null,`rgba(245,68,36,${warm*.25})`,Math.max(2,13-j*.47));
-        path([hot0,hot1],null,`rgba(255,139,82,${warm})`,Math.max(.65,2.4-j*.075));
       }
-      // Heat haze rolls across the horizon instead of washing out the text.
-      for(let k=0;k<(mobile?2:4);k++){
-        const x=(.17+k*.24)*w + Math.sin(t*.13+k*1.7)*w*.07;
-        const y=cy+h*(.035+k*.037), r=h*(.13+k*.015);
-        const haze=ctx.createRadialGradient(x,y,r*.14,x,y,r);
-        haze.addColorStop(0,k%2?'rgba(88,42,26,.16)':'rgba(141,57,28,.15)');
-        haze.addColorStop(1,'rgba(36,19,13,0)');
-        ctx.fillStyle=haze;ctx.fillRect(x-r,y-r,r*2,r*2);
+      for(let j=segments-1;j>=0;j--){
+        for(let side=0;side<2;side++){
+          const a=rails[side][j],b=rails[side][j+1];
+          for(let i=0;i<sides;i++)path([a[i],b[i],b[i+1],a[i+1]],i===0?tileRim:(i+j)%3===0?tileB:tileA,i===0?rim:line,.70,true);
+        }
+        const a=70+j*52+drift,b=a+52;
+        const heat=(.5+.5*Math.sin(j*.64-t*2.5));
+        const linePoints=[proj(fault(a),elevation(a,0)-15,a),proj(fault(b),elevation(b,0)-15,b)];
+        path(linePoints,null,rgba(blast,.18+heat*.24),Math.max(2,19-j*.71));
+        path(linePoints,null,rgba(core,.45+heat*.37),Math.max(.7,3.2-j*.1));
       }
-      for(let i=0;i<blocks.length;i++){
-        if(mobile && i%2)continue;
-        const b=blocks[i],a=b.a+t*.28+phase,rx=Math.cos(a)*b.r,rz=Math.sin(a)*b.r;
-        const zz=b.z + Math.sin(t*.37+b.a)*27,yy=b.y+Math.sin(t*.7+b.a)*11;
-        const top=proj(b.x+rx*.18,yy+b.r*.85,zz+rz*.2);
-        const left=proj(b.x-rx,yy-b.r*.54,zz-rz);
-        const right=proj(b.x+rx,yy-b.r*.30,zz+rz);
-        const base=proj(b.x-rz*.67,yy-b.r*.82,zz+rx*.67);
-        path([top,left,right],'rgba(24,19,34,.76)','rgba(178,92,106,.31)',.9,true);
-        path([left,base,right],'rgba(84,33,42,.63)','rgba(191,82,65,.30)',.7,true);
+      // Expanding shock rings emitted into the world's depth plane.
+      for(let k=0;k<(mobile?2:3);k++){
+        const pulse=fract(t*.16+k/3),r=36+pulse*523,pts=[];
+        for(let i=0;i<=32;i++){
+          const a=i/32*Math.PI*2;
+          pts.push(proj(22+Math.cos(a)*r,-89+Math.sin(a*3)*r*.04,850+Math.sin(a)*r*.76));
+        }
+        path(pts,null,rgba(core,(1-pulse)*pulse*.76),1);
       }
-      for(let i=0;i<dust.length;i++){
+      const centers=shards.map((b,i)=>{
+        const lift=Math.sin(t*.41+b.spin)*21;
+        return mobile&&i%2?null:proj(b.x+Math.sin(t*.29+b.spin)*34,b.y+lift,b.z+Math.cos(t*.31+b.spin)*31);
+      });
+      for(let i=0;i<edges.length;i++){
+        const [a,b]=edges[i];
+        path([centers[a],centers[b]],null,rgba(i%4===0?core:matrix,.13+(i%4===0?.16:0)),.77);
+      }
+      for(let i=0;i<shards.length;i++){
+        if(!centers[i])continue;
+        const b=shards[i],a=b.spin+t*(i%2?.35:-.24)+phase,r=b.size;
+        const x=b.x+Math.sin(t*.29+b.spin)*34,y=b.y+Math.sin(t*.41+b.spin)*21,z=b.z+Math.cos(t*.31+b.spin)*31;
+        const dx=Math.cos(a)*r,dz=Math.sin(a)*r;
+        const top=proj(x+dz*.15,y+r*.93,z+dx*.17),left=proj(x-dx,y-r*.45,z-dz);
+        const right=proj(x+dx,y-r*.28,z+dz),tip=proj(x-dz*.68,y-r*.84,z+dx*.73);
+        path([top,left,right],rgba(ash,.66),rgba(ion,i%5===0?.45:.21),.86,true);
+        path([left,tip,right],rgba(rock,.72),rgba(core,.19),.7,true);
+        const c=centers[i];
+        if(i%3===0){ctx.fillStyle=rgba(core,.67);ctx.fillRect(c[0],c[1],2.1,2.1);}
+      }
+      for(let i=0;i<motes.length;i++){
         if(mobile&&i%2)continue;
-        const d=dust[i],z=d.z+Math.cos(t*.23+d.a*12)*29;
-        const p=proj(d.x+Math.sin(t*.61+d.a*13)*18,d.y+Math.sin(t*.5+d.r*9)*24,z);
-        if(!p||p[0]<0||p[0]>w||p[1]<0||p[1]>h)continue;
-        const q=(.24+d.a*.59)*(.68+.32*Math.sin(t*1.8+d.r*60));
-        const size=Math.min(2.65,.7+p[2]*d.r*.75);
-        ctx.fillStyle=i%5===0?`rgba(173,190,255,${q})`:`rgba(254,135,84,${q})`;
-        ctx.fillRect(p[0],p[1],size,size);
+        const p=motes[i],travel=fract(t*(.083+p.b*.052)+p.offset);
+        const radius=(47+travel*690)*p.r,a=p.a+t*.031;
+        const point=proj(Math.cos(a)*radius,80+Math.sin(a)*radius*.53,p.z-travel*65);
+        if(!point||point[0]<0||point[0]>w||point[1]<0||point[1]>h)continue;
+        const alpha=(.18+p.b*.6)*Math.sin(travel*Math.PI);
+        const size=Math.min(2.7,.55+point[2]*p.b*.72);
+        ctx.fillStyle=rgba(i%5===0?ion:core,alpha);
+        ctx.fillRect(point[0],point[1],size,size);
       }
     }
-    function loop(now) {
+    function loop(now){
       frame=0;
       if(isStill()){last=0;return;}
-      const elapsedMs=now-last;
-      if(!last || elapsedMs>(w<680?32:21)) {
-        if(last) elapsed+=Math.min(elapsedMs,70)/1000;
+      const delta=now-last;
+      if(!last||delta>(w<680?32:21)){
+        if(last)t+=Math.min(delta,70)/1000;
         last=now;
-        sx=smooth(sx,px); sy=smooth(sy,py); journey=smooth(journey,section);
+        sx=lerp(sx,px,.10);sy=lerp(sy,py,.10);journey=lerp(journey,section,.075);
         draw();
       }
       frame=requestAnimationFrame(loop);
     }
-    function state() {
+    function state(){
       const still=isStill();
       canvas.dataset.motion=still?'static':'running';
-      if(still) { if(frame)cancelAnimationFrame(frame);frame=0;last=0;draw(); }
+      if(still){if(frame)cancelAnimationFrame(frame);frame=0;last=0;if(!document.hidden)draw();}
       else if(!frame)frame=requestAnimationFrame(loop);
     }
     addEventListener('resize',dimensions,{passive:true});
     addEventListener('scroll',scroll,{passive:true});
     addEventListener('pointermove',e=>{
-      if(!fine.matches||e.pointerType==='touch')return;
-      px=(e.clientX/w-.5)*2;py=(e.clientY/h-.5)*2;
+      if(isStill()||!fine.matches||e.pointerType==='touch'||!w||!h)return;
+      px=clamp((e.clientX/w-.5)*2,-1,1);py=clamp((e.clientY/h-.5)*2,-1,1);
     },{passive:true});
+    addEventListener('pointerout',e=>{if(!e.relatedTarget){px=0;py=0;}},{passive:true});
     pause?.addEventListener('change',state);
     reduce.addEventListener('change',state);
     document.addEventListener('visibilitychange',state);
-    scroll(); journey=section; dimensions(); root.classList.add('world-ready'); state();
+    scroll();journey=section;dimensions();root.classList.add('world-ready');state();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -357,6 +390,7 @@
           seen.add(e.id.trim()); return true;
         }).sort((a,b) => b.date.localeCompare(a.date));
         state = entries.length ? 'ready' : 'error';
+        document.dispatchEvent(new CustomEvent('scalinglow:archive',{detail: entries}));
       } catch { state = 'error'; }
       render();
       revealHash();

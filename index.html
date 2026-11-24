@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#110d0b"><title>Scaling Low | AI 风险与叙事核查</title><meta name="description" content="AI risk, claim checks, and the evidence behind the headlines.">
-<link rel="stylesheet" href="style.css?v=impact-01"><script src="script.js?v=impact-01"></script>
+<link rel="stylesheet" href="style.css?v=aftershock-01"><script src="script.js?v=aftershock-01"></script><script src="atlas.js?v=aftershock-01" defer></script>
 </head><body id="top">
 <canvas id="world-scene" aria-hidden="true"></canvas>
 <input id="signal-pause" type="checkbox" aria-label="Pause background motion" data-en-label="Pause background motion" data-zh-label="暂停背景动效">
 <label for="signal-pause" class="world-motion"><span class="world-pause"><span class="en">Pause motion</span><span class="zh" lang="zh-Hans">暂停动效</span></span><span class="world-resume"><span class="en">Resume motion</span><span class="zh" lang="zh-Hans">恢复动效</span></span></label>
 <a class="skip" href="#main"><span class="en">Skip to issue</span><span class="zh" lang="zh-Hans">跳到正文</span></a>
 <header class="bar wrap"><a class="brand" href="#top"><b aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 5l14 14m0-9v9h-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="round"/></svg></b> Scaling Low<span class="dot">.</span></a>
-<nav aria-label="Issue navigation" data-en-label="Issue navigation" data-zh-label="本期导航"><a href="#risks"><span class="en">Risk map</span><span class="zh" lang="zh-Hans">风险图谱</span></a><a class="desk-tab" href="#news"><span class="en">Risk feed</span><span class="zh" lang="zh-Hans">风险情报</span></a><a href="#lab"><span class="en">Simulator</span><span class="zh" lang="zh-Hans">模拟器</span></a></nav>
+<nav aria-label="Issue navigation" data-en-label="Issue navigation" data-zh-label="本期导航"><a href="#risks"><span class="en">Risk map</span><span class="zh" lang="zh-Hans">风险图谱</span></a><a class="desk-tab" href="#news"><span class="en">Risk feed</span><span class="zh" lang="zh-Hans">风险情报</span></a><a class="figure-tab" href="#figures"><span class="en">Charts</span><span class="zh" lang="zh-Hans">数据图表</span></a><a href="#lab"><span class="en">Simulator</span><span class="zh" lang="zh-Hans">模拟器</span></a></nav>
 <div class="switch enhanced" role="group" aria-label="Language" data-en-label="Language" data-zh-label="语言"><button data-lang="en" lang="en" aria-pressed="true">EN</button><button data-lang="zh" lang="zh-Hans" aria-pressed="false">中文</button></div></header>
 <main id="main"><section class="cover">
 <svg class="hero-wave" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true" focusable="false">
@@ -73,14 +73,71 @@
 <button data-filter="governance" aria-pressed="false"><span class="en">Governance</span><span class="zh" lang="zh-Hans">治理</span></button>
 <button data-filter="infrastructure" aria-pressed="false"><span class="en">Infrastructure</span><span class="zh" lang="zh-Hans">基础设施</span></button></div><p id="news-status" role="status" aria-live="polite" aria-atomic="true"></p><div id="news-list"></div>
 <noscript><p>Enable JavaScript to filter the news, or <a href="news.json">read the bilingual news file</a> directly.</p><p lang="zh-Hans">启用 JavaScript 即可筛选简讯，也可直接阅读<a href="news.json">双语新闻数据</a>。</p></noscript></section>
-<section class="wrap section" id="risks"><div class="meta"><i></i>02 &nbsp;/&nbsp; <span class="en">Field guide</span><span class="zh" lang="zh-Hans">阅读指南</span></div><h2><span class="en">A map of AI risk</span><span class="zh" lang="zh-Hans">AI 风险图谱</span></h2><div class="riskgrid"><article><div class="meta">A / <span class="en">Misuse</span><span class="zh" lang="zh-Hans">滥用</span></div><h3><span class="en">Who is asking?</span><span class="zh" lang="zh-Hans">谁在使用？</span></h3><p><span class="en">A convincing voice can help someone communicate or help an impostor borrow their identity. Before acting on an urgent request, confirm it through a familiar channel.</span><span class="zh" lang="zh-Hans">逼真的合成语音可以帮助人们表达，也可能被用来冒充他人。遇到紧急请求，不妨先通过熟悉的渠道向本人核实。</span></p></article>
-<article><div class="meta">B / <span class="en">Unreliable outputs</span><span class="zh" lang="zh-Hans">输出失准</span></div><h3><span class="en">Does the citation exist?</span><span class="zh" lang="zh-Hans">引文有出处吗？</span></h3><p><span class="en">A fluent answer can name a study that was never published. In a clinic or a classroom, someone needs time to check the original before relying on the answer.</span><span class="zh" lang="zh-Hans">流畅的回答也可能引用一项从未发表的研究。在诊室或课堂里，把答案用作依据之前，需要留出核对原文的时间。</span></p></article>
-<article><div class="meta">C / <span class="en">Systemic impact</span><span class="zh" lang="zh-Hans">系统性影响</span></div><h3><span class="en">Whose grid is it?</span><span class="zh" lang="zh-Hans">谁在共用电网？</span></h3><p><span class="en">A data centre plugs into the same grid as its neighbours. Its annual energy use tells only part of the story: planners also need to know how much power it draws at the busiest hour.</span><span class="zh" lang="zh-Hans">数据中心与周边居民共用电网。年耗电量只能说明一部分问题：规划者还得知道，在用电最紧张的时段，它需要多大功率。</span></p></article></div></section>
-<section class="wrap section" id="lab"><div class="meta"><i></i>03 &nbsp;/&nbsp; <span class="en">Modeled satire</span><span class="zh" lang="zh-Hans">模拟讽刺</span></div><h2><span class="en">Scale is all you <em>owe.</em></span><span class="zh" lang="zh-Hans">规模越大，<em>账单越长。</em></span></h2><p class="dek"><span class="en">In this toy model the score levels off while the bill rises in proportion to compute. Both curves are invented: this is neither a measured benchmark nor a forecast.</span><span class="zh" lang="zh-Hans">在这个玩具模型里，分数渐趋平缓，账单却与算力成正比。两条曲线都是虚构的，并非实测基准或预测。</span></p>
+<section class="wrap section" id="risks">
+<div class="meta"><i></i>02 &nbsp;/&nbsp; <span class="en">Risk atlas</span><span class="zh" lang="zh-Hans">风险测绘</span></div>
+<h2><span class="en">A map of AI risk</span><span class="zh" lang="zh-Hans">AI 风险图谱</span></h2>
+<div class="atlas">
+ <div class="atlas-display">
+  <svg id="atlas-graph" role="img" tabindex="0" viewBox="0 0 680 420" aria-labelledby="atlas-description" aria-describedby="atlas-instructions"><title id="atlas-description" data-en-label="AI risks: a three-dimensional map" data-zh-label="AI 风险三维图谱">AI risks: a three-dimensional map</title></svg>
+  <div class="atlas-guide" id="atlas-instructions"><span class="en">Drag to orbit · use arrow keys · lift the layers with the slider</span><span class="zh">拖动旋转 · 方向键转动 · 滑杆拉升层级</span></div>
+  <div class="atlas-tools"><label for="atlas-lift"><span class="en">Layer lift</span><span class="zh">层级拉升</span></label><input id="atlas-lift" type="range" min="0" max="100" value="65"><button type="button" id="atlas-reset"><span class="en">Reset view</span><span class="zh">复位视角</span></button></div>
+ </div>
+ <aside class="atlas-key">
+  <div class="meta"><span class="en">Explore a branch</span><span class="zh">选择风险分支</span></div>
+  <div class="atlas-branches" role="group" data-en-label="Risk branches" data-zh-label="风险分支">
+   <button type="button" data-risk="misuse" aria-pressed="true"><span class="en">Abuse</span><span class="zh">滥用</span></button>
+   <button type="button" data-risk="reliability" aria-pressed="false"><span class="en">Reliability</span><span class="zh">可靠性</span></button>
+   <button type="button" data-risk="infrastructure" aria-pressed="false"><span class="en">Infrastructure</span><span class="zh">基础设施</span></button>
+   <button type="button" data-risk="governance" aria-pressed="false"><span class="en">Governance</span><span class="zh">治理</span></button>
+  </div>
+  <div id="atlas-readout" aria-live="polite"><h3>Abuse</h3><p>How existing capabilities can amplify impersonation and distribution.</p></div>
+  <p class="atlas-note"><span class="en">Editorial classification, not a severity ranking. Vertical separation shows hierarchy, not magnitude.</span><span class="zh">这是本站的分类图，不是风险排行。高度只表示层级，不代表危害大小。</span> <a href="https://internationalaisafetyreport.org/publication/2026-report-extended-summary-policymakers"><span class="en">Safety report</span><span class="zh">安全报告</span></a></p>
+ </aside>
+</div>
+</section>
+
+<section class="wrap section" id="figures">
+ <div class="meta"><i></i>03 &nbsp;/&nbsp; <span class="en">The instruments</span><span class="zh">观测数据</span></div>
+ <h2><span class="en">The pressure in numbers</span><span class="zh">把风险画出来</span></h2>
+ <div class="evidence-plots">
+  <figure class="evidence-plot energy-plot">
+   <div class="plot-index">01 <span class="en">/ INFRASTRUCTURE</span><span class="zh">/ 电力</span></div>
+   <h3><span class="en">The data-centre load</span><span class="zh">数据中心的电力负荷</span></h3>
+   <svg viewBox="0 0 400 220" role="img" data-en-label="Global data centres: electricity use rose from 360 TWh in 2023 to 485 TWh in 2025. IEA projects 945 TWh in 2030 in its base case." data-zh-label="全球数据中心用电：2023 年 360、2024 年 416、2025 年 485 太瓦时。IEA 基准情景预计 2030 年为 945 太瓦时。">
+    <path class="plot-grid" d="M38 17H369M38 58H369M38 99H369M38 140H369M38 181H369"/>
+    <path class="plot-area" d="M38 122L85 113L133 101L133 181H38Z"/>
+    <path class="plot-history" d="M38 122L85 113L133 101"/>
+    <path class="plot-estimate" d="M133 101L369 26"/>
+    <g class="plot-dots"><circle cx="38" cy="122" r="4"/><circle cx="85" cy="113" r="4"/><circle cx="133" cy="101" r="4"/><circle cx="369" cy="26" r="5"/></g>
+    <g class="plot-values" text-anchor="middle"><text x="38" y="109">360</text><text x="85" y="100">416</text><text x="133" y="87">485</text><text x="364" y="16">945</text></g>
+    <g class="plot-axis" text-anchor="middle"><text x="38" y="204">2023</text><text x="85" y="204">2024</text><text x="133" y="204">2025</text><text x="369" y="204">2030</text></g><text x="40" y="43" class="plot-axis">TWh</text>
+   </svg>
+   <figcaption><span class="en">All data centres, not just AI. Solid: historical estimates. Dashed: 2030 base case.</span><span class="zh">全球所有数据中心，并非仅 AI。实线是历史估算，虚线终点为 2030 年基准情景。</span> <a href="https://www.iea.org/files/3179f7f8-01f6-4dd6-bffa-c9f7b73f1dc9/KeyQuestionsonEnergyandAI.pdf">IEA · A.4</a></figcaption>
+  </figure>
+  <figure class="evidence-plot rdqa-plot">
+   <div class="plot-index">02 <span class="en">/ RELIABILITY</span><span class="zh">/ 可靠性</span></div>
+   <h3><span class="en">When evidence counts</span><span class="zh">答案必须有出处</span></h3>
+   <div class="compare-bars">
+    <div><span><span class="en">Best generic agent</span><span class="zh">最佳通用智能体</span></span><strong>24.0%</strong><b style="--bar:24%" aria-hidden="true"></b></div>
+    <div><span>RDQA-Skill</span><strong>41.1%</strong><b style="--bar:41.1%" aria-hidden="true"></b></div>
+    <div class="compare-scale" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div>
+   </div>
+   <figcaption><span class="en">Evidence-adjusted accuracy on RDQA, not overall agent ability.</span><span class="zh">RDQA 的证据调整准确率，不是通用能力分数。</span> <a href="https://aclanthology.org/2026.emnlp-main.1855/">EMNLP · RDQA</a></figcaption>
+  </figure>
+  <figure class="evidence-plot archive-plot">
+   <div class="plot-index">03 <span class="en">/ COVERAGE</span><span class="zh">/ 站内观察</span></div>
+   <h3><span class="en">What we cover</span><span class="zh">本站报道分布</span></h3>
+   <div class="archive-center"><div id="atlas-donut"><strong id="atlas-total">—</strong></div><ul id="atlas-counts" aria-live="polite"></ul></div>
+   <figcaption><span class="en">Article counts by topic in this site’s archive, not the frequency of incidents.</span><span class="zh">按本站归档主题计篇数，不代表实际事件发生频率。</span> <a href="./news.json">news.json</a></figcaption>
+  </figure>
+ </div>
+</section>
+
+<section class="wrap section" id="lab"><div class="meta"><i></i>04 &nbsp;/&nbsp; <span class="en">Cost curve</span><span class="zh" lang="zh-Hans">代价曲线</span></div><h2><span class="en">Scale is all you <em>owe.</em></span><span class="zh" lang="zh-Hans">规模越大，<em>账单越长。</em></span></h2><p class="dek"><span class="en">In this toy model the score levels off while the bill rises in proportion to compute. Both curves are invented: this is neither a measured benchmark nor a forecast.</span><span class="zh" lang="zh-Hans">在这个玩具模型里，分数渐趋平缓，账单却与算力成正比。两条曲线都是虚构的，并非实测基准或预测。</span></p>
 <div class="labgrid"><figure class="chart"><figcaption class="meta"><span class="en">Fig. 01 / Benchmark score</span><span class="zh" lang="zh-Hans">图 01 / 基准分数</span></figcaption><svg viewBox="0 0 536 205" width="536" height="205" role="img" aria-label="Fictional score flattens as compute increases" data-en-label="Fictional score flattens as compute increases" data-zh-label="算力增加时虚构分数逐渐趋于平缓"><path class="grid" d="M36 26H498 M36 96H498 M36 166H498 M36 26V166 M190 26V166 M344 26V166 M498 26V166"/><g class="ticks"><text x="2" y="30">100</text><text x="9" y="100">50</text><text x="17" y="170">0</text><g text-anchor="middle"><text x="36" y="189">1×</text><text x="190" y="189">10×</text><text x="344" y="189">100×</text><text x="498" y="189">1,000×</text></g></g><path id="curve" pathLength="1" d="M36 157.6 C75 110 115 79 174.6 69.5 S276 51.5 345.54 48.1 S460 45.4 498 45"/><line id="guide" x1="345.54" x2="345.54" y1="48.1" y2="166"/><circle id="point" cx="345.54" cy="48.1" r="5"/></svg><div class="plotfoot meta"><span class="en">Compute multiple · log scale →</span><span class="zh" lang="zh-Hans">算力倍数 · 对数刻度 →</span></div></figure>
 <div class="controls"><div class="meter"><label for="compute"><span class="en">Throw compute at it</span><span class="zh" lang="zh-Hans">加点算力</span></label><strong id="multiplier">102×</strong></div><input class="enhanced" id="compute" type="range" min="0" max="100" value="67" aria-describedby="help"><p id="help"><span class="en">The invoice is the only thing that scales reliably.</span><span class="zh" lang="zh-Hans">唯一稳定增长的是账单。</span></p><dl class="results"><div><dt><span class="en">Demo score</span><span class="zh" lang="zh-Hans">模拟分数</span></dt><dd id="score">84.2</dd></div><div><dt><span class="en">Illustrative bill · USD</span><span class="zh" lang="zh-Hans">模拟账单 · 美元</span></dt><dd id="bill">$102,329</dd></div></dl></div></div></section>
 
-<section class="opinion"><div class="wrap opiniongrid"><div><div class="meta"><i></i>04 &nbsp;/&nbsp; <span class="en">Opinion · A small manifesto</span><span class="zh" lang="zh-Hans">观点 · 一份小宣言</span></div><h2><span class="en">Give enough a benchmark.</span><span class="zh" lang="zh-Hans">给「够用」定个标准。</span></h2></div><div class="marginnotes"><p><span class="en">Start with the job, not the model. If a small tool gets a reader to the right document, a larger one should earn its place: does it find what the first one missed, and can the reader check?</span><span class="zh" lang="zh-Hans">先问要做什么，再选模型。如果小工具已能帮读者找到所需文献，更大的模型就得说明自己的用处：它找到了哪些遗漏？读者能核实吗？</span></p></div></div></section>
+<section class="opinion"><div class="wrap opiniongrid"><div><div class="meta"><i></i>05 &nbsp;/&nbsp; <span class="en">Opinion · A small manifesto</span><span class="zh" lang="zh-Hans">观点 · 一份小宣言</span></div><h2><span class="en">Give enough a benchmark.</span><span class="zh" lang="zh-Hans">给「够用」定个标准。</span></h2></div><div class="marginnotes"><p><span class="en">Start with the job, not the model. If a small tool gets a reader to the right document, a larger one should earn its place: does it find what the first one missed, and can the reader check?</span><span class="zh" lang="zh-Hans">先问要做什么，再选模型。如果小工具已能帮读者找到所需文献，更大的模型就得说明自己的用处：它找到了哪些遗漏？读者能核实吗？</span></p></div></div></section>
 </main><footer><div class="wrap"><a class="brand" href="#top"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 5l14 14m0-9v9h-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="round"/></svg> Scaling Low.</a><span><span class="en">Field notes on the limits of more.</span><span class="zh" lang="zh-Hans">记录「更多」的限度。</span></span><a href="#top"><span class="en">Back to top</span><span class="zh" lang="zh-Hans">返回顶部</span></a></div></footer>
 </body></html>
 

@@ -493,3 +493,71 @@ html.sl{
 .sl footer{background:#1d140fa6}
 @media(max-width:760px){.sl .cover .stage .masthead{width:min(100%,540px)}.sl .cover .stage .tagline{padding-left:.5em}.sl .cover .stage{gap:24px}}
 @media print{.sl .impact-mark{display:none}.sl .masthead-name{position:static;width:auto;height:auto;clip-path:none;margin:0;color:#231620}.sl .cover .stage .tagline{color:#231620}}
+
+/* Aftershock: the interactive atlas and the evidence instruments. */
+.sl #figures{border-top:1px solid #bc84614a}
+.sl .atlas{display:grid;grid-template-columns:minmax(0,2fr) minmax(230px,.8fr);border:1px solid #a76b4f88;margin-top:1.35rem;background:#18100ecb;box-shadow:0 20px 55px #0a05055c}
+.sl .atlas-display{min-width:0;position:relative;background:radial-gradient(ellipse at 51% 53%,#713b2743,transparent 63%),linear-gradient(#25161366,#0c0809b3);border-inline-end:1px solid #ad795055}
+.sl #atlas-graph{width:100%;height:clamp(345px,39vw,510px);display:block;overflow:hidden;touch-action:none;cursor:grab}
+.sl #atlas-graph:active{cursor:grabbing}
+.sl .atlas-orbit{fill:none;stroke:#c3906560;stroke-width:1;vector-effect:non-scaling-stroke}
+.sl .atlas-stem{stroke-dasharray:2 5;stroke-width:1.15}
+.sl .atlas-node-label{font-family:var(--sans);font-size:13px;stroke:#190e09;stroke-width:3px;paint-order:stroke;font-weight:760;user-select:none}
+.sl .atlas-level-0{font-size:14px}.sl .atlas-level-2{font-size:11px}
+.sl [data-atlas-node]:not([data-atlas-node=""]){cursor:pointer}
+.sl .atlas-guide,.sl .atlas-tools{padding-inline:clamp(12px,2vw,25px)}
+.sl .atlas-guide{color:#d8bba7;font-size:.76rem;margin-top:-.5rem;min-height:1.6rem;position:relative}
+.sl .atlas-tools{display:grid;grid-template-columns:max-content minmax(40px,1fr) max-content;gap:12px;padding-block:12px 16px;align-items:center;color:#f2d9bf;font-size:.76rem;font-weight:750}
+.sl .atlas-tools input{width:100%;accent-color:#fdab74}
+.sl :is(.atlas-tools button,.atlas-branches button){color:#ffead1;padding:7px 10px;text-align:start;border:1px solid #bb896072;background:#3a241977;border-radius:2px}
+.sl .atlas-key{padding:clamp(16px,3vw,40px);color:#f1ddcc}
+.sl .atlas-key>.meta{color:#f3b892}
+.sl .atlas-branches{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0 22px}
+.sl .atlas-branches button[aria-pressed="true"]{background:#f7ba91;color:#321b13}
+.sl #atlas-readout h3{font-size:clamp(1.1rem,2.4vw,1.7rem);margin:0 0 6px;color:#ffe8cf}
+.sl #atlas-readout p,.sl .atlas-note{color:#e5cbb8;line-height:1.58;font-size:.86rem}
+.sl #atlas-readout a,.sl .atlas-note a,.sl .evidence-plot a{color:#ffbc94;text-decoration:underline;text-underline-offset:2px}
+.sl #atlas-readout a{display:inline-block;margin-top:9px;font-size:.76rem}
+.sl .atlas-note{border-top:1px solid #c7906473;margin-top:24px;padding-top:14px;font-size:.73rem}
+.sl .evidence-plots{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px;margin-top:1.35rem}
+.sl .evidence-plot{min-width:0;margin:0;padding:clamp(14px,2vw,24px);min-height:300px;display:flex;flex-direction:column;background:linear-gradient(144deg,#2b1c15ef,#14100fef);border:1px solid #956e4e70;border-top:2px solid #ed9c71}
+.sl .evidence-plot h3{margin:8px 0 10px;color:#fff0d9;line-height:1.15;font-size:clamp(1.16rem,1.75vw,1.68rem)}
+.sl .plot-index{color:#f2b895;font:680 .64rem var(--mono);letter-spacing:.08em}
+.sl .evidence-plot figcaption{font-size:.73rem;color:#dfc5b1;line-height:1.53;margin-top:auto;padding-top:9px}
+.sl .energy-plot svg{width:100%;height:auto;min-height:140px}
+.sl .plot-grid{stroke:#98765e70;stroke-width:1;fill:none}
+.sl .plot-history,.sl .plot-estimate{stroke:#ffae7c;stroke-width:2.5;fill:none}
+.sl .plot-estimate{stroke:#f9d58b;stroke-dasharray:6 5}
+.sl .plot-area{fill:#ff8c592c}.sl .plot-dots{fill:#ffd4af}.sl :is(.plot-values,.plot-axis){fill:#f4d3bc;font:700 13px var(--mono)}
+.sl .plot-axis{font-size:11px}
+.sl .compare-bars{display:grid;gap:14px;margin-block:20px;color:#f0d5bf;font-size:.77rem}
+.sl .compare-bars>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 6px;align-items:baseline}
+.sl .compare-bars strong{color:#ffbd97;font:800 .95rem var(--mono)}
+.sl .compare-bars b{display:block;position:relative;grid-column:1/-1;width:100%;height:8px;background:#594331}
+.sl .compare-bars b::before{content:"";display:block;width:var(--bar);height:100%;background:#f7ab73}
+.sl .compare-bars>div:nth-child(2) b::before{background:#f5d783}
+.sl .compare-bars>.compare-scale{display:flex;justify-content:space-between;color:#e0bea8;font:600 .64rem var(--mono);margin-top:-7px}
+.sl .archive-center{display:grid;grid-template-columns:auto minmax(85px,1fr);align-items:center;gap:10px;margin:14px 0}
+.sl #atlas-donut{width:clamp(72px,8vw,119px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:#433323;color:#fff0da}
+.sl #atlas-total{width:76%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:#1d130f;font:800 1.16rem var(--mono)}
+.sl #atlas-counts{padding:0;margin:0;display:grid;gap:6px;list-style:none;color:#f2d7c3;font-size:.72rem}
+.sl #atlas-counts li{display:grid;grid-template-columns:7px minmax(0,1fr) auto;gap:5px;align-items:center}
+.sl #atlas-counts i{width:6px;height:6px;border-radius:50%}
+@media(max-width:960px){.sl .evidence-plots{grid-template-columns:1fr 1fr}.sl .energy-plot{grid-column:1/-1}.sl .energy-plot svg{max-height:240px}}
+@media(max-width:760px){
+ .sl .atlas{grid-template-columns:minmax(0,1fr)}
+ .sl .atlas-display{border-inline-end:0;border-bottom:1px solid #ad795055}
+ .sl #atlas-graph{height:clamp(295px,77vw,390px)}
+ .sl .atlas-guide{font-size:.68rem}
+ .sl .atlas-tools{gap:7px}.sl .atlas-tools button{padding:6px 7px}
+ .sl .evidence-plots{grid-template-columns:minmax(0,1fr)}
+ .sl .evidence-plot{min-height:0}.sl .energy-plot{grid-column:auto}
+ .sl .archive-center{grid-template-columns:90px minmax(0,1fr)}.sl #atlas-donut{width:84px}
+ .sl .bar nav{gap:clamp(7px,2vw,14px);justify-content:space-between}
+ .sl .bar nav .desk-tab::before{margin-right:4px}
+}
+@media print{
+ .sl .atlas,.sl .atlas-display,.sl .atlas-key,.sl .evidence-plot{background:#fff;color:#231711;box-shadow:none}
+ .sl :is(.atlas-guide,.atlas-tools,.atlas-key p,.evidence-plot figcaption,.evidence-plot h3,#atlas-readout h3,#atlas-counts){color:#231711}
+ .sl .atlas-node-label{fill:#231711;stroke:#fff}
+}
