@@ -744,6 +744,31 @@
           "zh": "Meta 2026 年三季度财报及现金流调节表"
         }
       }
+    },
+    {
+      "id": "medical-image-qa-repeatable-errors",
+      "date": "2026-11-24",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "In medical image tests, models can repeat the same wrong answer",
+        "zh": "医学影像判断题测试中，模型可能反复给出同一错答"
+      },
+      "summary": {
+        "en": "The authors report that even when they removed or mismatched a patient’s visual evidence, models could repeatedly give the same incorrect yes/no answer with high confidence.",
+        "zh": "论文作者报告，即使移除患者的影像证据，或换上与患者不匹配的影像，模型仍可能以高置信度反复给出同一个错误的是非判断。"
+      },
+      "takeaway": {
+        "en": "On these yes/no tests, agreement across repeated answers is not enough to show that the answer is correct or grounded in the patient’s image.",
+        "zh": "在这类判断题中，多次作答一致，并不足以说明答案正确，也不能证明模型依据的是该患者的影像。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.29592",
+        "label": {
+          "en": "arXiv cs.AI",
+          "zh": "arXiv 人工智能"
+        }
+      }
     }
   ]
 }
