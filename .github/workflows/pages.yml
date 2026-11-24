@@ -24,7 +24,7 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir _site
-          cp index.html style.css script.js news.json factchecks.json _site/
+          cp index.html style.css script.js news.json _site/
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:

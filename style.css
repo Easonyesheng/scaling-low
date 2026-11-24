@@ -123,3 +123,76 @@ html.sl{--ink:#14223c;--paper:#eff3f9;--dim:#4d5d73;--rule:#bdcadd;--lav:#e5edf7
 .sl #factcheck-list>article:first-child .sources a{color:#bde0ff}
 .sl #factcheck-list>article:first-child .sources a:hover{color:#ffc55c}
 .sl #factcheck-list :target{outline:3px solid #2b75f0;outline-offset:4px}
+/* One signal sweep, one timeline. Works with the existing bilingual markup. */
+html.sl{--signal-board:#0d1933;--signal-ice:#a9d7ff;--signal-mark:#ffc55c;--signal-line:#2871c7}
+.sl .cover{isolation:isolate;position:relative;overflow:hidden;background:radial-gradient(ellipse at 79% 56%,#244575 0%,#152d52 43%,var(--signal-board) 76%);color:#f3f8ff}
+.sl .cover::before{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;background-image:linear-gradient(#92c0ff1a 1px,transparent 1px),linear-gradient(90deg,#92c0ff1a 1px,transparent 1px);background-size:30px 30px;mask-image:linear-gradient(105deg,transparent 20%,#000 75%)}
+.sl .cover::after{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;background:linear-gradient(102deg,transparent 42%,#9ed8ff26 51%,#b6eaff80 52%,transparent 54%);opacity:0}
+.sl .cover>.wrap{position:relative}
+.sl .cover .folio,.sl .cover .coverfoot{border-color:#99c9ff4d;color:#cadcf9}
+.sl .cover .meta i{background:var(--signal-mark);box-shadow:0 0 12px #ffc55c72}
+.sl .cover .stage{padding-block:clamp(2rem,5vw,4.25rem)}
+.sl .cover .stage .plate{max-width:none}
+.sl .cover .plate svg g[stroke]{stroke:var(--signal-ice)}
+.sl .cover .plate svg>path[stroke]{stroke:var(--signal-mark)}
+.sl .cover .stage h1 em{color:var(--signal-ice);text-shadow:0 0 36px #418fff4d}
+.sl .cover .stage .tagline{color:#e4f0ff}
+.sl .cover .checkpoint{position:relative;border:1px solid #8ebaff64;border-radius:11px;padding:clamp(14px,2.5vw,30px);background:linear-gradient(130deg,#111e3eea,#1b3463bf);box-shadow:0 20px 64px #0711267a,inset 0 1px #c5e7ff29}
+.sl .cover .checkpoint::after{content:"";position:absolute;pointer-events:none;right:13px;top:13px;width:12px;height:12px;border-top:1px solid var(--signal-mark);border-right:1px solid var(--signal-mark)}
+.sl .cover .checkpoint .meta{color:var(--signal-mark)}
+.sl .cover .checkpoint p{color:#d3e5ff}
+.sl .cover #clock{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-block:15px 12px}
+.sl .cover #clock>div{min-width:0;display:grid;justify-items:center;text-align:center;padding:8px 3px;background:#89baff17;border:1px solid #a3ccff25;border-top-color:#a3ccff68;border-radius:4px;font-size:clamp(.49rem,1vw,.72rem);letter-spacing:.02em;color:#dcecff}
+.sl .cover #clock strong{min-width:0;font-size:clamp(1.6rem,4.4vw,4.45rem);letter-spacing:-.09em;color:#fff;font-variant-numeric:tabular-nums}
+@keyframes sl-cover-sweep{0%{transform:translateX(-72%);opacity:0}17%{opacity:.60}72%{opacity:.40}100%{transform:translateX(70%);opacity:0}}
+@keyframes sl-digit-tick{0%{transform:translateY(3px);opacity:.48}100%{transform:translateY(0);opacity:1}}
+@media(prefers-reduced-motion:no-preference){
+ .sl .cover::after{animation:sl-cover-sweep 1.3s cubic-bezier(.25,.45,.35,1) .06s 1 both}
+ .sl .cover #clock strong.digit-tick{animation:sl-digit-tick .22s ease-out 1}
+ /* The sweep is the only opening flourish, even with earlier cover styles. */
+ .sl .cover .stage .trace{animation:none}
+}
+
+.sl #news .feedhead{border-color:#29446e}
+.sl #news .filters{background:#e5edf9;border:1px solid #c2d2ea;border-radius:8px;padding:3px}
+.sl #news .filters button{border-radius:5px}
+.sl #news-list{--rail-x:14px;position:relative;display:grid;gap:10px;padding-inline-start:calc(var(--rail-x) + 16px)}
+.sl #news-list::before{content:"";position:absolute;inset-block:1.45rem .5rem;inset-inline-start:var(--rail-x);width:1px;background:linear-gradient(#4b79bc,#9cb1d0 86%,transparent);pointer-events:none}
+.sl #news-list .note{position:relative;min-width:0;grid-template-columns:minmax(120px,19%) minmax(0,1fr);gap:clamp(12px,2vw,26px);border:1px solid #bfcde0;border-radius:7px;background:#f9fbff;padding:clamp(14px,2.2vw,27px);overflow-wrap:anywhere}
+.sl #news-list .note::before{content:"";position:absolute;left:-21px;top:clamp(1.22rem,2.45vw,2.03rem);width:9px;height:9px;border-radius:50%;background:#f9fbff;border:2px solid #4f79b7}
+.sl #news-list .note .dateline{min-width:0}
+.sl #news-list .note h3{font-weight:800}
+.sl #news-list .note.is-check{border-inline-start:3px solid var(--signal-line);background:linear-gradient(115deg,#ecf4ff,#f9fbff 63%)}
+.sl #news-list .note.is-check::before{background:#2871c7;border-color:#225b9d;left:-23px}
+.sl #news-list .note :is(.fact-verdict,.check-verdict,.verdict){display:inline-block;align-self:start;width:fit-content;max-width:100%;padding:3px 7px;border-radius:4px;background:#d9eaff;color:#164986;font:750 .75rem/1.4 var(--sans)}
+.sl #news-list .note :is(.fact-metric,.check-metric,.metric){font-variant-numeric:tabular-nums;font-weight:800;color:#164986}
+.sl #news-list .note details{margin-top:10px;border-top:1px solid #c4d2e6;padding-top:8px}
+.sl #news-list .note details summary{cursor:pointer;color:#173b6c;font-weight:750}
+.sl #news-list .note details[open] summary{margin-bottom:9px}
+
+@media(max-width:740px){
+ .sl .cover #clock strong{font-size:clamp(1.55rem,7vw,3rem)}
+ .sl #news-list{--rail-x:6px;padding-inline-start:calc(var(--rail-x) + 13px)}
+ .sl #news-list .note{grid-template-columns:minmax(0,1fr);gap:8px}
+ .sl #news-list .note .dateline{flex-wrap:wrap;gap:4px 12px;padding-top:0}
+ .sl #news-list .note::before{left:-18px;top:1.15rem}
+ .sl #news-list .note.is-check::before{left:-20px}
+}
+@media print{
+ .sl .cover,.sl .cover .checkpoint{color:#14223c;background:white;box-shadow:none}
+ .sl .cover::before,.sl .cover::after{display:none}
+ .sl .cover .stage :is(em,.tagline),.sl .cover .checkpoint :is(.meta,p),.sl .cover #clock :is(div,strong){color:#14223c;text-shadow:none}
+ .sl #news-list .note{background:white;break-inside:avoid}
+}
+
+.sl .cover .clock-method{margin-top:9px;padding-top:9px;border-top:1px solid #a3ccff38;color:#d5e8ff;font-size:.83rem;line-height:1.48}
+.sl .clock-method summary{cursor:pointer;font-weight:750;color:#c4e1ff}
+.sl .clock-method p{margin:.65rem 0 .4rem}
+.sl .clock-method ol{margin:.5rem 0;padding-inline-start:1.25rem}
+.sl .clock-method li+li{margin-top:.25rem}
+.sl .clock-method .clock-sources{display:flex;flex-wrap:wrap;gap:10px}
+.sl .clock-method .clock-sources a{color:#c4e1ff}
+.sl #news-list .check-meta{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:.45rem}
+.sl #news-list .fact-claim{margin-top:.45rem;color:#4a607e}
+.sl #news-list .note:target{outline:2px solid #2574db;outline-offset:3px;scroll-margin-top:1rem}
+.sl #news-list .sources{display:flex;flex-wrap:wrap;gap:6px 14px}
