@@ -3,9 +3,10 @@
 
   const root = document.documentElement;
   const storageKey = 'scaling-low-lang';
-  let language = 'en';
+  let language = /^zh\b/i.test(navigator.language) ? 'zh' : 'en';
   try {
-    if (localStorage.getItem(storageKey) === 'zh') language = 'zh';
+    const saved = localStorage.getItem(storageKey);
+    if (saved === 'zh' || saved === 'en') language = saved;
   } catch { /* The in-page switch still works without storage. */ }
 
   // This script runs in the head, before either language is painted.
@@ -101,6 +102,79 @@
     let entries = [], state = 'loading', topic = 'all';
     const tr = (en, zh) => language === 'zh' ? zh : en;
     const kinds = {report:'报告', proposal:'提案', research:'研究', company:'企业披露'};
+    const factList = document.getElementById('factcheck-list');
+    let factEntries = [], factState = 'loading';
+    const verdicts = {scope:['Scope check','限定范围'], unsupported:['Not established','证据未到'], verified:['Verified with context','确认及补充']};
+    function factNode(parent, tag, value = '', cls = '') {
+      const el = document.createElement(tag);
+      if (cls) el.className = cls;
+      el.textContent = value;
+      parent.append(el);
+      return el;
+    }
+    function renderFacts() {
+      if (!factList) return;
+      const open = new Set([...factList.querySelectorAll('details[open]')].map(el => el.parentElement.id));
+      factList.replaceChildren();
+      if (factState !== 'ready') {
+        factNode(factList, 'p', factState === 'loading' ? tr('Loading evidence…','正在加载证据…') : tr('Evidence desk is temporarily unavailable.','暂时无法读取拆条档案。')).setAttribute('role','status');
+        return;
+      }
+      for (const e of factEntries) {
+        const card = factNode(factList,'article','','fact-card');
+        card.id = 'case-' + e.id;
+        const meta = factNode(card,'div','','fact-meta');
+        factNode(meta,'time',e.date).dateTime = e.date;
+        factNode(meta,'span',tr(...verdicts[e.verdict]),'fact-verdict');
+        if (typeof e.metric === 'string' && e.metric) factNode(card,'div',e.metric,'fact-metric');
+        factNode(card,'h3',e.title[language]);
+        factNode(card,'p',tr('The headline: ','标题怎么说：') + e.claim[language],'fact-claim');
+        factNode(card,'p',e.evidence[language],'fact-evidence');
+        const details = factNode(card,'details');
+        details.open = open.has(card.id) || location.hash === '#' + card.id;
+        factNode(details,'summary',tr('Read our take & sources','展开解读与信源'));
+        factNode(details,'p',e.takeaway[language]);
+        const links = factNode(details,'div','','sources');
+        for (const source of [e.coverage,...e.sources]) {
+          factNode(links,'a',source.label[language]).href = source.url;
+        }
+        factNode(links,'a',tr('Link to this case','本条链接')).href = '#' + card.id;
+      }
+    }
+    async function loadFacts() {
+      if (!factList) return;
+      try {
+        const r = await fetch('./factchecks.json',{mode:'same-origin',cache:'no-cache'});
+        if (!r.ok) throw Error();
+        const data = await r.json();
+        if (data.schemaVersion !== 1 || !Array.isArray(data.entries)) throw Error();
+        const pair = p => p && ['en','zh'].every(k => typeof p[k] === 'string' && p[k].trim());
+        const link = l => {
+          try {
+            const u = new URL(l.url);
+            return pair(l.label) && u.protocol === 'https:' && !u.username && !u.password;
+          } catch { return false; }
+        };
+        const seen = new Set();
+        factEntries = data.entries.filter(e => {
+          if (!e || typeof e.id !== 'string' || !/^[a-z0-9-]{1,80}$/.test(e.id) || seen.has(e.id) ||
+              !/^\d{4}-\d{2}-\d{2}$/.test(e.date) || !Object.hasOwn(verdicts,e.verdict) ||
+              ![e.title,e.claim,e.evidence,e.takeaway].every(pair) || !link(e.coverage) ||
+              !Array.isArray(e.sources) || !e.sources.length || !e.sources.every(link)) return false;
+          seen.add(e.id);
+          return true;
+        }).sort((a,b) => b.date.localeCompare(a.date));
+        factState = factEntries.length ? 'ready' : 'error';
+      } catch { factState = 'error'; }
+      renderFacts();
+      if (location.hash.startsWith('#case-')) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+    }
+    window.addEventListener('hashchange', () => {
+      if (location.hash.startsWith('#case-')) {
+        const detail = document.getElementById(location.hash.slice(1))?.querySelector('details');
+        if (detail) detail.open = true;
+      }
+    });
     function render() {
       list.replaceChildren();
       const visible = entries.filter(e => topic === 'all' || e.topic === topic);
@@ -168,11 +242,12 @@
     function applyLanguage() {
       root.lang = language === 'zh' ? 'zh-Hans' : 'en';
       document.title = language === 'zh'
-        ? 'Scaling Low — 损失降了，账单可没降。'
-        : 'Scaling Low — The loss goes down. The bill doesn’t.';
+        ? 'Scaling Low | AI 风险与叙事核查'
+        : 'Scaling Low | AI risk and claim checks';
       buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === language)));
       labels.forEach(element => element.setAttribute('aria-label', element.getAttribute(`data-${language}-label`)));
       render();
+      renderFacts();
       readout();
     }
 
@@ -186,5 +261,6 @@
     filters.forEach(button => button.addEventListener('click', () => { topic = button.dataset.filter; render(); }));
     applyLanguage();
     load();
+    loadFacts();
   }, { once: true });
 })();

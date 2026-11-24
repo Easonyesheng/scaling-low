@@ -42,3 +42,84 @@ html.sl[lang=zh-Hans] :is(h1,h2,h3,h4){letter-spacing:-.035em;line-height:1.2}ht
 @media(max-width:480px){.sl #clock{grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}.sl #clock strong{font-size:2.9rem}.sl .stage .plate{width:100%;height:66%}}
 .sl .riskgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1.4rem;margin-top:1.6rem}.sl .riskgrid article{padding:1rem;border-top:2px solid var(--ink);background:var(--lav)}
 .sl .riskgrid h3,.sl .note h3{font:400 clamp(1.45rem,2.4vw,2rem)/1.2 var(--serif);margin:.35em 0}.sl #news-status{margin:1rem 0;color:var(--dim);font-size:.85rem}.sl .bar nav,.sl .folio{flex-wrap:wrap}.sl .labgrid>*{min-width:0}.sl .coverfoot{font-size:.79rem}.sl .coverbody .tagline{color:white;font:italic 1.4rem/1.3 var(--serif)}
+
+/* Counterfeed: split-screen signal monitor, then a light, source-first reading desk. */
+html.sl{--ink:#14223c;--paper:#eff3f9;--dim:#4d5d73;--rule:#bdcadd;--lav:#e5edf7;--accent:#1b55a4;--light:#ffc55c;--board:#0d1731;--ice:#add8ff;--electric:#3479ff;--sans:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.sl .wrap{width:min(1320px,calc(100% - clamp(28px,7vw,120px)))}
+.sl .bar{min-height:66px}
+.sl .brand,.sl .bar nav,.sl .stage h1,.sl .desk-head h2{font-family:var(--sans)}
+.sl .brand{font-weight:850}
+.sl .brand b{border-radius:7px;background:#172d52;color:#d7f5ff}
+.sl .bar nav a{min-height:40px}
+.sl .bar nav .desk-tab{color:#184e99}
+.sl .bar nav .desk-tab:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#2774dc;vertical-align:2px;margin-right:7px}
+.sl .switch{border-radius:8px;overflow:hidden}
+.sl :focus-visible{outline-color:#397eee}
+.sl .cover{position:relative;background:radial-gradient(ellipse at 76% 55%,#223f78 0%,#13264b 37%,var(--board) 73%);color:#f3f7ff}
+.sl .cover::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(#8db6ff19 1px,transparent 1px),linear-gradient(90deg,#8db6ff19 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(110deg,transparent 20%,#000 84%);opacity:.6}
+.sl .cover>.wrap{position:relative}
+.sl .folio{padding:16px 0;border-bottom:1px solid #7da2ed3d;color:#c4d9fb}
+.sl .cover .meta i{width:7px;height:7px;border-radius:100%;background:#ffc55c;box-shadow:0 0 12px #ffc55c72}
+.sl .stage{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:center;gap:clamp(18px,5vw,82px);min-height:clamp(350px,41vw,520px);padding-block:clamp(42px,6vw,80px);overflow:visible}
+.sl .stage .plate{inset:0 10% 0 auto;width:68%;opacity:.5;mask-image:linear-gradient(90deg,transparent,#000 52%,#0004)}
+.sl .stage .trace{animation:sl-signal 1.45s ease-out both}
+@keyframes sl-signal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.sl .stage h1,html.sl[lang=zh-Hans] .stage h1{font-size:clamp(3.3rem,8.7vw,8.7rem);line-height:.88;letter-spacing:-.095em;font-weight:900;word-spacing:.08em}
+.sl .stage h1 em{color:#a4d4ff;font-style:normal;font-weight:900;text-shadow:0 0 36px #418fff4d}
+.sl .stage .tagline{font:680 clamp(1.2rem,2vw,1.65rem)/1.35 var(--sans);color:#edf6ff;margin-top:22px}
+.sl .cover-brief{color:#c5d8f3;margin-top:8px;max-width:36ch}
+.sl .checkpoint{margin:0;position:relative;border:1px solid #88b7ff67;border-radius:10px;padding:clamp(14px,3vw,35px);background:linear-gradient(140deg,#111e3de8,#12244cbf);box-shadow:0 22px 75px #08102385,inset 0 1px #c3e2ff29}
+.sl .checkpoint::after{content:"";position:absolute;right:15px;top:15px;width:12px;height:12px;border-top:1px solid var(--light);border-right:1px solid var(--light)}
+.sl .checkpoint h2{font:750 clamp(1.05rem,2vw,1.8rem)/1.2 var(--sans);letter-spacing:-.03em}
+.sl #clock{max-width:none;gap:5px;margin:16px 0 13px}
+.sl #clock>div{background:#7eabf01d;border-top:1px solid #abcfff60;border-radius:3px;padding:8px 5px;text-align:center;font-size:clamp(.49rem,1vw,.69rem);letter-spacing:.025em;color:#d4e7ff}
+.sl #clock strong{font-size:clamp(1.65rem,4vw,4.25rem);color:white;letter-spacing:-.09em}
+.sl .checkpoint p{color:#c5d7f3}
+.sl .coverfoot{border-top-color:#7da2ed3d;padding:13px 0 20px;color:#c2d6f9}
+.sl .coverfoot a:hover{color:#ffc55c}
+.sl .cover-link{display:inline-flex;align-items:center;gap:10px;border-radius:7px;border:1px solid #78a9ff80;background:#325caa56;color:white;padding:9px 14px;font-weight:750;text-decoration:none}
+.sl .cover-link [aria-hidden]{color:#ffc55c}
+.sl .evidence-desk{padding-block:clamp(37px,5.5vw,77px);background:linear-gradient(140deg,#deeaff,#eef4fb 70%);border-bottom:1px solid var(--rule)}
+.sl .desk-head{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;align-items:end;padding:0 0 21px;border-bottom:2px solid #213d69;margin-bottom:19px}
+.sl .desk-head h2{font-size:clamp(2.4rem,5.6vw,5.8rem);letter-spacing:-.074em;line-height:.97;font-weight:900;margin-top:12px}
+.sl .desk-head p{color:#3d5374;line-height:1.55;max-width:37ch;margin-bottom:4px}
+.sl .desk-label{color:#1b55a4;font-size:.85rem;font-weight:800;display:flex;align-items:center;gap:8px}
+.sl .desk-label>span[aria-hidden]{width:15px;height:12px;background:#3479ff;clip-path:polygon(0 0,100% 0,64% 100%,0 100%)}
+.sl #factcheck-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.sl #factcheck-list>article{min-width:0;padding:clamp(16px,3vw,33px);background:#f7faff;border:1px solid #bfcde0;border-top:3px solid #3479ff;border-radius:6px;display:flex;align-items:start;flex-direction:column;gap:10px;overflow-wrap:anywhere}
+.sl #factcheck-list>article:first-child{grid-column:1/-1;background:linear-gradient(115deg,#132b51,#223c70);color:#f5f8ff;border-color:#497fd6}
+.sl #factcheck-list>article h3{font:800 clamp(1.18rem,2.7vw,2rem)/1.17 var(--sans);letter-spacing:-.04em}
+.sl #factcheck-list>article:first-child h3{font-size:clamp(1.48rem,3.6vw,3rem)}
+.sl #factcheck-list :is(.fact-meta,.fact-verdict){font:750 .78rem/1.4 var(--sans);color:#1a55a2}
+.sl #factcheck-list .fact-verdict{background:#d3e9ff;padding:4px 8px;border-radius:4px}
+.sl #factcheck-list>article:first-child :is(.fact-meta,.fact-claim,.fact-evidence){color:#d4e6ff}
+.sl #factcheck-list p{max-width:76ch}
+.sl #factcheck-list summary{cursor:pointer;font-weight:750}
+.sl #factcheck-list .sources{margin-top:2px}
+.sl #factcheck-list article:first-child a:hover{color:#ffc55c}
+.sl .section h2,.sl .opinion h2{font-family:var(--sans);font-weight:850;letter-spacing:-.065em}
+.sl .note{border-color:var(--rule)}
+.sl .note h3,.sl .riskgrid h3{font-family:var(--sans);font-weight:740}
+.sl .riskgrid article{border:1px solid var(--rule);border-top:3px solid #3479ff;border-radius:6px;background:#f8fbff}
+.sl .opinion,.sl .labgrid{background:#e2eaf7}
+@media(max-width:760px){
+.sl .bar nav{justify-content:space-between;gap:4px;font-size:.73rem}.sl .bar nav a{white-space:nowrap}
+.sl .stage{grid-template-columns:1fr;min-height:auto;gap:24px;padding-block:32px 22px}
+.sl .stage h1,html.sl[lang=zh-Hans] .stage h1{font-size:clamp(3.1rem,12.8vw,6.7rem)}
+.sl .stage .plate{top:3%;right:0;width:85%;height:76%;opacity:.4}
+.sl .stage .tagline{margin-top:13px}.sl .cover-brief{font-size:.88rem}
+.sl .desk-head{grid-template-columns:1fr;gap:12px}
+.sl #clock{grid-template-columns:repeat(4,minmax(0,1fr))}
+.sl #clock strong{font-size:clamp(1.62rem,7vw,3.1rem)}
+}
+@media(max-width:540px){.sl #factcheck-list{grid-template-columns:1fr}.sl .coverfoot p{font-size:.65rem}}
+@media(prefers-reduced-motion:reduce){.sl .stage .trace{animation:none}}
+@media print{.sl .cover,.sl .checkpoint,.sl #factcheck-list>article:first-child{background:white;color:var(--ink);box-shadow:none}.sl .cover::before,.sl .stage .plate{display:none}.sl #clock strong,.sl #clock>div,.sl .cover-brief,.sl .stage h1 em,.sl .stage .tagline,.sl #factcheck-list>article:first-child :is(.fact-meta,.fact-claim,.fact-evidence){color:var(--ink)}}
+
+
+.sl #factcheck-list .fact-meta{display:flex;flex-wrap:wrap;align-items:center;gap:9px}
+.sl #factcheck-list .fact-metric{font:850 clamp(1.25rem,4vw,2.45rem)/1.05 var(--sans);color:#1b54a5;letter-spacing:-.055em}
+.sl #factcheck-list>article:first-child .fact-metric{font-size:clamp(2.25rem,7vw,5.1rem);color:#ffcc72}
+.sl #factcheck-list>article:first-child .sources a{color:#bde0ff}
+.sl #factcheck-list>article:first-child .sources a:hover{color:#ffc55c}
+.sl #factcheck-list :target{outline:3px solid #2b75f0;outline-offset:4px}
