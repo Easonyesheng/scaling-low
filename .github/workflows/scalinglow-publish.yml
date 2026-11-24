@@ -2,8 +2,9 @@ name: Scaling Low scheduled DSH publishing
 
 'on':
   schedule:
-    # Avoid GitHub Actions' start-of-hour load. Asia/Shanghai: 03:17, 09:17, 15:17, 21:17.
-    - cron: '17 1,7,13,19 * * *'
+    # Use an explicit native timezone; retain the four existing local slots.
+    - cron: '17 3,9,15,21 * * *'
+      timezone: Asia/Shanghai
   workflow_dispatch:
   # This repair commit may launch one run; later pushes do not run DSH.
   push:
@@ -21,8 +22,8 @@ jobs:
     if: >-
       github.ref == 'refs/heads/main' && github.run_attempt == 1 &&
       (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
-       (github.event_name == 'push' && github.event.before == 'daf4ab783773bbebd1aeb208f6ceef3ec52eca79' &&
-        github.event.head_commit.message == 'Simplify the native schedule and run DSH once'))
+       (github.event_name == 'push' && github.event.before == '132fd8ea37278a84548a58cc18b46ce531aa4820' &&
+        github.event.head_commit.message == 'Align Scaling Low DSH with the editorial guide and run once'))
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     permissions:
@@ -33,6 +34,8 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
+      - name: Validate the editorial and publish contract without API calls
+        run: python3 -B .github/scalinglow/test_pipeline.py
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24'
@@ -67,7 +70,8 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: main
+          ref: ${{ github.sha }}
+          fetch-depth: 0
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: scalinglow-verified-${{ github.run_id }}
@@ -77,22 +81,44 @@ jobs:
           SOURCE_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-          if [[ "$(git rev-parse HEAD)" != "$SOURCE_SHA" ]]; then
-            echo "main advanced after generation; skipping instead of overwriting"
-            echo 'changed=no' >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          python3 .github/scalinglow/publish.py news.json "$RUNNER_TEMP/scalinglow-verified/scalinglow-candidates.json" "$GITHUB_OUTPUT"
-          if ! git diff --quiet -- news.json; then
-            git config user.name 'github-actions[bot]'
-            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add -- news.json
-            git diff --cached --check
-            test "$(git diff --cached --name-only)" = 'news.json'
-            git commit -m 'Publish source-verified DSH AI risk briefs'
-            git push origin HEAD:main
-            git rev-parse HEAD > "$RUNNER_TEMP/scalinglow-published-sha"
-          fi
+          publisher="$GITHUB_WORKSPACE/.github/scalinglow/publish.py"
+          payload="$RUNNER_TEMP/scalinglow-verified/scalinglow-candidates.json"
+          wt="$RUNNER_TEMP/scalinglow-live-main"
+          result="$RUNNER_TEMP/scalinglow-append-outputs"
+          for attempt in 1 2; do
+            git fetch --no-tags origin '+refs/heads/main:refs/remotes/origin/main'
+            base="$(git rev-parse refs/remotes/origin/main)"
+            if ! git merge-base --is-ancestor "$SOURCE_SHA" "$base"; then
+              echo '::error::Generation commit is no longer in main history.'
+              exit 1
+            fi
+            git worktree add --detach "$wt" "$base"
+            : > "$result"
+            python3 "$publisher" "$wt/news.json" "$payload" "$result"
+            if git -C "$wt" diff --quiet -- news.json; then
+              echo 'changed=no' >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            git -C "$wt" add -- news.json
+            git -C "$wt" diff --cached --check
+            test "$(git -C "$wt" diff --cached --name-only)" = 'news.json'
+            git -C "$wt" -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Publish source-verified DSH AI risk briefs'
+            if git -C "$wt" push origin HEAD:refs/heads/main; then
+              echo 'changed=yes' >> "$GITHUB_OUTPUT"
+              cat "$result" >> "$GITHUB_OUTPUT"
+              git -C "$wt" rev-parse HEAD > "$RUNNER_TEMP/scalinglow-published-sha"
+              exit 0
+            fi
+            git worktree remove "$wt"
+            git fetch --no-tags origin '+refs/heads/main:refs/remotes/origin/main'
+            if [[ "$(git rev-parse refs/remotes/origin/main)" == "$base" ]]; then
+              echo '::error::Push failed without a concurrent update; check branch permissions or transport.'
+              exit 1
+            fi
+            echo 'main advanced; rechecking duplicates without invoking DSH again.'
+          done
+          echo '::error::main advanced twice; no unsafe overwrite attempted.'
+          exit 1
       - name: Explicitly dispatch the existing GitHub Pages deployment
         if: steps.append.outputs.changed == 'yes'
         env:
@@ -100,9 +126,11 @@ jobs:
         run: gh workflow run pages.yml --repo "$GITHUB_REPOSITORY" --ref main
       - name: Confirm the live website contains the new article IDs
         if: steps.append.outputs.changed == 'yes'
+        env:
+          PUBLISHED_IDS: ${{ steps.append.outputs.published_ids }}
         run: |
           set -euo pipefail
-          want="$(jq -c '[.entries[].id]' "$RUNNER_TEMP/scalinglow-verified/scalinglow-candidates.json")"
+          want="$PUBLISHED_IDS"
           for i in {1..16}; do
             if curl -fsS --max-time 8 "https://scalinglow.com/news.json?run=${GITHUB_RUN_ID}-${i}" |
                 jq -e --argjson want "$want" '[.entries[].id] as $live | ($want - $live | length) == 0' >/dev/null; then

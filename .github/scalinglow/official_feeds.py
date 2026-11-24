@@ -36,8 +36,10 @@ def day(text):
 
 def parse(xml,label,today,canon):
     if re.search(br'<!\s*(?:doctype|entity)',xml,re.I):
-        return []
+        raise ValueError('unsafe_feed_format')
     tree=ET.fromstring(xml)
+    if name(tree.tag) not in {'rss','feed','rdf'}:
+        raise ValueError('not_a_feed')
     rows=[]
     for el in tree.iter():
         if name(el.tag) not in ('item','entry'):

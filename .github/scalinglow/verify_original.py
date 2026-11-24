@@ -48,7 +48,7 @@ def tokens(s):
     return {w for w in re.findall(r'[a-z][a-z0-9-]{3,}',normalized(s)) if w not in STOP}
 
 def good_scope(e):
-    return e['kind'] in {'report','research','company','policy'} and not BLOCK.search(
+    return e['kind'] in {'report','research','company','proposal'} and not BLOCK.search(
         ' '.join(e[k][l] for k in ('title','summary','takeaway') for l in ('en','zh')))
 
 def verified_text(e, quote, raw):
