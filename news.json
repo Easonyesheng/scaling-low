@@ -14,8 +14,8 @@
         "url": "https://ferc.gov/news-events/news/2026-2027-winter-energy-market-electric-reliability-assessment"
       },
       "title": {
-        "en": "North America’s 245 GW winter forecast is a peak, not a power bill",
-        "zh": "北美冬峰负荷预计增245吉瓦，不是全年用电量"
+        "en": "A 245 GW winter-peak warning for North America. This winter’s grid has a different outlook.",
+        "zh": "十年冬峰或增245吉瓦，北美今冬常态下却够用"
       },
       "summary": {
         "en": "FERC cites a NERC projection of roughly 245 GW in additional North American winter peak demand over the next decade, driven mostly by large loads, chiefly data centers. But the assessment expects enough resources this winter under normal conditions.",
@@ -39,8 +39,8 @@
         "url": "https://safeguards.anthropic.com/2026/automated-red-teaming/"
       },
       "title": {
-        "en": "Anthropic’s own stress tests found holes in its safeguards",
-        "zh": "Anthropic 自测找出了防护漏洞，漏检仍未知"
+        "en": "Anthropic found gaps in its own defenses. What did its tests miss?",
+        "zh": "Anthropic 自测抓到漏洞，没抓到的呢？"
       },
       "summary": {
         "en": "Anthropic says its automated stress tests uncovered weaknesses its safeguards did not catch. The disclosure describes what the developer found, not what an independent review would find.",
@@ -64,8 +64,8 @@
         "url": "https://www.consumerfinance.gov/about-us/newsroom/the-cfpb-is-correcting-flaws-to-restore-integrity-and-utility-to-the-consumer-complaint-system/"
       },
       "title": {
-        "en": "The CFPB flags AI in rising complaint volumes but cannot count its share from totals",
-        "zh": "美国消费者金融保护局点名AI，投诉增量却难归因"
+        "en": "Credit complaints surged. How much of the rise was AI?",
+        "zh": "美国征信投诉暴增，多少是AI替人提交的？"
       },
       "summary": {
         "en": "The CFPB lists AI tools acting on behalf of consumers alongside credit-repair firms and other intermediaries as possible contributors to complaint growth. The total alone does not separate these factors.",
@@ -89,8 +89,8 @@
         "url": "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026"
       },
       "title": {
-        "en": "The International AI Safety Report warns that test scores don’t travel",
-        "zh": "国际AI安全报告：上线前成绩难外推到现实"
+        "en": "The International AI Safety Report asks what a passing pre-launch score proves in the real world.",
+        "zh": "AI上线前过了关，安全报告为何不把它当通行证？"
       },
       "summary": {
         "en": "The 2026 report distinguishes misuse, malfunctions and systemic risks. It warns that pre-deployment evaluations cannot reliably predict real-world usefulness or risk: the setting is part of the result.",
@@ -114,8 +114,8 @@
         "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm"
       },
       "title": {
-        "en": "Anthropic’s IPO filing shows the $1.5 billion cost of a prior copyright settlement",
-        "zh": "Anthropic 招股书披露15亿美元版权和解旧账"
+        "en": "A $1.5 billion copyright bill in Anthropic’s IPO paperwork",
+        "zh": "翻开Anthropic招股书：一笔15亿美元的版权和解账"
       },
       "summary": {
         "en": "The prospectus says Anthropic booked the $1.5 billion Bartz settlement in 2025 and that a district court approved it in July 2026. The filing discloses an earlier settlement, not a new fine.",
@@ -132,8 +132,8 @@
       "topic": "governance",
       "kind": "research",
       "title": {
-        "en": "Schneider’s team asks who can control the AI risks they answer for",
-        "zh": "Schneider 团队追问：AI出了事，担责的人能管吗？"
+        "en": "If AI causes harm, can the person held responsible even intervene?",
+        "zh": "AI若出了事，担责的人连系统都管不了？"
       },
       "summary": {
         "en": "Lena Schneider and colleagues introduce ALIGN to identify gaps between who is expected to answer for high-risk AI use and who has meaningful control. Evaluating a governance method is not evidence that deployed systems became safer.",
@@ -157,8 +157,8 @@
       "topic": "governance",
       "kind": "company",
       "title": {
-        "en": "OpenAI raises the bar for release evidence. Does it catch more risk?",
-        "zh": "OpenAI 提高发布证据门槛，能多拦下多少风险？"
+        "en": "OpenAI wants more proof before launch. Who checks what slips through?",
+        "zh": "OpenAI 给发布加了一道门，谁来查漏网风险？"
       },
       "summary": {
         "en": "OpenAI says it now asks for stronger alignment evidence during training and written safety arguments before deployment. A higher bar on paper is not yet an independent measure of the risks it catches in practice.",
@@ -182,8 +182,8 @@
       "topic": "misuse",
       "kind": "research",
       "title": {
-        "en": "Amer’s team finds a limit to perfect AI guardrails, not a reason to scrap them",
-        "zh": "Amer 团队划出AI护栏上限，并非护栏无用"
+        "en": "Stop every bad answer, let every good one through: when AI guardrails cannot do both",
+        "zh": "坏答案全拦，好答案全放：AI护栏何时两难？"
       },
       "summary": {
         "en": "Ahmed Amer and colleagues examine when an output policy can be enforced without misses. Their result bounds what can be promised in general; it does not rule out useful safeguards for specific policies.",
@@ -207,8 +207,8 @@
       "topic": "governance",
       "kind": "research",
       "title": {
-        "en": "SplitBench separates the grader from the coding agent’s test environment",
-        "zh": "SplitBench 给编码智能体另设裁判，跑测试不等于打分"
+        "en": "What’s a coding-agent score worth if the grader isn’t independent?",
+        "zh": "裁判不独立，编码智能体的高分还值多少？"
       },
       "summary": {
         "en": "Researchers behind SplitBench argue that executing a coding agent’s submission and deciding its score should be separate jobs. Isolating the grader protects evaluation integrity, but it cannot fix every weakness in the original tests.",
@@ -232,8 +232,8 @@
       "topic": "infrastructure",
       "kind": "analysis",
       "title": {
-        "en": "DeepMind cut one fusion-model circuit’s cost 11.8-fold, on paper",
-        "zh": "DeepMind 将聚变模拟电路成本降至约1/12，完整电路未做硬件验证"
+        "en": "DeepMind cut a fusion circuit’s cost to about 1/12. When can hardware run it?",
+        "zh": "DeepMind聚变电路成本降到约1/12，离上机还有多远？"
       },
       "summary": {
         "en": "DeepMind reported an 11.8-fold reduction in a combined qubit-and-operation cost metric for one fusion-related calculation. Lean checked the mathematics; today’s hardware did not run the full circuit.",
@@ -281,8 +281,8 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "RDQA’s best generic agent scored 24% when the source had to check out",
-        "zh": "RDQA 通用智能体最高只得24%，分数还要算溯源"
+        "en": "On RDQA, generic agents topped out at 24%. A tailored system hit 41.1%.",
+        "zh": "RDQA通用智能体最高24%，专用方案冲到41.1%"
       },
       "summary": {
         "en": "On 1,350 source-dependent questions, RDQA’s best of 12 general-purpose configurations scored 24.0% after checking source use; a purpose-built baseline reached 41.1%. Missing a verified trace is not proof the model answered from memory.",
@@ -322,8 +322,8 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "Anthropic releases a Lean proof claim for VP≠VNP; P vs NP is untouched",
-        "zh": "Anthropic 公布VP≠VNP证明主张，P vs NP仍未解"
+        "en": "Anthropic puts forward a VP≠VNP proof. The million-dollar P vs NP problem is still open.",
+        "zh": "Anthropic公布VP≠VNP证明，百万美元的P vs NP还没解"
       },
       "summary": {
         "en": "Anthropic released an AI-authored paper and Lean formalization claiming VP and VNP differ over every field. The release says no human mathematician had checked the proof at publication; the claim concerns arithmetic circuits, not the Clay problem.",
@@ -371,8 +371,8 @@
       "topic": "governance",
       "kind": "analysis",
       "title": {
-        "en": "The US Genesis Mission counts 297 projects. How much faster is the science?",
-        "zh": "美国创世纪计划立项297个，项目数不等于科研提速"
+        "en": "America’s Genesis Mission selected 297 projects. Where’s the speedup?",
+        "zh": "美国创世纪计划立项297个，科研究竟快了多少？"
       },
       "summary": {
         "en": "The US Department of Energy reports 297 selected projects across 369 institutions. Doubling research productivity and impact is a decade-long goal, not a year-one result measured by this count.",
@@ -420,8 +420,8 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "Vals AI beat a shortest-path bound. The stopwatch is still waiting.",
-        "zh": "Vals AI 改进最短路复杂度，未公布大图实测"
+        "en": "Vals AI made shortest paths faster on paper. Where are the large-graph timings?",
+        "zh": "Vals AI压低最短路复杂度，大图实测呢？"
       },
       "summary": {
         "en": "In September, Vals AI reported a Lean-verified improvement for a particular range of graph densities, with no timing results on large graphs. Duan and colleagues had already beaten Dijkstra’s sparse directed-graph bound in 2025.",
@@ -469,8 +469,8 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "Anthropic changed Claude’s answers. That is not a test of consciousness.",
-        "zh": "Anthropic 能干预 Claude 的回答，但未证明主观体验"
+        "en": "Anthropic can change what Claude says. Did it prove Claude feels anything?",
+        "zh": "Anthropic动了Claude内部信号，能证明它有感受吗？"
       },
       "summary": {
         "en": "In July, Anthropic reported that altering certain internal signals changed Claude’s responses in controlled tests. The research describes a measurable function rather than evidence of subjective experience.",
@@ -510,8 +510,8 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "Astra helped prove a Goldbach-type result that does not require primes",
-        "zh": "Astra 参与证明哥德巴赫变体，两素数命题仍未解"
+        "en": "Astra helped prove a Goldbach variant whose summands can be composite. Even 8 qualifies.",
+        "zh": "Astra参与证明哥德巴赫变体，连合数8都能当加数"
       },
       "summary": {
         "en": "The Lean theorem from September expresses even numbers above two as sums of two integers with odd prime-factor counts, including multiplicity. Such integers need not be prime: eight is 2 × 2 × 2.",

@@ -2,15 +2,17 @@
 <html class="sl" lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#100d23"><title>Scaling Low | AI 风险与叙事核查</title><meta name="description" content="AI risk, claim checks, and the evidence behind the headlines.">
-<link rel="stylesheet" href="style.css?v=rupture-02"><script src="script.js?v=epic-01"></script>
+<meta name="theme-color" content="#100c11"><title>Scaling Low | AI 风险与叙事核查</title><meta name="description" content="AI risk, claim checks, and the evidence behind the headlines.">
+<link rel="stylesheet" href="style.css?v=abyss-03"><script src="script.js?v=abyss-01"></script>
 </head><body id="top">
+<canvas id="world-scene" aria-hidden="true"></canvas>
+<input id="signal-pause" type="checkbox" aria-label="Pause background motion" data-en-label="Pause background motion" data-zh-label="暂停背景动效">
+<label for="signal-pause" class="world-motion"><span class="world-pause"><span class="en">Pause motion</span><span class="zh" lang="zh-Hans">暂停动效</span></span><span class="world-resume"><span class="en">Resume motion</span><span class="zh" lang="zh-Hans">恢复动效</span></span></label>
 <a class="skip" href="#main"><span class="en">Skip to issue</span><span class="zh" lang="zh-Hans">跳到正文</span></a>
 <header class="bar wrap"><a class="brand" href="#top"><b aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 5l14 14m0-9v9h-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="round"/></svg></b> Scaling Low<span class="dot">.</span></a>
 <nav aria-label="Issue navigation" data-en-label="Issue navigation" data-zh-label="本期导航"><a href="#risks"><span class="en">Risk map</span><span class="zh" lang="zh-Hans">风险图谱</span></a><a class="desk-tab" href="#news"><span class="en">Risk feed</span><span class="zh" lang="zh-Hans">风险情报</span></a><a href="#lab"><span class="en">Simulator</span><span class="zh" lang="zh-Hans">模拟器</span></a></nav>
 <div class="switch enhanced" role="group" aria-label="Language" data-en-label="Language" data-zh-label="语言"><button data-lang="en" lang="en" aria-pressed="true">EN</button><button data-lang="zh" lang="zh-Hans" aria-pressed="false">中文</button></div></header>
 <main id="main"><section class="cover">
-<input class="signal-toggle" id="signal-pause" type="checkbox" aria-label="Pause scan" data-en-label="Pause scan" data-zh-label="暂停扫描">
 <svg class="hero-wave" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true" focusable="false">
 <defs>
 <linearGradient id="wave-ink"><stop offset="0" stop-color="#4f71f3" stop-opacity="0"/><stop offset=".28" stop-color="#777ffb"/><stop offset=".62" stop-color="#ba8cfd"/><stop offset=".67" stop-color="#ffe3a5"/><stop offset=".74" stop-color="#f77965"/><stop offset="1" stop-color="#845cef" stop-opacity=".14"/></linearGradient>
@@ -47,7 +49,7 @@
 <li><span class="en">Does NVIDIA report weaker data-center demand?</span><span class="zh" lang="zh-Hans">英伟达是否披露数据中心需求走弱？</span></li></ol>
 <div class="clock-sources"><a href="https://www.nvidia.com/gtc/events/">GTC</a><a href="https://abc.xyz/investor/events/event-details/2026/2026-Q3-Earnings-Call-2026-Ujou16CTw9/default.aspx">Alphabet</a><a href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Third-Quarter-Fiscal-2027/">NVIDIA</a></div></details>
 </section></div>
-<div class="coverfoot"><a class="cover-link" href="#news"><span class="en">Read the risk feed</span><span class="zh" lang="zh-Hans">进入情报流</span> <span aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 5l14 14m0-9v9h-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="round"/></svg></span></a><label for="signal-pause" class="signal-control"><span class="en" lang="en">Pause scan</span><span class="zh" lang="zh-Hans">暂停扫描</span></label><p><span class="en">Research · 2020</span><span class="zh" lang="zh-Hans">研究 · 2020</span>　/　<a href="https://arxiv.org/abs/2001.08361">Kaplan et al.</a></p></div></div></section>
+<div class="coverfoot"><a class="cover-link" href="#news"><span class="en">Read the risk feed</span><span class="zh" lang="zh-Hans">进入情报流</span> <span aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 5l14 14m0-9v9h-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="round"/></svg></span></a><p><span class="en">Research · 2020</span><span class="zh" lang="zh-Hans">研究 · 2020</span>　/　<a href="https://arxiv.org/abs/2001.08361">Kaplan et al.</a></p></div></div></section>
 <section class="wrap section" id="news"><span id="factchecks" aria-hidden="true"></span><div class="meta"><i></i>01 &nbsp;/&nbsp; <span class="en">Source notebook</span><span class="zh" lang="zh-Hans">原始资料笔记</span></div><h2><span class="en">AI risk feed</span><span class="zh" lang="zh-Hans">AI 风险情报流</span></h2>
 <div class="filters enhanced" role="group" aria-label="Filter news by topic" data-en-label="Filter news by topic" data-zh-label="按主题筛选简讯"><button data-filter="all" aria-pressed="true"><span class="en">All</span><span class="zh" lang="zh-Hans">全部</span></button>
 <button data-filter="checks" aria-pressed="false"><span class="en">Claim checks</span><span class="zh" lang="zh-Hans">标题核查</span></button>
