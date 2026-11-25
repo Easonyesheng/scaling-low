@@ -769,6 +769,31 @@
           "zh": "arXiv 人工智能"
         }
       }
+    },
+    {
+      "id": "ai-survey-personas-link-unrelated-opinions",
+      "date": "2026-11-24",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "In US survey tests, AI personas linked unrelated opinions more closely than people did",
+        "zh": "美国民调测试中，AI模拟受访者在无关议题上的立场关联更强"
+      },
+      "summary": {
+        "en": "The authors report that, when language models played survey respondents, party affiliation explained more of the variation in their answers than it did for human respondents.",
+        "zh": "作者报告称，与真人受访者相比，语言模型模拟的受访者之间，回答差异更大程度上可由党派认同解释。"
+      },
+      "takeaway": {
+        "en": "The authors found that asking for more diverse responses weakened the links between opinions, but did so by making answers more random.",
+        "zh": "作者发现，要求模型给出更多样的回答，虽然减弱了不同议题立场之间的关联，却是通过增加回答的随机性做到的。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.29805",
+        "label": {
+          "en": "arXiv cs.AI",
+          "zh": "arXiv 人工智能"
+        }
+      }
     }
   ]
 }
