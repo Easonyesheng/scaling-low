@@ -794,6 +794,56 @@
           "zh": "arXiv 人工智能"
         }
       }
+    },
+    {
+      "id": "qwen-vision-errors-in-answer-key",
+      "date": "2026-11-25",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "An audit of Qwen’s visual question answering finds errors in the answer key",
+        "zh": "人工复核 Qwen 看图问答错题，发现参考答案也有错"
+      },
+      "summary": {
+        "en": "The authors report that human reviewers found incorrect reference answers among questions Qwen3-VL-8B-Instruct was marked as answering incorrectly. The questions were generated from COCO and GQA.",
+        "zh": "作者报告，研究人员人工复核了 Qwen3-VL-8B-Instruct 被判答错的题目，发现部分参考答案有误。这些题目由 COCO 和 GQA 数据生成。"
+      },
+      "takeaway": {
+        "en": "Even on held-out questions, a correct answer need not show better image understanding: the authors found that classifiers could answer some pairs correctly from the wording alone.",
+        "zh": "即使模型在预留的测试题上答对了，也不一定说明它更会看图。作者发现，分类器只看题目措辞，就能把部分成对试题的两道题都答对。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.32982",
+        "label": {
+          "en": "arXiv cs.CL",
+          "zh": "arXiv 计算语言学"
+        }
+      }
+    },
+    {
+      "id": "secondchance-agent-error-recovery",
+      "date": "2026-11-25",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "SecondChance tests what AI agents do after a mistake",
+        "zh": "SecondChance 测试 AI 智能体出错后如何补救"
+      },
+      "summary": {
+        "en": "The authors introduce a benchmark that records mistakes agents made during tasks, then lets different agents resume from the same points to compare how they respond.",
+        "zh": "作者介绍了一项评测：先记录智能体执行任务时实际出现的错误，再让不同智能体从相同的出错节点继续任务，比较它们如何应对。"
+      },
+      "takeaway": {
+        "en": "As the authors note, scoring only whether a task was eventually completed does not tell the user whether the agent corrected an unnoticed error or disclosed it.",
+        "zh": "作者指出，只看任务最终是否完成，无法判断智能体有没有纠正先前未被察觉的错误，也看不出它是否告知了用户。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.31586",
+        "label": {
+          "en": "arXiv cs.CL",
+          "zh": "arXiv 计算语言学"
+        }
+      }
     }
   ]
 }
