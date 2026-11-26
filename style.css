@@ -609,3 +609,9 @@ html.sl{
 .sl .cover [data-bar="technical"]{background:#ff9b71}
 .sl .cover [data-bar="economic"]{background:#f0d2ba}
 .sl .cover #bubble-tracks p{margin:.25rem 0 .65rem}
+
+.sl .cover .bubble-formula{font-family:var(--mono);overflow-wrap:anywhere}
+.sl .cover .bubble-history-list{display:grid;gap:.75rem}
+.sl .cover .bubble-history-list li+li{margin-top:0}
+.sl .cover .bubble-history-list p{margin:.2rem 0}
+.sl .cover #bubble-history a{color:#f5d1bf}

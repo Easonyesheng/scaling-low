@@ -52,3 +52,5 @@ Add an object to `entries` in `news.json` using a unique `id`, ISO publication d
 ### Bubble countdown
 
 `bubble.json` is a separately reviewed editorial snapshot, not an output of the hourly DSH news job. The homepage calculates the single countdown from its two timezone-qualified track dates and integer weights (total 100), and falls back to the original checkpoint if the snapshot is unavailable. Follow [the analysis guide](prompts/BUBBLE_TIMING_ANALYSIS.md) when updating the observation points, the evidence and the snapshot date together.
+
+The clock always counts to the same UTC instant. The frontend formats dates in the visitor’s browser time zone, including historical records. For each approved change to the countdown, append the superseded snapshot (its `revision.changedAt`, `revision.note`, and both `tracks` with their weights and targets) to `history`, then update `revision` with the publication timestamp and a bilingual reason. Never rewrite past entries. The newest log entry is drawn from the active settings rather than copied.

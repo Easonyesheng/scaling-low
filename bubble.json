@@ -38,5 +38,50 @@
       },
       "url": "https://www.sec.gov/about/forms/form10-q.pdf"
     }
-  ]
+  ],
+  "history": [
+    {
+      "changedAt": "2026-11-20T09:50:46Z",
+      "target": "2027-12-31T15:59:59Z",
+      "note": {
+        "en": "Started with an end-of-2027 editorial scenario checkpoint.",
+        "zh": "首次设置倒计时：以 2027 年年末为情景观察点。"
+      },
+      "url": "https://github.com/Easonyesheng/scaling-low/commit/5c8e887beb69bb6b067746b34716c20f3da6b96e"
+    },
+    {
+      "changedAt": "2026-11-24T06:20:27Z",
+      "target": "2027-03-20T09:00:00+08:00",
+      "note": {
+        "en": "Moved to a checkpoint after NVIDIA GTC and the annual guidance cycle.",
+        "zh": "将观察点提前到英伟达 GTC 闭幕后，结合大厂年度指引复盘。"
+      },
+      "url": "https://github.com/Easonyesheng/scaling-low/commit/5b0a6fb42a0064e8faeb3d0d36f074d4799fa9b7"
+    },
+    {
+      "changedAt": "2026-11-26T08:24:52Z",
+      "tracks": {
+        "technical": {
+          "target": "2027-03-20T09:00:00+08:00",
+          "weight": 50
+        },
+        "economic": {
+          "target": "2027-05-15T09:00:00+08:00",
+          "weight": 50
+        }
+      },
+      "note": {
+        "en": "Replaced the fixed date with a 50/50 technical and economic weighted checkpoint.",
+        "zh": "从固定观察点改为技术面、经济面各占 50% 的加权观察点。"
+      },
+      "url": "https://github.com/Easonyesheng/scaling-low/commit/446be50c951f7bf3da8aa6236315a970c110cc9d"
+    }
+  ],
+  "revision": {
+    "changedAt": "2026-11-26T08:29:36Z",
+    "note": {
+      "en": "Published the calculation and revision history. Dates now use the browser’s time zone; the target instant did not change.",
+      "zh": "公开计算公式和变更历史，日期改按浏览器时区显示，目标时刻不变。"
+    }
+  }
 }
