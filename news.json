@@ -844,6 +844,31 @@
           "zh": "arXiv 计算语言学"
         }
       }
+    },
+    {
+      "id": "pathology-scanner-agreement",
+      "date": "2026-11-25",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "Researchers report that fine-tuning makes pathology predictions more consistent across scanners",
+        "zh": "研究发现：微调让病理模型在不同扫描仪上的预测更一致"
+      },
+      "summary": {
+        "en": "The authors report that fine-tuning narrowed differences between scanners when models predicted HPV status in head and neck cancer. Prostate cancer grades also agreed more often across scanners.",
+        "zh": "作者报告，微调后，模型使用不同扫描仪的图像预测头颈癌 HPV 状态时，结果差异缩小；对前列腺癌给出的分级也更一致。"
+      },
+      "takeaway": {
+        "en": "The reported gain is in reproducibility: it measures how closely predictions agree across scanners, rather than how often a diagnosis is correct.",
+        "zh": "这里衡量的是可重复性：不同扫描仪下的预测有多一致，而不是诊断有多准确。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.31536",
+        "label": {
+          "en": "arXiv cs.AI",
+          "zh": "arXiv 人工智能"
+        }
+      }
     }
   ]
 }
