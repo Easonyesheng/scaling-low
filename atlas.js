@@ -14,7 +14,7 @@
   ];
   const ns='http://www.w3.org/2000/svg';
   const panelButtons=[...document.querySelectorAll('button[data-risk]')];
-  let width=680,height=420,yaw=.32,pitch=.19,selected='misuse',pointer=null,news=null,archiveState="loading",archiveMode="count";
+  let width=680,height=420,yaw=.32,pitch=.19,selected='misuse',pointer=null,news=null,archiveState="loading",archiveMode="count",archiveWindow="all";
   const initial=65, clamp=(v, lo, hi)=>Math.max(lo,Math.min(hi,v));
   const L=(a)=>words(...a);
   const scene=document.createElementNS(ns,'g');svg.append(scene);
@@ -113,11 +113,31 @@
   slider.addEventListener('input',draw);
   document.getElementById('atlas-reset').addEventListener('click',()=>{yaw=.32;pitch=.19;slider.value=initial;draw();});
   const archiveChoices = [...document.querySelectorAll('button[data-archive-mode]')];
+  const windowChoices = [...document.querySelectorAll('button[data-archive-window]')];
+  function kpis(id, items) {
+    const host = document.getElementById(id);
+    host.replaceChildren(...items.map(([label,value])=>{
+      const wrap=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');
+      dt.textContent=label;dd.textContent=value;wrap.append(dt,dd);return wrap;
+    }));
+  }
+  const percent = (value, signed=false) => new Intl.NumberFormat(english()?'en-US':'zh-CN',{
+    style:'percent',maximumFractionDigits:1,signDisplay:signed?'always':'auto'
+  }).format(value);
+  const number = value => new Intl.NumberFormat(english()?'en-US':'zh-CN',{maximumFractionDigits:1}).format(value);
   function plotArchive(){
     const donut=document.getElementById('atlas-donut'),list=document.getElementById('atlas-counts');
     const status=document.getElementById('archive-status');
     const ready = archiveState === 'ready';
-    const total = ready ? news.length : 0;
+    const index = ready && Array.isArray(news) ? news : [];
+    const latest = index.reduce((date,e)=>e.date>date?e.date:date,'');
+    const firstMs=Date.parse(latest) - (Number(archiveWindow)-1)*86400000;
+    const visible = archiveWindow==='all' ? index : index.filter(e=>Date.parse(e.date)>=firstMs);
+    const total = visible.length;
+    windowChoices.forEach(button=>{
+      button.disabled=!ready;
+      button.setAttribute('aria-pressed', String(button.dataset.archiveWindow===archiveWindow));
+    });
     document.getElementById('atlas-total').textContent = ready ? String(total) : '—';
     archiveChoices.forEach(button => {
       button.disabled = !ready;
@@ -125,26 +145,41 @@
     });
     status.textContent = archiveState === 'loading' ? words('Loading the archive…','正在读取报道归档…') :
       !ready ? words('Archive data unavailable.','暂时无法读取报道归档。') :
-      words(`${total} articles. Select a topic to see its reports.`,`共 ${total} 篇。点主题可查看相关报道。`);
+      words(`${total} in view. Topic links open the full archive for that topic.`,`当前范围 ${total} 篇。点主题可查看该主题的全部报道。`);
     const legend=[], slices=[];
     let x=0;
-    const percent = new Intl.NumberFormat(english() ? 'en-US' : 'zh-CN',{style:'percent', maximumFractionDigits:1});
-    if (ready) for(const b of branches){
-      const n=news.filter(e=>e.topic===b.id).length,end=x+n/total*100;
+    const leaders=[];
+    if (total) for(const b of branches){
+      const n=visible.filter(e=>e.topic===b.id).length,end=x+n/total*100;
+      leaders.push([b,n]);
       if(n)slices.push(`${b.color} ${x}% ${end}%`);x=end;
       const row=document.createElement('li'), link=document.createElement(n ? 'a' : 'span');
       const dot=document.createElement('i'),label=document.createElement('span'),number=document.createElement('b');
       if(n)link.href='#topic-' + b.id;
       else link.className='archive-item';
       dot.style.background=b.color;label.textContent=L(b.name);
-      number.textContent=archiveMode==='count'?String(n):percent.format(n/total);
-      if(n)link.setAttribute('aria-label', words(`${L(b.name)}: ${n} articles (${percent.format(n/total)}). View reports.`,`${L(b.name)}：${n} 篇，占 ${percent.format(n/total)}。查看报道。`));
-      link.append(dot,label,number);row.append(link);legend.push(row);
+      number.textContent=archiveMode==='count'?String(n):percent(n/total);
+      if(n)link.setAttribute('aria-label', words(`${L(b.name)}: ${n} articles (${percent(n/total)}). View reports.`,`${L(b.name)}：${n} 篇，占 ${percent(n/total)}。查看报道。`));
+      const meter=document.createElement('small');
+      meter.setAttribute('aria-hidden','true');
+      meter.style.setProperty('--topic-share', percent(n/total));
+      meter.style.setProperty('--topic-ink', b.color);
+      link.append(dot,label,number,meter);row.append(link);legend.push(row);
     }
     donut.style.backgroundImage=slices.length?`conic-gradient(${slices.join(',')})`:'';
     list.replaceChildren(...legend);
+    const top=Math.max(0,...leaders.map(([,n])=>n));
+    const topTopics=leaders.filter(([,n])=>n===top).map(([b])=>L(b.name)).join(words(' / ','、'));
+    const first=archiveWindow==='all' ? index.reduce((d,e)=>!d||e.date<d?e.date:d,'') : latest ? new Date(firstMs).toISOString().slice(0,10) : '';
+    kpis('archive-kpis', ready&&latest ? [
+      [words('Coverage window','统计范围'),`${first.slice(5)} → ${latest.slice(5)}`],
+      [words('Most covered','报道最多'),topTopics||'—'],
+      [words('In view / archive','当前 / 总归档'),`${number(total)} / ${number(index.length)}`]
+    ] : []);
   }
   archiveChoices.forEach(b=>b.addEventListener('click',()=>{archiveMode=b.dataset.archiveMode;plotArchive();}));
+
+  windowChoices.forEach(b=>b.addEventListener('click',()=>{archiveWindow=b.dataset.archiveWindow;plotArchive();}));
 
   const years = [
     {year:2023,value:360,x:38,y:122},
@@ -167,17 +202,48 @@
       const change = new Intl.NumberFormat(english()?'en-US':'zh-CN',{style:'percent',signDisplay:'always', maximumFractionDigits:1}).format(item.value/prev.value-1);
       tail = words(` · ${change} vs ${prev.year}`,` · 较 ${prev.year} 年 ${change}`);
     }
+    const n = item.year - (prev?.year ?? item.year);
+    const annual = n ? percent((item.value/prev.value)**(1/n)-1,true) : '—';
+    kpis('energy-kpis', [
+      [words('Global use','全球用电量'),`${number(item.value)} TWh`],
+      [prev ? words(`vs ${prev.year}`,`较 ${prev.year} 年`) : words('First year shown','图中首年'),
+        prev ? `+${number(item.value-prev.value)} TWh` : '—'],
+      [item.scenario ? words('Implied annual growth','情景隐含年增速') : words('Year-on-year','同比'),
+        annual]
+    ]);
     document.getElementById('energy-readout').textContent = item.scenario ?
       words(`${item.value} TWh · 2030 base case`,`${item.value} 太瓦时 · 2030 年基准情景`) + tail :
       words(`${item.value} TWh · ${selectedYear} historical estimate`,`${item.value} 太瓦时 · ${selectedYear} 年历史估算`) + tail;
   }
   yearButtons.forEach(b=>b.addEventListener('click',()=>{selectedYear=Number(b.dataset.energy);showEnergy();}));
   function showBenchmark() {
-    const gap = benchmark === 'gap';
+    const gap = benchmark === 'gap', sample=benchmark==='sample';
+    const grid=document.getElementById('rdqa-grid');
+    grid.hidden=!sample;
+    if(sample) {
+      const sampleRow=(title,pct)=>{
+        const row=document.createElement('section'), label=document.createElement('h4'), cells=document.createElement('div');
+        label.textContent=`${title} · ${pct.toFixed(1)}%`;
+        cells.className='rdqa-cells';cells.setAttribute('aria-hidden','true');
+        for(let i=0;i<100;i++){
+          const cell=document.createElement('i');
+          cell.style.setProperty('--fill',`${Math.max(0,Math.min(1,pct-i))*100}%`);
+          cells.append(cell);
+        }
+        row.append(label,cells);return row;
+      };
+      grid.replaceChildren(sampleRow(words('Best generic agent','最佳通用智能体'),24),sampleRow('RDQA-Skill',41.1));
+    }
+    kpis('rdqa-kpis',[
+      [words('Questions','评测题目'),'1,350'],
+      [words('General-purpose setups','通用配置'),'12'],
+      [words('Evidence-adjusted gap','证据调整分差'),words('+17.1 pp','+17.1 个百分点')]
+    ]);
     benchmarkButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.rdqa===benchmark)));
-    document.getElementById('rdqa-bars').hidden = gap;
+    document.getElementById('rdqa-bars').hidden = gap || sample;
     document.getElementById('rdqa-gap').hidden = !gap;
-    document.getElementById('rdqa-readout').textContent = gap ?
+    document.getElementById('rdqa-readout').textContent = sample ?
+      words('The scores shown per 100 questions; cells are a visual conversion, not individual test records.','按每百题折算；方格是分数示意，不是逐题答题记录。') : gap ?
       words('RDQA-Skill scores 17.1 percentage points higher on this benchmark.','在这项基准上，RDQA-Skill 高出 17.1 个百分点。') :
       words('Both scores use the same 0–100% scale.','两个分数使用同一条 0–100% 刻度。');
   }

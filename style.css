@@ -615,3 +615,53 @@ html.sl{
 .sl .cover .bubble-history-list li+li{margin-top:0}
 .sl .cover .bubble-history-list p{margin:.2rem 0}
 .sl .cover #bubble-history a{color:#f5d1bf}
+
+/* Risk instruments: four lenses, one instrument deck. */
+.sl #figures .instrument-deck{max-width:64ch;color:#ddc3ae;margin:.6rem 0 1.5rem;line-height:1.55}
+.sl #figures .evidence-plots{grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(12px,1.6vw,22px);align-items:stretch}
+.sl #figures .evidence-plot{--instrument-ink:#ffc18a;--instrument-glow:#e47c3223;position:relative;border-top-color:var(--instrument-ink);background:radial-gradient(ellipse at 92% 0,var(--instrument-glow),transparent 58%),#1b1110f5}
+.sl #figures .energy-plot{grid-column:span 7;--instrument-ink:#ffb779}
+.sl #figures .rdqa-plot{grid-column:span 5;--instrument-ink:#f5d78d;--instrument-glow:#dfac3320}
+.sl #figures .archive-plot{grid-column:span 5;--instrument-ink:#99d4d4;--instrument-glow:#63b3b023}
+.sl #figures .cost-instrument{grid-column:span 7;margin:0;--instrument-ink:#d8b4f4;--instrument-glow:#b172da25}
+.sl #figures .plot-index{color:var(--instrument-ink)}
+.sl #figures .energy-plot>svg{align-self:center;width:min(100%,650px);height:auto;max-height:280px;margin-block:.12rem}
+.sl #figures .energy-plot .plot-dots .is-current{filter:drop-shadow(0 0 6px var(--instrument-ink))}
+.sl #figures .energy-plot .plot-dots circle{transition:r .2s ease}
+.sl #figures .risk-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;padding:0;margin:.9rem 0 .35rem;border:1px solid #c59b7448;background:#c59b7437}
+.sl #figures .risk-kpis:empty{display:none}
+.sl #figures .risk-kpis>div{min-width:0;background:#1b1312;padding:.65rem .55rem;display:grid;gap:.22rem;align-content:start}
+.sl #figures .risk-kpis dt{color:#e4c9b3;font:550 .69rem/1.35 var(--sans);overflow-wrap:anywhere}
+.sl #figures .risk-kpis dd{color:var(--instrument-ink);font:720 clamp(.76rem,1.3vw,1.04rem)/1.24 var(--mono);margin:0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.sl #figures .evidence-plot figcaption{border-top:1px solid #be99753b;margin-top:auto}
+.sl #figures .plot-controls button{border-bottom-width:2px;transition:transform .14s ease,background-color .14s ease,border-color .14s ease}
+.sl #figures .plot-controls button[aria-pressed=true]{background:#40281a;border-color:var(--instrument-ink);color:#fff5df;box-shadow:inset 0 -2px var(--instrument-ink)}
+.sl #figures .plot-controls button:not(:disabled):active{transform:translateY(2px)}
+.sl #figures .rdqa-grid:not([hidden]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(8px,2vw,20px);margin:8px 0}
+.sl #figures .rdqa-grid h4{margin:0 0 .35rem;color:#fff0d7;font:650 .72rem/1.4 var(--mono)}
+.sl #figures .rdqa-cells{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:2px;max-width:152px}
+.sl #figures .rdqa-cells i{aspect-ratio:1;border:1px solid #c59b7445;background:linear-gradient(90deg,#e6ac6a var(--fill),#332721 var(--fill))}
+.sl #figures .rdqa-grid section+section i{background:linear-gradient(90deg,#f7dc91 var(--fill),#332721 var(--fill))}
+.sl #figures .archive-center{flex:1;gap:clamp(10px,2vw,20px)}
+.sl #figures #atlas-counts small{grid-column:2/-1;height:3px;background:linear-gradient(90deg,var(--topic-ink) var(--topic-share),#564138 var(--topic-share))}
+.sl #figures .cost-instrument .labgrid{grid-template-columns:minmax(0,1fr);align-content:start}
+.sl #figures .cost-instrument .chart{border-right:0;border-bottom:1px solid #c59b7448}
+.sl #figures .cost-instrument :is(.chart,.controls){padding:clamp(10px,1.6vw,20px)}
+.sl #figures .cost-instrument .chart figcaption{margin:0;border:0;padding:0}
+.sl #figures .cost-instrument .chart svg{max-height:215px}
+.sl #cost-reference{stroke:#d8b4f4;stroke-width:1.5;stroke-dasharray:4 5}
+.sl #cost-reference-point{fill:#1b1312;stroke:#d8b4f4;stroke-width:2}
+.sl #figures .cost-instrument .instrument-readout{margin-bottom:0}
+@media(max-width:720px){
+ .sl #figures .evidence-plots{grid-template-columns:minmax(0,1fr)}
+ .sl #figures .evidence-plots>*{grid-column:1}
+ .sl #figures .risk-kpis>div{padding:.52rem .42rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .sl #figures .plot-controls button,.sl #figures .energy-plot .plot-dots circle{transition:none}
+ .sl #figures .plot-controls button:not(:disabled):active{transform:none}
+}
+@media print{
+ .sl #figures .evidence-plot,.sl #figures .risk-kpis>div{background:white}
+ .sl #figures :is(.instrument-deck,.risk-kpis dt,.risk-kpis dd){color:#231711}
+}

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#110d0b"><title>Scaling Low | AI 风险与叙事核查</title><meta name="description" content="AI risk, claim checks, and the evidence behind the headlines.">
-<link rel="stylesheet" href="style.css?v=clock-history-01"><script src="script.js?v=clock-history-01"></script><script src="atlas.js?v=instruments-03" defer></script>
+<link rel="stylesheet" href="style.css?v=risk-console-01"><script src="script.js?v=risk-console-01"></script><script src="atlas.js?v=risk-console-01" defer></script>
 </head><body id="top">
 <canvas id="world-scene" aria-hidden="true"></canvas>
 <input id="signal-pause" type="checkbox" aria-label="Pause background motion" data-en-label="Pause background motion" data-zh-label="暂停背景动效">
@@ -111,7 +111,7 @@
 <section class="wrap section" id="figures">
  <div class="meta"><i></i>03 &nbsp;/&nbsp; <span class="en">The instruments</span><span class="zh">观测数据</span></div>
  <h2><span class="en">Risk visualization</span><span class="zh">风险可视化</span></h2>
- <div class="evidence-plots">
+ <p class="instrument-deck"><span class="en">Move through the evidence: demand over time, answers with proof, what this site covers, and what more compute buys.</span><span class="zh" lang="zh-Hans">从四个角度看代价：需求怎么涨，证据能拉开多少分，本站在追什么，以及多加算力究竟买到什么。</span></p><div class="evidence-plots">
   <figure class="evidence-plot energy-plot">
    <div class="plot-index">01 <span class="en">/ INFRASTRUCTURE</span><span class="zh">/ 电力</span></div>
    <h3><span class="en">The data-centre load</span><span class="zh">数据中心的电力负荷</span></h3>
@@ -128,7 +128,7 @@
    <div class="plot-controls enhanced" id="energy-controls" role="group" data-en-label="Select electricity data year" data-zh-label="选择用电数据年份">
     <button type="button" data-energy="2023" aria-pressed="false">2023</button><button type="button" data-energy="2024" aria-pressed="false">2024</button><button type="button" data-energy="2025" aria-pressed="true">2025</button><button type="button" data-energy="2030" aria-pressed="false" class="scenario-button">2030 <span class="en">scenario</span><span class="zh">情景</span></button>
    </div>
-   <output id="energy-readout" class="instrument-readout enhanced" aria-live="polite"></output>
+   <dl class="risk-kpis enhanced" id="energy-kpis"></dl><output id="energy-readout" class="instrument-readout enhanced" aria-live="polite"></output>
    <figcaption><span class="en">All data centres, not just AI. Solid: historical estimates. Dashed: 2030 base case.</span><span class="zh">全球所有数据中心，并非仅 AI。实线是历史估算，虚线终点为 2030 年基准情景。</span> <a href="https://www.iea.org/files/3179f7f8-01f6-4dd6-bffa-c9f7b73f1dc9/KeyQuestionsonEnergyandAI.pdf">IEA · A.4</a></figcaption>
   </figure>
   <figure class="evidence-plot rdqa-plot">
@@ -143,27 +143,33 @@
     <div class="gap-value"><strong id="rdqa-delta">+17.1</strong><span class="en">percentage points</span><span class="zh">个百分点</span></div>
     <div class="gap-track" aria-hidden="true"><b></b></div><div class="gap-labels"><span>24.0%</span><span>41.1%</span></div>
    </div>
+   <div id="rdqa-grid" class="rdqa-grid" hidden></div>
    <div class="plot-controls enhanced" id="rdqa-controls" role="group" data-en-label="Choose benchmark view" data-zh-label="选择对照图视图">
-    <button type="button" data-rdqa="scores" aria-pressed="true"><span class="en">Both scores</span><span class="zh">看准确率</span></button><button type="button" data-rdqa="gap" aria-pressed="false"><span class="en">Score gap</span><span class="zh">看分数差</span></button>
+    <button type="button" data-rdqa="scores" aria-pressed="true"><span class="en">Both scores</span><span class="zh">看准确率</span></button><button type="button" data-rdqa="gap" aria-pressed="false"><span class="en">Score gap</span><span class="zh">看分数差</span></button><button type="button" data-rdqa="sample" aria-pressed="false"><span class="en">Per 100 questions</span><span class="zh" lang="zh-Hans">每百题</span></button>
    </div>
-   <output id="rdqa-readout" class="instrument-readout enhanced" aria-live="polite"></output>
+   <dl class="risk-kpis enhanced" id="rdqa-kpis"></dl><output id="rdqa-readout" class="instrument-readout enhanced" aria-live="polite"></output>
    <figcaption><span class="en">Evidence-adjusted accuracy on RDQA, not overall agent ability.</span><span class="zh">RDQA 的证据调整准确率，不是通用能力分数。</span> <a href="https://aclanthology.org/2026.emnlp-main.1855/">EMNLP · RDQA</a></figcaption>
   </figure>
   <figure class="evidence-plot archive-plot">
    <div class="plot-index">03 <span class="en">/ COVERAGE</span><span class="zh">/ 站内观察</span></div>
    <h3><span class="en">What we cover</span><span class="zh">本站报道分布</span></h3>
-   <div class="archive-center"><div id="atlas-donut"><strong id="atlas-total">—</strong></div><ul id="atlas-counts"></ul></div>
+   <div class="plot-controls enhanced archive-window" role="group" data-en-label="Archive time window" data-zh-label="归档时间范围">
+     <button type="button" data-archive-window="all" aria-pressed="true"><span class="en">All time</span><span class="zh" lang="zh-Hans">全部</span></button><button type="button" data-archive-window="7" aria-pressed="false"><span class="en">Latest 7 days</span><span class="zh" lang="zh-Hans">近 7 天</span></button><button type="button" data-archive-window="30" aria-pressed="false"><span class="en">Latest 30 days</span><span class="zh" lang="zh-Hans">近 30 天</span></button>
+    </div><div class="archive-center"><div id="atlas-donut"><strong id="atlas-total">—</strong></div><ul id="atlas-counts"></ul></div>
    <div class="plot-controls enhanced" id="archive-controls" role="group" data-en-label="Show archive by count or share" data-zh-label="切换报道篇数与占比">
     <button type="button" data-archive-mode="count" aria-pressed="true" disabled><span class="en">Counts</span><span class="zh">看篇数</span></button><button type="button" data-archive-mode="share" aria-pressed="false" disabled><span class="en">Share</span><span class="zh">看占比</span></button>
    </div>
-   <p id="archive-status" class="instrument-readout enhanced" role="status"></p>
+   <dl class="risk-kpis enhanced" id="archive-kpis"></dl><p id="archive-status" class="instrument-readout enhanced" role="status"></p>
    <figcaption><span class="en">Article counts by topic in this site’s archive, not the frequency of incidents.</span><span class="zh">按本站归档主题计篇数，不代表实际事件发生频率。</span> <a href="./news.json">news.json</a></figcaption>
   </figure>
- </div>
-<section class="cost-instrument" id="lab" aria-labelledby="cost-chart-title"><div class="plot-index">04 <span class="en">/ INTERACTIVE MODEL</span><span class="zh" lang="zh-Hans">/ 互动模型</span></div><h3 id="cost-chart-title"><span class="en">The cost curve</span><span class="zh" lang="zh-Hans">代价曲线</span></h3><p class="dek"><span class="en">In this illustrative model, the score levels off but the bill keeps rising with compute. Neither is measured data or a forecast.</span><span class="zh" lang="zh-Hans">这张示意图里，分数逐渐见顶，账单却继续随算力增长。分数与费用都不是实测或预测。</span></p>
-<div class="labgrid"><figure class="chart"><figcaption class="meta"><span class="en">Illustrative score</span><span class="zh" lang="zh-Hans">示意分数</span></figcaption><svg viewBox="0 0 536 205" width="536" height="205" role="img" aria-label="Fictional score flattens as compute increases" data-en-label="Fictional score flattens as compute increases" data-zh-label="算力增加时虚构分数逐渐趋于平缓"><path class="grid" d="M36 26H498 M36 96H498 M36 166H498 M36 26V166 M190 26V166 M344 26V166 M498 26V166"/><g class="ticks"><text x="2" y="30">100</text><text x="9" y="100">50</text><text x="17" y="170">0</text><g text-anchor="middle"><text x="36" y="189">1×</text><text x="190" y="189">10×</text><text x="344" y="189">100×</text><text x="498" y="189">1,000×</text></g></g><path id="curve" pathLength="1" d="M36 157.6 C75 110 115 79 174.6 69.5 S276 51.5 345.54 48.1 S460 45.4 498 45"/><line id="guide" x1="345.54" x2="345.54" y1="48.1" y2="166"/><circle id="point" cx="345.54" cy="48.1" r="5"/></svg><div class="plotfoot meta"><span class="en">Compute multiple · log scale →</span><span class="zh" lang="zh-Hans">算力倍数 · 对数刻度 →</span></div></figure>
-<div class="controls"><div class="meter"><label for="compute"><span class="en">Throw compute at it</span><span class="zh" lang="zh-Hans">加点算力</span></label><strong id="multiplier">102×</strong></div><input class="enhanced" id="compute" type="range" min="0" max="30" step="0.1" value="20.1" aria-describedby="help"><div class="plot-controls enhanced" id="compute-presets" role="group" data-en-label="Compute presets" data-zh-label="算力倍数预设"><button type="button" data-compute="0" aria-pressed="false">1×</button><button type="button" data-compute="10" aria-pressed="false">10×</button><button type="button" data-compute="20" aria-pressed="false">100×</button><button type="button" data-compute="30" aria-pressed="false">1,000×</button></div><p id="help"><span class="en">The invoice is the only thing that scales reliably.</span><span class="zh" lang="zh-Hans">唯一稳定增长的是账单。</span></p><dl class="results"><div><dt><span class="en">Demo score</span><span class="zh" lang="zh-Hans">模拟分数</span></dt><dd id="score">84.2</dd></div><div><dt><span class="en">Illustrative bill · USD</span><span class="zh" lang="zh-Hans">模拟账单 · 美元</span></dt><dd id="bill">$102,329</dd></div></dl></div></div></section>
-</section>
+
+<section class="cost-instrument evidence-plot" id="lab" aria-labelledby="cost-chart-title"><div class="plot-index">04 <span class="en">/ INTERACTIVE MODEL</span><span class="zh" lang="zh-Hans">/ 互动模型</span></div><h3 id="cost-chart-title"><span class="en">The cost curve</span><span class="zh" lang="zh-Hans">代价曲线</span></h3><p class="dek"><span class="en">In this illustrative model, the score levels off but the bill keeps rising with compute. Neither is measured data or a forecast.</span><span class="zh" lang="zh-Hans">这张示意图里，分数逐渐见顶，账单却继续随算力增长。分数与费用都不是实测或预测。</span></p>
+<div class="labgrid"><figure class="chart"><figcaption class="meta"><span class="en">Illustrative score</span><span class="zh" lang="zh-Hans">示意分数</span></figcaption><svg viewBox="0 0 536 205" width="536" height="205" role="img" aria-label="Fictional score flattens as compute increases" data-en-label="Fictional score flattens as compute increases" data-zh-label="算力增加时虚构分数逐渐趋于平缓"><path class="grid" d="M36 26H498 M36 96H498 M36 166H498 M36 26V166 M190 26V166 M344 26V166 M498 26V166"/><g class="ticks"><text x="2" y="30">100</text><text x="9" y="100">50</text><text x="17" y="170">0</text><g text-anchor="middle"><text x="36" y="189">1×</text><text x="190" y="189">10×</text><text x="344" y="189">100×</text><text x="498" y="189">1,000×</text></g></g><path id="curve" pathLength="1" d="M36 157.6 C75 110 115 79 174.6 69.5 S276 51.5 345.54 48.1 S460 45.4 498 45"/><line id="guide" x1="345.54" x2="345.54" y1="48.1" y2="166"/><line id="cost-reference" x1="344" x2="344" y1="26" y2="166" hidden/><circle id="cost-reference-point" cx="344" cy="49" r="5" hidden/><circle id="point" cx="345.54" cy="48.1" r="5"/></svg><div class="plotfoot meta"><span class="en">Compute multiple · log scale →</span><span class="zh" lang="zh-Hans">算力倍数 · 对数刻度 →</span></div></figure>
+<div class="controls"><div class="meter"><label for="compute"><span class="en">Throw compute at it</span><span class="zh" lang="zh-Hans">加点算力</span></label><strong id="multiplier">102×</strong></div><input class="enhanced" id="compute" type="range" min="0" max="30" step="0.1" value="20.1" aria-describedby="help"><div class="plot-controls enhanced" id="compute-presets" role="group" data-en-label="Compute presets" data-zh-label="算力倍数预设"><button type="button" data-compute="0" aria-pressed="false">1×</button><button type="button" data-compute="10" aria-pressed="false">10×</button><button type="button" data-compute="20" aria-pressed="false">100×</button><button type="button" data-compute="30" aria-pressed="false">1,000×</button></div><p id="help"><span class="en">The invoice is the only thing that scales reliably.</span><span class="zh" lang="zh-Hans">唯一稳定增长的是账单。</span></p><dl class="results"><div><dt><span class="en">Demo score</span><span class="zh" lang="zh-Hans">模拟分数</span></dt><dd id="score">84.2</dd></div><div><dt><span class="en">Illustrative bill · USD</span><span class="zh" lang="zh-Hans">模拟账单 · 美元</span></dt><dd id="bill">$102,329</dd></div></dl>
+<div class="plot-controls enhanced" role="group" data-en-label="Compare two compute settings" data-zh-label="对比两个算力档位"><button type="button" id="cost-pin"><span class="en">Pin current as baseline</span><span class="zh" lang="zh-Hans">固定当前为基准</span></button><button type="button" id="cost-reset"><span class="en">Reset to 100×</span><span class="zh" lang="zh-Hans">重置到 100 倍</span></button></div>
+<dl class="risk-kpis enhanced" id="cost-kpis"></dl><p id="cost-readout" class="instrument-readout enhanced" role="status"></p>
+</div></div></section>
+</div></section>
 
 </main><footer><div class="wrap"><a class="brand" href="#top"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 5l14 14m0-9v9h-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="round"/></svg> Scaling Low.</a><span><span class="en">Field notes on the limits of more.</span><span class="zh" lang="zh-Hans">记录「更多」的限度。</span></span><a href="#top"><span class="en">Back to top</span><span class="zh" lang="zh-Hans">返回顶部</span></a></div></footer>
 </body></html>

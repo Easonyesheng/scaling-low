@@ -45,6 +45,24 @@
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let displayed = target();
     let frame = 0;
+    let reference = 1/3;
+    const referenceLine=get('cost-reference'), referencePoint=get('cost-reference-point');
+    const pin=get('cost-pin'), reset=get('cost-reset');
+    const compare=get('cost-kpis'), explanation=get('cost-readout');
+    const price=t=>1000*10**(3*t);
+    const T=(en,zh)=>language==='zh'?zh:en;
+    const signed=(n,digits=1)=>(Math.abs(n)<.001?'':n>0?'+':'−')+Math.abs(n).toFixed(digits);
+    function metric(label,value){
+      const div=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');
+      dt.textContent=label;dd.textContent=value;div.append(dt,dd);return div;
+    }
+    function referenceDraw(){
+      const px=x(reference),py=y(reference);
+      referenceLine.setAttribute('x1',px);referenceLine.setAttribute('x2',px);
+      referencePoint.setAttribute('cx',px);referencePoint.setAttribute('cy',py);
+      referenceLine.hidden=false;referencePoint.hidden=false;
+      referenceLine.removeAttribute('hidden');referencePoint.removeAttribute('hidden');
+    }
 
     const presets = [...document.querySelectorAll("button[data-compute]")];
     function readout() {
@@ -56,6 +74,19 @@
       score.textContent = benchmark(t).toFixed(1);
       bill.textContent = money[language].format(1000 * compute);
       slider.setAttribute('aria-valuetext', language === 'zh' ? `${times} 倍算力` : `${times} times compute`);
+      referenceDraw();
+      const referenceLabel=`${Math.round(10**(3*reference)).toLocaleString(language)}×`;
+      const delta=price(t)-price(reference);
+      const loadAs=t=>Math.round(10**(3*t)).toLocaleString(language);
+      const NEXT= Math.min(1,t+1/3), increase=Math.max(0,benchmark(NEXT)-benchmark(t));
+      compare.replaceChildren(
+        metric(T('Pinned baseline','已固定基准'),referenceLabel),
+        metric(T('Score vs baseline','较基准分差'),signed(benchmark(t)-benchmark(reference))),
+        metric(T('Bill vs baseline','较基准账单'),`${Math.abs(delta)<.01?'':delta>0?'+':'−'}${money[language].format(Math.abs(delta))}`)
+      );
+      explanation.textContent = NEXT===t ? T('At the upper limit of this model.','已到示意模型的上限。') :
+        T(`From ${times}× to ${loadAs(NEXT)}×: +${increase.toFixed(1)} points for another ${money[language].format(price(NEXT)-price(t))}.`,
+           `从 ${times}× 加到 ${loadAs(NEXT)}×：多得 ${increase.toFixed(1)} 分，多花 ${money[language].format(price(NEXT)-price(t))}。`);
     }
 
     function draw(t) {
@@ -92,6 +123,8 @@
     draw(displayed);
     const update = () => { readout(); move(); };
     slider.addEventListener('input', update);
+    pin.addEventListener('click',()=>{reference=target();update();});
+    reset.addEventListener('click',()=>{reference=1/3;slider.value='20';update();});
     presets.forEach(button => button.addEventListener('click', () => {
       slider.value = button.dataset.compute;
       update();
