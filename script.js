@@ -425,7 +425,7 @@
       revealHash(/^(case|news)-/.test(destination()));
     }
 
-    const deadline = Date.parse(document.getElementById('checkpoint').dateTime);
+    let deadline = Date.parse(document.getElementById('checkpoint').dateTime);
     const clock = document.getElementById('clock');
     const digits = clock.querySelectorAll('strong');
     let timer;
@@ -441,16 +441,70 @@
         if (!still.matches) digit.classList.add('digit-tick');
       });
       clock.hidden = false;
-      if (!n) {
-        clearInterval(timer);
-        document.removeEventListener('visibilitychange', resumeClock);
-        document.getElementById('passed').hidden = false;
-      }
+      document.getElementById('passed').hidden = n !== 0;
+      if (!n && timer) { clearInterval(timer); timer = undefined; }
+      if (n && !timer) timer = setInterval(tick,1000);
     }
     function resumeClock() { if (!document.hidden) tick(); }
-    timer = setInterval(tick,1000);
     document.addEventListener('visibilitychange',resumeClock);
     tick();
+
+    const trackKeys = ['technical','economic'];
+    const checkpoint = document.getElementById('checkpoint');
+    const timestamp = value => typeof value === 'string' &&
+      /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})$/.test(value) &&
+      Number.isFinite(Date.parse(value)) &&
+      new Date(value.slice(0,10) + 'T00:00:00Z').toISOString().slice(0,10) === value.slice(0,10);
+    let bubble;
+    function renderBubble() {
+      if (!bubble) return;
+      const zh = language === 'zh';
+      const time = value => new Intl.DateTimeFormat(zh ? 'zh-CN' : 'en-GB', {
+        timeZone: 'Asia/Shanghai', year: 'numeric', month: zh ? 'numeric' : 'short', day: 'numeric',
+        hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+      }).format(new Date(value)) + (zh ? ' · 北京时间' : ' Beijing time');
+      checkpoint.dateTime = new Date(deadline).toISOString();
+      checkpoint.textContent = time(deadline);
+      document.getElementById('bubble-method').textContent = (bilingual(bubble.method) ? bubble.method[language] : bubble.method);
+      document.getElementById('bubble-as-of').textContent =
+        (zh ? '数据基准：' : 'As of: ') + time(bubble.asOf);
+      const list = document.getElementById('bubble-tracks');
+      const sources = document.getElementById('bubble-sources');
+      list.replaceChildren();
+      sources.replaceChildren();
+      for (const key of trackKeys) {
+        const track = bubble.tracks[key], weight = track.weight + '%';
+        const label = key === 'technical' ? (zh ? '技术面' : 'Technical') : (zh ? '经济面' : 'Economic');
+        document.querySelector(`[data-share="${key}"]`).textContent = weight;
+        document.querySelector(`[data-bar="${key}"]`).style.width = weight;
+        const item = node(list, 'li');
+        node(item, 'strong', `${label} ${weight} · ${time(track.target)}`);
+        node(item, 'p', track.summary[language]);
+      }
+      for (const source of bubble.sources) node(sources, 'a', source.label[language]).href = source.url;
+      document.getElementById('bubble-fallback').hidden = true;
+      document.getElementById('bubble-details').hidden = false;
+      document.getElementById('bubble-mix').hidden = false;
+    }
+    async function loadBubble() {
+      try {
+        const response = await fetch('./bubble.json', { cache: 'no-cache' });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (data?.schemaVersion !== 1 || !timestamp(data.asOf) || !(bilingual(data.method) || nonEmpty(data.method)) ||
+          !Array.isArray(data.sources) || !data.sources.length || !data.sources.every(goodLink)) return;
+        const tracks = trackKeys.map(key => data.tracks?.[key]);
+        if (!tracks.every(track => track && Number.isInteger(track.weight) &&
+          track.weight >= 0 && track.weight <= 100 && timestamp(track.target) &&
+          Date.parse(track.target) >= Date.parse(data.asOf) && bilingual(track.summary)) ||
+          tracks[0].weight + tracks[1].weight !== 100) return;
+        deadline = Math.round(tracks.reduce((sum, track) => sum + Date.parse(track.target) * track.weight, 0) / 100);
+        bubble = data;
+        renderBubble();
+        tick();
+      } catch { /* Keep the original editorial checkpoint if the feed is unavailable. */ }
+    }
+
     function applyLanguage() {
       root.lang = language === 'zh' ? 'zh-Hans' : 'en';
       document.title = language === 'zh'
@@ -460,6 +514,7 @@
       labels.forEach(element => element.setAttribute('aria-label', element.getAttribute(`data-${language}-label`)));
       render();
       readout();
+      renderBubble();
     }
 
     buttons.forEach(button => button.addEventListener('click', () => {
@@ -478,5 +533,6 @@
     applyLanguage();
     revealHash(true);
     load();
+    loadBubble();
   }, { once: true });
 })();

@@ -48,3 +48,7 @@ And occasionally ask:
 From the repository root, run `python3 -m http.server` and open `http://localhost:8000/`. Opening the HTML as a file will not load the news feed.
 
 Add an object to `entries` in `news.json` using a unique `id`, ISO publication date (`YYYY-MM-DD`), `topic` (misuse, reliability, governance, infrastructure), and `kind` (report, proposal, research, company). Supply `en` and `zh` strings for `title`, `summary`, `takeaway`, and `source.label`, plus the original HTTPS `source.url`. Keep the source’s observation in the summary and the editorial reading in the takeaway. Display order is newest first.
+
+### Bubble countdown
+
+`bubble.json` is a separately reviewed editorial snapshot, not an output of the hourly DSH news job. The homepage calculates the single countdown from its two timezone-qualified track dates and integer weights (total 100), and falls back to the original checkpoint if the snapshot is unavailable. Follow [the analysis guide](prompts/BUBBLE_TIMING_ANALYSIS.md) when updating the observation points, the evidence and the snapshot date together.

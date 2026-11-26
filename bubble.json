@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-26T00:00:00+08:00",
+  "tracks": {
+    "technical": {
+      "weight": 50,
+      "target": "2027-03-20T09:00:00+08:00",
+      "summary": {
+        "en": "Review inference performance, cost and supply signals after NVIDIA GTC ends on March 18.",
+        "zh": "英伟达 GTC 于 3 月 18 日闭幕后，复核推理性能、成本与供给信号。"
+      }
+    },
+    "economic": {
+      "weight": 50,
+      "target": "2027-05-15T09:00:00+08:00",
+      "summary": {
+        "en": "Recheck hyperscaler capex, cloud profitability and cash flow after the first calendar-quarter reporting window. May 15 includes an editorial buffer beyond the usual 40-day SEC deadline for accelerated filers.",
+        "zh": "一季度披露窗口过后，复核云厂商资本开支、云业务利润和现金流。5 月 15 日是在 SEC 对加速申报企业通常适用的 40 天期限外留出的编辑部缓冲。"
+      }
+    }
+  },
+  "method": {
+    "en": "Weighted mean of the two checkpoint timestamps. Equal editorial weights reflect no verified reason to give either track more weight. This is a review date, not a crash forecast.",
+    "zh": "综合时点＝技术观察时点 × 技术权重 ＋ 经济观察时点 × 经济权重。暂无足够证据给任一轨更高权重，初始各占一半。这是复盘时点，不是崩盘预测。"
+  },
+  "sources": [
+    {
+      "label": {
+        "en": "NVIDIA GTC | Conference dates",
+        "zh": "英伟达 GTC｜会议日期"
+      },
+      "url": "https://www.nvidia.com/gtc/faq/"
+    },
+    {
+      "label": {
+        "en": "SEC | Form 10-Q filing deadlines",
+        "zh": "美国证交会｜10-Q 季报时限"
+      },
+      "url": "https://www.sec.gov/about/forms/form10-q.pdf"
+    }
+  ]
+}

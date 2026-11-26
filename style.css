@@ -599,3 +599,13 @@ html.sl{
 .sl #atlas-counts b{font-variant-numeric:tabular-nums;white-space:nowrap}
 .sl #lab .plot-controls{margin-top:1px}
 @media print{.sl.js :is(.plot-controls,.instrument-readout){display:none!important}}
+
+/* Shared cover clock: technical and economic editorial weights. */
+.sl .cover .bubble-mix{margin-block:.6rem .8rem}
+.sl .cover .bubble-mix-labels{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem .75rem;color:#ffdbca;font:700 .74rem/1.4 var(--mono)}
+.sl .cover .bubble-mix-labels b{font-size:.95rem;font-variant-numeric:tabular-nums}
+.sl .cover .bubble-mix-bar{display:flex;height:5px;margin-top:5px;background:#ffbb9c1f;overflow:hidden;border-radius:3px}
+.sl .cover .bubble-mix-bar i{display:block;height:100%}
+.sl .cover [data-bar="technical"]{background:#ff9b71}
+.sl .cover [data-bar="economic"]{background:#f0d2ba}
+.sl .cover #bubble-tracks p{margin:.25rem 0 .65rem}
