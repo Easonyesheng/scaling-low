@@ -869,6 +869,31 @@
           "zh": "arXiv 人工智能"
         }
       }
+    },
+    {
+      "id": "bop-refer-gemini-2d-3d-localization",
+      "date": "2026-11-26",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "BOP-Refer authors report Gemini 4 Carbon scored 72.6% average precision on 2D boxes but only 12.4% on 3D boxes",
+        "zh": "BOP-Refer 作者报告：Gemini 4 Carbon 定位物体，二维框平均精度为 72.6%，三维框仅为 12.4%"
+      },
+      "summary": {
+        "en": "The authors tested 17 vision-language models on images of everyday and industrial objects. Each model had to locate the object named by a human-verified description in both 2D and 3D. Gemini 4 Carbon performed best in the comparison.",
+        "zh": "作者用日常物品和工业物体的图像测试了 17 个视觉语言模型。模型须根据经人工核验的描述，用二维框和三维框分别标出所指物体。Gemini 4 Carbon 在这组模型中表现最好。"
+      },
+      "takeaway": {
+        "en": "The gap persisted even though the 3D test used more lenient thresholds for overlap between predicted and reference boxes. On this benchmark, a high 2D score did not carry over to 3D localization.",
+        "zh": "三维测试对预测框与参考框重叠程度的要求更宽松，两项得分却仍有明显差距。在这项测试中，二维定位的高分并未延续到三维。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.34862",
+        "label": {
+          "en": "arXiv cs.AI",
+          "zh": "arXiv 人工智能"
+        }
+      }
     }
   ]
 }
