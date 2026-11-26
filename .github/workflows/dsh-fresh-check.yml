@@ -1,0 +1,37 @@
+name: Check fresh headlines with current DSH
+
+'on':
+  push:
+    branches: [editorial/fresh-headline-check-20261126]
+    paths: [.github/workflows/dsh-fresh-check.yml]
+
+permissions: {}
+
+concurrency:
+  group: scalinglow-dsh-fresh-check
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Validate the editorial and publish contract without API calls
+        run: python3 -B .github/scalinglow/test_pipeline.py
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Install pinned DSH without the API key in scope
+        run: npm install --prefix "$RUNNER_TEMP/dsh" --no-audit --no-fund --ignore-scripts --save-exact @deepseek-ai/dsh@0.2.2-rc.5
+      - name: Generate DSH candidates with official-feed date and URL checks
+        env:
+          SCALINGLOW_OPENAI_API_KEY: ${{ secrets.SCALINGLOW_OPENAI_API_KEY }}
+        run: python3 .github/scalinglow/daily.py "$RUNNER_TEMP/dsh/node_modules/.bin/dsh" news.json "$RUNNER_TEMP/scalinglow-candidates.json"
+      - name: Report verified fresh-news proposals for review
+        run: |
+          python3 -c 'import base64, json, sys; p=json.load(open(sys.argv[1])); print("Fresh verified drafts:", len(p["entries"])); print("DSH_FRESH_BASE64="+base64.b64encode(json.dumps(p).encode()).decode())' "$RUNNER_TEMP/scalinglow-candidates.json"
