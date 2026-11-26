@@ -894,6 +894,31 @@
           "zh": "arXiv 人工智能"
         }
       }
+    },
+    {
+      "id": "resnet-identifies-four-image-generators",
+      "date": "2026-11-26",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "On held-out prompts, ResNet-50 correctly identified which of four models generated every test image, authors report",
+        "zh": "作者报告：在留作测试的提示词上，ResNet-50 判别每张图出自四个模型中的哪一个，一张没错"
+      },
+      "summary": {
+        "en": "The authors tested a standard ResNet-50 classifier on images from the four highest-ranked open-source models on the Text-to-Image Arena: HiDream-O1-Dev, FLUX.2-dev, HunyuanImage-3.0 and Qwen-Image-2512. They report 100% source-classification accuracy on held-out prompts.",
+        "zh": "作者用标准 ResNet-50 分类器测试了 Text-to-Image Arena 上排名最高的四个开源模型生成的图像：HiDream-O1-Dev、FLUX.2-dev、HunyuanImage-3.0 和 Qwen-Image-2512。作者报告，在留作测试的提示词上，图像来源识别准确率为 100%。"
+      },
+      "takeaway": {
+        "en": "Blind evaluations cannot assume that comparable visual quality makes model images indistinguishable. The test asked the classifier to choose among four known sources, not to identify an arbitrary generator.",
+        "zh": "盲评不能因为画质相近，就假定不同模型生成的图像无法区分。测试要求分类器从四个已知来源中选出一个，并未检验它能否识别任意生成模型。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.34843",
+        "label": {
+          "en": "arXiv cs.AI",
+          "zh": "arXiv 人工智能"
+        }
+      }
     }
   ]
 }
