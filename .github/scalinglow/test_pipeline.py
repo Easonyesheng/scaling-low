@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import unittest
 
-from daily import canonical, editorial_guide, validate, KINDS, bind_source_labels, apply_model_settings, make_patch, DSH_MODEL_PROFILE
+from daily import canonical, editorial_guide, editorial_prompt, validate, KINDS, bind_source_labels, apply_model_settings, make_patch, DSH_MODEL_PROFILE
 from publish import append
 from official_feeds import parse
 
@@ -58,6 +58,13 @@ class Pipeline(unittest.TestCase):
         guide = editorial_guide(ROOT / 'prompts/NEWS_HEADLINE_GUIDE.md')
         self.assertIn('关键人物或著名机构', guide)
         self.assertNotIn('同一条新闻的预览与详情对应关系', guide)
+        self.assertIn('先拟三个角度', guide)
+        self.assertIn('测试中', guide)
+        prompt = editorial_prompt(TODAY, [{'title': 'already in archive'}])
+        self.assertIn(guide, prompt)
+        self.assertIn('match the scope', prompt.lower())
+        self.assertIn('already in archive', prompt)
+        self.assertNotIn('同一条新闻的预览与详情对应关系', prompt)
 
     def test_feed_errors_are_not_empty_days(self):
         with self.assertRaisesRegex(ValueError, 'not_a_feed'):

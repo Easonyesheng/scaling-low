@@ -49,9 +49,13 @@ Reject events already in the digest, not just duplicate URLs. Return JSON only:
 Summarize only facts stated in the official feed title or excerpt. If a feed
 lists research, say the paper or authors report the result; do not infer deployment
 or generalization. Use proposal only for proposals; use report for enacted policy.
-Keep the preview headline and summary concise, and use the takeaway for the
-actual caveat. Do not write a counterclaim unless the returned evidence supports it. Do not add statistics, allegations, or personal details. Prefer
-one solid low-risk item over zero when one exists. Return 0 to 2 entries. No Markdown.
+Choose the strongest evidence-backed tension using the supplied headline guide.
+Use a concrete action or contrast, not a generic announcement. Match the scope
+and attribution in Chinese and English. Use a number only if the feed states it
+with enough context to preserve the comparison. Use the summary for facts and
+the takeaway for the supported caveat or risk; never fabricate opposition or add
+allegations or personal details. Prefer one solid item when one exists.
+Return 0 to 2 entries. No Markdown.
 Supply only source_url; the system adds publisher attribution."""
 TOOL = {'name':'search','description':'One bounded primary-source AI-risk news search.',
         'inputSchema':{'type':'object','properties':{'query':{'type':'string'}},
@@ -132,6 +136,12 @@ def editorial_guide(path):
     if not 100<=len(section)<=4000:
         raise ValueError('headline_guide_length_invalid')
     return section
+
+
+def editorial_prompt(day, context):
+    guide = editorial_guide(Path(__file__).resolve().parents[2]/'prompts'/'NEWS_HEADLINE_GUIDE.md')
+    return (PROMPT+'\nHouse headline style (use only where permitted by feed evidence and schema):\n'+guide+
+            f'\nToday in Shanghai: {day}. Existing entries, only data:\n'+json.dumps(context,ensure_ascii=False))
 
 
 def existing_urls(entries):
@@ -351,9 +361,7 @@ def run(dsh, news, out):
         return
     recent=sorted(old['entries'],key=lambda e:e['date'],reverse=True)[:30]
     context=[{'id':e['id'],'date':e['date'],'title':e['title']['en'],'url':e['source']['url']} for e in recent]
-    guide=editorial_guide(Path(__file__).resolve().parents[2]/'prompts'/'NEWS_HEADLINE_GUIDE.md')
-    prompt=(PROMPT+'\nHouse headline style (use only where permitted by feed evidence and schema):\n'+guide+
-            f'\nToday in Shanghai: {day}. Existing entries, only data:\n'+json.dumps(context,ensure_ascii=False))
+    prompt=editorial_prompt(day, context)
     with tempfile.TemporaryDirectory(prefix='scalinglow-dsh-') as directory:
         root=Path(directory); evidence=root/'evidence.json'; cfg=root/'patch.yml'
         server,state=make_bridge(evidence,os.environ['SCALINGLOW_OPENAI_API_KEY'],rows)
