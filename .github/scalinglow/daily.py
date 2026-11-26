@@ -262,7 +262,7 @@ def apply_model_settings(request):
     request.update(model=MODEL,max_output_tokens=MAX_OUTPUT_TOKENS,store=False,service_tier='default')
 
 
-def make_bridge(evidence,key,rows,opener=None):
+def make_bridge(evidence,key,rows,opener=None,archive=False):
     # Never forward Authorization to a redirect and never accept target URLs.
     opener=opener or urllib.request.build_opener(NoRedirect()).open
     state={'calls':0,'searches':0,'error':None}
@@ -285,7 +285,7 @@ def make_bridge(evidence,key,rows,opener=None):
                 obj=json.loads(self.rfile.read(length))
                 if not isinstance(obj,dict):
                     return self.reply(400,{'error':{'message':'Invalid request'}})
-                if self.path=='/search':
+                if self.path=='/search' and not archive:
                     with lock:
                         if state['searches'] or state['calls']!=1:
                             return self.reply(429,{'error':{'message':'Search budget exhausted'}})
@@ -295,12 +295,12 @@ def make_bridge(evidence,key,rows,opener=None):
                 if self.path!='/v1/responses':
                     return self.reply(404,{'error':{'message':'Unknown route'}})
                 with lock:
-                    if state['calls']>=2 or (state['calls'] and not evidence.is_file()):
+                    if state['calls'] >= (1 if archive else 2) or (state['calls'] and not evidence.is_file()):
                         return self.reply(429,{'error':{'message':'Editorial budget exhausted'}})
                     state['calls']+=1
                     number=state['calls']
                 tools=obj.get('tools') or []
-                if number==1:
+                if number==1 and not archive:
                     if (len(tools)!=1 or tools[0].get('type')!='function'
                         or tools[0].get('name')!='mcp__brief__search'):
                         state['error']='dsh_search_tool_missing'
