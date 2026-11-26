@@ -14,8 +14,8 @@
         "url": "https://ferc.gov/news-events/news/2026-2027-winter-energy-market-electric-reliability-assessment"
       },
       "title": {
-        "en": "A 245 GW winter-peak warning for North America. This winter’s grid has a different outlook.",
-        "zh": "十年冬峰或增245吉瓦，北美今冬常态下却够用"
+        "en": "North America’s winter peak could rise 245 GW in a decade. This winter, normal-weather supply looks adequate",
+        "zh": "北美冬季用电峰值十年或增245吉瓦，今冬正常天气下仍够用"
       },
       "summary": {
         "en": "FERC cites a NERC projection of roughly 245 GW in additional North American winter peak demand over the next decade, driven mostly by large loads, chiefly data centers. But the assessment expects enough resources this winter under normal conditions.",
@@ -39,8 +39,8 @@
         "url": "https://safeguards.anthropic.com/2026/automated-red-teaming/"
       },
       "title": {
-        "en": "Anthropic found gaps in its own defenses. What did its tests miss?",
-        "zh": "Anthropic 自测抓到漏洞，没抓到的呢？"
+        "en": "Anthropic says its automated stress tests caught problems its safeguards missed",
+        "zh": "Anthropic 称自动化压力测试找出了自家防护没挡住的问题"
       },
       "summary": {
         "en": "Anthropic says its automated stress tests uncovered weaknesses its safeguards did not catch. The disclosure describes what the developer found, not what an independent review would find.",
@@ -64,8 +64,8 @@
         "url": "https://www.consumerfinance.gov/about-us/newsroom/the-cfpb-is-correcting-flaws-to-restore-integrity-and-utility-to-the-consumer-complaint-system/"
       },
       "title": {
-        "en": "Credit complaints surged. How much of the rise was AI?",
-        "zh": "美国征信投诉暴增，多少是AI替人提交的？"
+        "en": "US credit complaints surged, but the total can’t show how many AI tools filed for consumers",
+        "zh": "美国征信投诉激增，投诉总量看不出多少由 AI 代交"
       },
       "summary": {
         "en": "The CFPB lists AI tools acting on behalf of consumers alongside credit-repair firms and other intermediaries as possible contributors to complaint growth. The total alone does not separate these factors.",
@@ -89,8 +89,8 @@
         "url": "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026"
       },
       "title": {
-        "en": "The International AI Safety Report asks what a passing pre-launch score proves in the real world.",
-        "zh": "AI上线前过了关，安全报告为何不把它当通行证？"
+        "en": "A passing score before launch doesn’t prove real-world safety, the International AI Safety Report warns",
+        "zh": "上线前过关不等于上线后安全：国际AI安全报告指出评测盲区"
       },
       "summary": {
         "en": "The 2026 report distinguishes misuse, malfunctions and systemic risks. It warns that pre-deployment evaluations cannot reliably predict real-world usefulness or risk: the setting is part of the result.",
@@ -114,8 +114,8 @@
         "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm"
       },
       "title": {
-        "en": "A $1.5 billion copyright bill in Anthropic’s IPO paperwork",
-        "zh": "翻开Anthropic招股书：一笔15亿美元的版权和解账"
+        "en": "Anthropic’s prospectus lists a $1.5 billion copyright settlement booked in 2025, not a new fine",
+        "zh": "Anthropic 招股书：15 亿美元版权和解费已在 2025 年计提，并非新罚款"
       },
       "summary": {
         "en": "The prospectus says Anthropic booked the $1.5 billion Bartz settlement in 2025 and that a district court approved it in July 2026. The filing discloses an earlier settlement, not a new fine.",
@@ -132,8 +132,8 @@
       "topic": "governance",
       "kind": "research",
       "title": {
-        "en": "If AI causes harm, can the person held responsible even intervene?",
-        "zh": "AI若出了事，担责的人连系统都管不了？"
+        "en": "ALIGN compares who answers for high-risk AI with who can actually intervene",
+        "zh": "ALIGN 对照高风险 AI 的问责与控制权：谁担责，谁能干预"
       },
       "summary": {
         "en": "Lena Schneider and colleagues introduce ALIGN to identify gaps between who is expected to answer for high-risk AI use and who has meaningful control. Evaluating a governance method is not evidence that deployed systems became safer.",
@@ -157,8 +157,8 @@
       "topic": "governance",
       "kind": "company",
       "title": {
-        "en": "OpenAI wants more proof before launch. Who checks what slips through?",
-        "zh": "OpenAI 给发布加了一道门，谁来查漏网风险？"
+        "en": "OpenAI adds a prelaunch safety case. How much risk it catches is still unverified",
+        "zh": "OpenAI给发布加了安全论证，能拦下多少风险还待验证"
       },
       "summary": {
         "en": "OpenAI says it now asks for stronger alignment evidence during training and written safety arguments before deployment. A higher bar on paper is not yet an independent measure of the risks it catches in practice.",
@@ -182,8 +182,8 @@
       "topic": "misuse",
       "kind": "research",
       "title": {
-        "en": "Stop every bad answer, let every good one through: when AI guardrails cannot do both",
-        "zh": "坏答案全拦，好答案全放：AI护栏何时两难？"
+        "en": "Preprint identifies a computability limit: no guardrail can perfectly enforce every language model output policy",
+        "zh": "预印本给出可计算性边界：大模型护栏不能保证对所有输出规则都不误判"
       },
       "summary": {
         "en": "Ahmed Amer and colleagues examine when an output policy can be enforced without misses. Their result bounds what can be promised in general; it does not rule out useful safeguards for specific policies.",
@@ -207,8 +207,8 @@
       "topic": "governance",
       "kind": "research",
       "title": {
-        "en": "What’s a coding-agent score worth if the grader isn’t independent?",
-        "zh": "裁判不独立，编码智能体的高分还值多少？"
+        "en": "SplitBench separates code execution from scoring to keep submissions from influencing their own grades",
+        "zh": "编码智能体的代码不该左右评分，SplitBench把运行和打分拆开"
       },
       "summary": {
         "en": "Researchers behind SplitBench argue that executing a coding agent’s submission and deciding its score should be separate jobs. Isolating the grader protects evaluation integrity, but it cannot fix every weakness in the original tests.",
@@ -232,8 +232,8 @@
       "topic": "infrastructure",
       "kind": "analysis",
       "title": {
-        "en": "DeepMind cut a fusion circuit’s cost to about 1/12. When can hardware run it?",
-        "zh": "DeepMind聚变电路成本降到约1/12，离上机还有多远？"
+        "en": "DeepMind cuts one fusion calculation’s quantum resource estimate to about a twelfth; no full hardware run yet",
+        "zh": "DeepMind把一项聚变计算成本降到约1/12，硬件还没跑完电路"
       },
       "summary": {
         "en": "DeepMind reported an 11.8-fold reduction in a combined qubit-and-operation cost metric for one fusion-related calculation. Lean checked the mathematics; today’s hardware did not run the full circuit.",
@@ -281,8 +281,8 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "On RDQA, generic agents topped out at 24%. A tailored system hit 41.1%.",
-        "zh": "RDQA通用智能体最高24%，专用方案冲到41.1%"
+        "en": "With sources checked on 1,350 RDQA questions, the best of 12 general-purpose configurations scored 24.0%; the tailored baseline reached 41.1%",
+        "zh": "RDQA的1350题核验来源后，12种通用配置最高24.0%，专用基线达41.1%"
       },
       "summary": {
         "en": "On 1,350 source-dependent questions, RDQA’s best of 12 general-purpose configurations scored 24.0% after checking source use; a purpose-built baseline reached 41.1%. Missing a verified trace is not proof the model answered from memory.",
@@ -322,8 +322,8 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "Anthropic puts forward a VP≠VNP proof. The million-dollar P vs NP problem is still open.",
-        "zh": "Anthropic公布VP≠VNP证明，百万美元的P vs NP还没解"
+        "en": "Anthropic’s AI-authored preprint claims VP≠VNP; P versus NP remains open",
+        "zh": "Anthropic的AI预印本主张VP≠VNP，P与NP问题仍未解"
       },
       "summary": {
         "en": "Anthropic released an AI-authored paper and Lean formalization claiming VP and VNP differ over every field. The release says no human mathematician had checked the proof at publication; the claim concerns arithmetic circuits, not the Clay problem.",
@@ -371,8 +371,8 @@
       "topic": "governance",
       "kind": "analysis",
       "title": {
-        "en": "America’s Genesis Mission selected 297 projects. Where’s the speedup?",
-        "zh": "美国创世纪计划立项297个，科研究竟快了多少？"
+        "en": "US Energy Department’s Genesis Mission selected 297 projects in year one; doubling research productivity remains a decade-long goal",
+        "zh": "美国能源部创世纪计划首年选中297个项目，科研生产力翻倍仍是十年目标"
       },
       "summary": {
         "en": "The US Department of Energy reports 297 selected projects across 369 institutions. Doubling research productivity and impact is a decade-long goal, not a year-one result measured by this count.",
@@ -420,8 +420,8 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "Vals AI made shortest paths faster on paper. Where are the large-graph timings?",
-        "zh": "Vals AI压低最短路复杂度，大图实测呢？"
+        "en": "Vals AI reports tighter shortest-path bounds at certain graph densities, but no large-graph timings",
+        "zh": "Vals AI收紧特定图密度下的最短路上界，未报告大图实测耗时"
       },
       "summary": {
         "en": "In September, Vals AI reported a Lean-verified improvement for a particular range of graph densities, with no timing results on large graphs. Duan and colleagues had already beaten Dijkstra’s sparse directed-graph bound in 2025.",
@@ -469,8 +469,8 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "Anthropic can change what Claude says. Did it prove Claude feels anything?",
-        "zh": "Anthropic动了Claude内部信号，能证明它有感受吗？"
+        "en": "Anthropic changed Claude’s internal signals and its answers changed. That doesn’t establish subjective experience",
+        "zh": "Anthropic改了内部信号，Claude改口了。这还不能证明它有感受"
       },
       "summary": {
         "en": "In July, Anthropic reported that altering certain internal signals changed Claude’s responses in controlled tests. The research describes a measurable function rather than evidence of subjective experience.",
@@ -510,8 +510,8 @@
       "topic": "reliability",
       "kind": "analysis",
       "title": {
-        "en": "Astra helped prove a Goldbach variant whose summands can be composite. Even 8 qualifies.",
-        "zh": "Astra参与证明哥德巴赫变体，连合数8都能当加数"
+        "en": "Astra helped prove a Goldbach variant where even 8 qualifies as a summand, despite not being prime",
+        "zh": "Astra参与证明哥德巴赫变体：8也能当加数，但它不是素数"
       },
       "summary": {
         "en": "The Lean theorem from September expresses even numbers above two as sums of two integers with odd prime-factor counts, including multiplicity. Such integers need not be prime: eight is 2 × 2 × 2.",
@@ -551,8 +551,8 @@
       "topic": "misuse",
       "kind": "report",
       "title": {
-        "en": "Grok’s safety promises face lawsuits in two US states",
-        "zh": "Grok的安全承诺被告上法庭，美国两州各自起诉"
+        "en": "Virginia and Oregon file separate lawsuits alleging Grok generated intimate images without consent",
+        "zh": "弗吉尼亚州与俄勒冈州分别起诉，指Grok未经同意生成私密图像"
       },
       "summary": {
         "en": "Virginia and Oregon announced separate lawsuits over Grok-generated nonconsensual intimate imagery. Virginia alleges the companies promoted safeguards that failed to protect users; that is a claim in litigation, not a court finding.",
@@ -576,8 +576,8 @@
       "topic": "reliability",
       "kind": "research",
       "title": {
-        "en": "METR’s AI task horizon doubled every 3.6 months. What exactly doubled?",
-        "zh": "METR测出AI任务时长约3.6个月翻倍，翻倍的究竟是什么？"
+        "en": "On METR’s combined benchmarks, estimated human task time at 50% model success doubled roughly every 3.6 months",
+        "zh": "METR合并基准：模型成功率为50%的任务，对应人类用时约每3.6个月翻倍"
       },
       "summary": {
         "en": "Across METR’s combined benchmark suites, the estimated 50%-success time horizon doubled roughly every 3.6 months. The horizon is measured by how long the task takes a human, not how long an agent can reliably work unattended.",
@@ -601,8 +601,8 @@
       "topic": "governance",
       "kind": "report",
       "title": {
-        "en": "Britain tests frontier AI, but its safety institute doesn’t certify it",
-        "zh": "英国测试前沿AI，安全研究所却不给模型盖合格章"
+        "en": "Britain’s AI Security Institute tests frontier models but neither approves nor certifies them",
+        "zh": "英国AI安全研究所测试前沿模型，但不审批也不认证"
       },
       "summary": {
         "en": "In a response published November 20, the UK government said its AI Security Institute evaluates advanced models but neither approves them nor gives them a certification mark. Ministers also acknowledged that regulation at the point of use may not always be enough.",
@@ -626,8 +626,8 @@
       "topic": "infrastructure",
       "kind": "report",
       "title": {
-        "en": "The IEA puts roughly 30% of data-centre capacity in water-stressed areas",
-        "zh": "IEA：全球约三成现有和规划机房容量，落在高水压力地区"
+        "en": "IEA estimates power generation accounted for nearly 40% of data-centre-related water consumption in 2025, more than direct cooling",
+        "zh": "国际能源署估计：2025年数据中心相关耗水近四成用于发电，高于直接冷却"
       },
       "summary": {
         "en": "The IEA estimates that around 30% of existing and planned global data-centre capacity is in high-water-stress areas. It also estimates that power generation accounted for nearly 40% of data-centre-related water consumption in 2025, more than direct cooling.",
@@ -651,8 +651,8 @@
       "topic": "reliability",
       "kind": "research",
       "title": {
-        "en": "The AI got the diagnosis right. In one audit, 55% still took a risky turn.",
-        "zh": "诊断没答错，回放中约55%的路径仍经过潜在危险决策"
+        "en": "In a cardiology replay, 55.2% of AI paths with acceptable diagnoses had a step rated as posing moderate or severe potential harm",
+        "zh": "心内科回放：AI诊断可接受的路径中，55.2%仍至少有一步可能造成中重度伤害"
       },
       "summary": {
         "en": "In a retrospective hospital cardiology replay, 55.2% of AI trajectories ending in an acceptable diagnosis included a decision rated as having moderate or severe potential harm. The preprint uses retrospective scoring with a physician reference, not observations of patient injury.",
@@ -676,8 +676,8 @@
       "topic": "governance",
       "kind": "report",
       "title": {
-        "en": "New York names its AI safety enforcers before incident reporting kicks in",
-        "zh": "纽约先组AI执法队，前沿模型事故上报随后生效"
+        "en": "New York attorney general forms AI enforcement unit before RAISE takes effect January 1, 2027",
+        "zh": "纽约州总检察长先设AI执法组，RAISE法案2027年1月1日生效"
       },
       "summary": {
         "en": "Attorney General Letitia James announced a new enforcement unit on November 17. It will oversee rules including the RAISE Act, which takes effect January 1, 2027 and requires covered frontier-model developers to disclose safeguards and report safety incidents promptly.",
@@ -701,8 +701,8 @@
       "topic": "infrastructure",
       "kind": "report",
       "title": {
-        "en": "Fort Worth sees real data-centre tax revenue. Net gains are harder to show.",
-        "zh": "数据中心交了不少税，沃思堡为何还要算净收益？"
+        "en": "Fort Worth collects substantial data-centre property taxes, but net gains depend on local costs",
+        "zh": "数据中心给沃思堡缴了可观房产税，净收益还要扣除当地成本"
       },
       "summary": {
         "en": "Fort Worth’s study commission found that existing data centres contribute substantial property tax, but gross revenue is not the city’s net fiscal benefit. It also distinguishes jobs during construction from the relatively smaller number during operation.",
@@ -726,8 +726,8 @@
       "topic": "infrastructure",
       "kind": "company",
       "title": {
-        "en": "Meta generated $32.8B in operating cash and still reported negative free cash flow",
-        "zh": "Meta经营现金流近328亿美元，自由现金流为何是负数？"
+        "en": "Meta reports September-quarter capital spending exceeded operating cash flow, leaving free cash flow at −$2.12 billion",
+        "zh": "Meta披露三季度资本开支超过经营现金流，自由现金流为负21.2亿美元"
       },
       "summary": {
         "en": "Meta reported $32.79 billion in operating cash flow, $34.91 billion in company-wide capital spending including finance-lease principal, and negative $2.12 billion in free cash flow for the September quarter.",
@@ -751,8 +751,8 @@
       "topic": "reliability",
       "kind": "research",
       "title": {
-        "en": "In medical image tests, models can repeat the same wrong answer",
-        "zh": "医学影像判断题测试中，模型可能反复给出同一错答"
+        "en": "Take away the patient image and models in the test can still confidently repeat the same wrong answer",
+        "zh": "拿掉病人影像，测试中的模型仍可能自信地重复同一个错答"
       },
       "summary": {
         "en": "The authors report that even when they removed or mismatched a patient’s visual evidence, models could repeatedly give the same incorrect yes/no answer with high confidence.",
@@ -776,8 +776,8 @@
       "topic": "reliability",
       "kind": "research",
       "title": {
-        "en": "In US survey tests, AI personas linked unrelated opinions more closely than people did",
-        "zh": "美国民调测试中，AI模拟受访者在无关议题上的立场关联更强"
+        "en": "In US survey tests, party affiliation explained more variation in AI responses than in human responses",
+        "zh": "美国民调测试中，党派认同比起真人更能解释AI受访者的回答差异"
       },
       "summary": {
         "en": "The authors report that, when language models played survey respondents, party affiliation explained more of the variation in their answers than it did for human respondents.",
@@ -801,8 +801,8 @@
       "topic": "reliability",
       "kind": "research",
       "title": {
-        "en": "An audit of Qwen’s visual question answering finds errors in the answer key",
-        "zh": "人工复核 Qwen 看图问答错题，发现参考答案也有错"
+        "en": "Reviewers found errors in the answer key for visual questions Qwen was marked wrong on",
+        "zh": "Qwen看图题被判错，人工复核发现部分参考答案有误"
       },
       "summary": {
         "en": "The authors report that human reviewers found incorrect reference answers among questions Qwen3-VL-8B-Instruct was marked as answering incorrectly. The questions were generated from COCO and GQA.",
@@ -826,8 +826,8 @@
       "topic": "reliability",
       "kind": "research",
       "title": {
-        "en": "SecondChance tests what AI agents do after a mistake",
-        "zh": "SecondChance 测试 AI 智能体出错后如何补救"
+        "en": "Finishing isn’t fixing the mistake: SecondChance tests agents from the same point of failure",
+        "zh": "任务做完不等于纠错：SecondChance让AI从同一个出错点重来"
       },
       "summary": {
         "en": "The authors introduce a benchmark that records mistakes agents made during tasks, then lets different agents resume from the same points to compare how they respond.",
@@ -851,8 +851,8 @@
       "topic": "reliability",
       "kind": "research",
       "title": {
-        "en": "Researchers report that fine-tuning makes pathology predictions more consistent across scanners",
-        "zh": "研究发现：微调让病理模型在不同扫描仪上的预测更一致"
+        "en": "Fine-tuning made pathology AI more consistent across scanners. That’s not evidence of better accuracy",
+        "zh": "微调后换扫描仪仍判得更一致，没证明病理AI判得更准"
       },
       "summary": {
         "en": "The authors report that fine-tuning narrowed differences between scanners when models predicted HPV status in head and neck cancer. Prostate cancer grades also agreed more often across scanners.",
