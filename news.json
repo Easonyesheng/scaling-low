@@ -919,6 +919,31 @@
           "zh": "arXiv 人工智能"
         }
       }
+    },
+    {
+      "id": "simulated-user-errors-attributed-to-assistant",
+      "date": "2026-11-26",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "When a simulated user skips an option in a test, the assistant can take the blame, authors warn",
+        "zh": "作者提醒：模拟用户在测试中漏试选项，错误却可能算在对话助手头上"
+      },
+      "summary": {
+        "en": "The authors introduce a benchmark of 500 workflows to test how faithfully language models play the user in a conversation. The workflows include tasks that must be done in sequence, fallback steps and tasks that depend on one another.",
+        "zh": "作者用500个工作流程检验语言模型扮演用户时能否按要求行事。这些流程涉及须按顺序完成的任务、备选步骤，以及彼此依赖的任务。"
+      },
+      "takeaway": {
+        "en": "The authors note that a simulator can also drift from its assigned goal. A failed workflow alone does not show which side of the conversation went off course.",
+        "zh": "作者指出，模拟用户也可能偏离指定目标。仅凭流程失败，无法判断是对话中的哪一方出了错。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.34044",
+        "label": {
+          "en": "arXiv cs.CL",
+          "zh": "arXiv 计算语言学"
+        }
+      }
     }
   ]
 }
