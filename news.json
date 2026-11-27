@@ -944,6 +944,31 @@
           "zh": "arXiv 计算语言学"
         }
       }
+    },
+    {
+      "id": "fisher-r1-correct-execution-wrong-inference",
+      "date": "2026-11-27",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "In hypothesis tests, AI agents ran analyses correctly but still drew wrong conclusions, authors report",
+        "zh": "作者报告：在假设检验中，AI 智能体正确执行了分析，却仍得出错误结论"
+      },
+      "summary": {
+        "en": "The authors report that agents frequently made subtle errors in statistical inference. They built P-Bench with 425 open-ended hypothesis-testing tasks to evaluate this failure mode.",
+        "zh": "作者报告，智能体在统计推断中经常犯不易察觉的错误。为评估这类错误，他们构建了 P-Bench，包含 425 项开放式假设检验任务。"
+      },
+      "takeaway": {
+        "en": "The authors identify a check that existing benchmarks rarely make: whether the reported p-value is valid under the assumptions that apply to the data.",
+        "zh": "作者指出，现有基准很少核查一个关键问题：在适用于这组数据的统计假设下，所报告的 p 值是否有效。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2608.07437",
+        "label": {
+          "en": "arXiv cs.AI",
+          "zh": "arXiv 人工智能"
+        }
+      }
     }
   ]
 }
