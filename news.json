@@ -969,6 +969,31 @@
           "zh": "arXiv 人工智能"
         }
       }
+    },
+    {
+      "id": "sage-med-scaling-text-vision-gap",
+      "date": "2026-11-27",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "In medical AI tests, larger models gained mainly on text. Reasoning mode didn’t close the visual gap, Sage-Med authors report",
+        "zh": "Sage-Med 作者报告：医学 AI 测试中，模型变大主要提升了文本能力，开启推理模式也没补上视觉差距"
+      },
+      "summary": {
+        "en": "Across a range of medical tasks, the authors found that existing medical multimodal models tended to underperform leading general-purpose multimodal models.",
+        "zh": "作者在多项医学任务上比较了两类多模态模型，发现现有医学专用模型的表现往往不及领先的通用模型。"
+      },
+      "takeaway": {
+        "en": "In these tests, gains on text were not a reliable guide to how much better a model could interpret visual information.",
+        "zh": "在这些测试中，不能用文本能力的提升幅度来推断模型解读视觉信息的能力提高了多少。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.34575",
+        "label": {
+          "en": "arXiv cs.AI",
+          "zh": "arXiv 人工智能"
+        }
+      }
     }
   ]
 }
