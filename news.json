@@ -994,6 +994,31 @@
           "zh": "arXiv 人工智能"
         }
       }
+    },
+    {
+      "id": "maintenance-orders-hash-checks-versus-calculation-proofs",
+      "date": "2026-11-27",
+      "topic": "reliability",
+      "kind": "research",
+      "title": {
+        "en": "In a maintenance test, hash checks let 4 of 9 flagged recommendations through. Verifying the calculation blocked all 9, authors report",
+        "zh": "作者报告：在维护测试中，哈希校验放行了9条问题建议中的4条；核验计算证明则拦下全部9条"
+      },
+      "summary": {
+        "en": "The authors used a four-organization Hyperledger Fabric testbed and a public engine benchmark. Before releasing a work order, participants checked proof that the agreed model and decision rule had produced the recommendation. The four recommendations accepted by hash checks either raised simulated maintenance costs or brought back late failures.",
+        "zh": "作者在由四个组织组成的 Hyperledger Fabric 测试环境中使用了公开的发动机基准。参与方在下发工单前核验计算证明，确认建议确由约定的模型和决策规则生成。哈希校验放行的4条建议，要么推高了模拟维护成本，要么使后期故障再次出现。"
+      },
+      "takeaway": {
+        "en": "A shared ledger can identify who submitted a recommendation without establishing how it was calculated. The added check verified the calculation in a testbed; the study does not establish that it prevents failures in operating plants.",
+        "zh": "共享账本能记录谁提交了建议，却不能单凭这条记录确认建议是怎么算出来的。新增步骤在测试环境中核验了计算过程；这项研究并未证实它能防止实际工厂发生故障。"
+      },
+      "source": {
+        "url": "https://arxiv.org/abs/2611.34662",
+        "label": {
+          "en": "arXiv cs.AI",
+          "zh": "arXiv 人工智能"
+        }
+      }
     }
   ]
 }
